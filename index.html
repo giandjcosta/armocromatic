@@ -566,7 +566,7 @@
       <div class="card">
         <h2 data-i18n="home.guidesTitle">Guide da Esplorare</h2>
         <a class="shop-link" href="#grooming" data-section="grooming">
-          <img src="img/grooming.webp" alt="" width="1200" height="800" loading="lazy" decoding="async" data-i18n-alt="img.grooming">
+          <img alt="" width="1200" height="800" loading="lazy" decoding="async" data-gender-image="grooming" data-i18n-alt="img.grooming">
           <div>
             <h4 data-i18n="home.guide1Title">Capelli e barba su misura</h4>
             <p data-i18n="home.guide1Text">Le linee che valorizzano il tuo viso: volume laterale, barba curata, texture definita.</p>
@@ -612,6 +612,14 @@
       <div class="card">
         <h2 data-i18n="me.title">Il Mio Profilo</h2>
         <p style="margin-bottom:16px;" data-i18n="me.intro">Inserisci i tuoi dati: la Home, i consigli e perfino i colori del sito si adattano a te.</p>
+
+        <div class="form-group">
+          <label for="me-gender" data-i18n="me.gender">I consigli sono per</label>
+          <select id="me-gender" class="form-control">
+            <option value="m" data-i18n="me.genderM">Uomo</option>
+            <option value="f" data-i18n="me.genderF">Donna</option>
+          </select>
+        </div>
 
         <div class="form-group">
           <label for="me-season" data-i18n="me.season">La tua stagione armocromatica</label>
@@ -704,7 +712,7 @@
     <!-- GROOMING SECTION: SELETTORE FORME DEL VISO -->
     <div id="grooming" class="section">
       <figure class="editorial-media wide">
-        <img src="img/grooming.webp" alt="" width="1200" height="800" decoding="async" data-i18n-alt="img.grooming">
+        <img alt="" width="1200" height="800" decoding="async" data-gender-image="grooming" data-i18n-alt="img.grooming">
       </figure>
       <div class="card">
         <h2 data-i18n="grooming.title">Analisi Viso & Grooming</h2>
@@ -818,6 +826,34 @@
           'nav.grooming': 'Grooming & Forme Viso', 'nav.palette': 'Palette & Stagioni',
           'nav.rules': 'Regole & Abbinamenti', 'nav.accessori': 'Accessori', 'nav.profile': 'Il Mio Profilo',
           'me.title': 'Il Mio Profilo',
+          'me.gender': 'I consigli sono per', 'me.genderM': 'Uomo', 'me.genderF': 'Donna',
+          'profile.chipGender': 'Consigli per',
+          'fit.typeHourglass': 'Clessidra', 'fit.typePear': 'Pera / Triangolo', 'fit.typeApple': 'Mela / Ovale',
+          'fit.typeRectangle': 'Rettangolo', 'fit.typeInvTriangle': 'Triangolo Invertito',
+          'home.guide1Title.f': 'Capelli e trucco su misura',
+          'home.guide1Text.f': 'Tagli, riga e trucco che valorizzano la forma del tuo viso.',
+          'home.guide2Text.f': 'Gioielli dorati, borsa in cuoio, foulard: i dettagli caldi legano l’outfit.',
+          'home.f2d.f': 'Guida forme viso, capelli e trucco.',
+          'home.f4d.f': 'Gioielli, borse e occhiali.',
+          'home.tipFaceNone.f': '<strong>Viso:</strong> indica la forma del viso nel profilo per tagli, trucco e orecchini adatti a te.',
+          'grooming.needData.f': 'Scegli la forma del viso per vedere i consigli su capelli, trucco e orecchini.',
+          'accessori.watches.f': '<strong>Gioielli:</strong> Oro giallo, bronzo e pietre calde come ambra, corniola o occhio di tigre.',
+          'accessori.glasses.f': '<strong>Occhiali:</strong> Montature tartarugate ambrate o in acetato verde oliva/marrone.',
+          'accessori.hats.f': '<strong>Borse:</strong> Cuoio cognac, camoscio moka o senape, con fibbie dorate.',
+          'accessori.metals.f': '<strong>Foulard e cappelli:</strong> Seta stampata nei toni ruggine e oliva, fedora o basco cammello.',
+          'img.hero.autumn.f': 'Donna con maglione color ruggine sotto un albero dalle foglie gialle',
+          'img.hero.winter.f': 'Donna con abito turchese e giacca nera in un paesaggio innevato',
+          'img.hero.spring.f': 'Donna con corsetto a fiori e pantaloni chiari tra i tulipani rossi',
+          'img.hero.summer.f': 'Donna con tailleur rosa cipria in riva a un lago',
+          'img.capsule.autumn.f': 'Donna con cappotto a quadri, maglione senape e cappello in un parco autunnale',
+          'img.capsule.winter.f': 'Donna con cappotto bianco e sciarpa nera su una panchina innevata',
+          'img.capsule.spring.f': 'Donna con giacca di jeans chiara tra fiori arancioni',
+          'img.capsule.summer.f': 'Pantaloni e abiti pastello: lavanda, menta e azzurro con sneakers e sandali',
+          'img.accessories.autumn.f': 'Accessori autunnali da donna: borsa in cuoio, cappello marrone e maglia panna',
+          'img.accessories.winter.f': 'Accessori invernali da donna: décolleté neri, borsa nera e rossetto su fondo bianco',
+          'img.accessories.spring.f': 'Accessori primaverili da donna: borsa color pesca, peonie e gioielli dorati con perle',
+          'img.accessories.summer.f': 'Accessori estivi da donna: borse rosa cipria, fiori chiari e palette di ombretti',
+          'img.grooming.f': 'Pennelli da trucco e pettine di legno su fondo chiaro',
           'me.intro': 'Inserisci i tuoi dati: la Home, i consigli e perfino i colori del sito si adattano a te.',
           'me.season': 'La tua stagione armocromatica', 'me.pick': '— Scegli —',
           'me.privacy': 'I dati restano solo su questo dispositivo e si salvano da soli: niente account, niente invii.',
@@ -832,7 +868,7 @@
           'quiz.result': 'Probabilmente sei {s}. È un\u2019indicazione: confrontala con la palette prima di sceglierla.',
           'quiz.apply': 'Usa {s} come mia stagione',
           'profile.createTitle': 'Crea il Tuo Profilo',
-          'profile.createText': 'Inserisci stagione, altezza, corporatura e forma del viso: consigli e colori del sito si adattano a te. I dati restano su questo dispositivo.',
+          'profile.createText': 'Indica se i consigli sono per uomo o donna, poi stagione, altezza, corporatura e forma del viso: consigli e colori del sito si adattano a te. I dati restano su questo dispositivo.',
           'profile.createBtn': 'Crea il tuo profilo →', 'profile.editBtn': 'Modifica il profilo',
           'profile.setText': 'Consigli e colori del sito sono calibrati su di te.',
           'profile.chipHeight': 'Altezza', 'profile.chipBody': 'Corporatura',
@@ -909,6 +945,34 @@
           'nav.grooming': 'Grooming & Face Shapes', 'nav.palette': 'Palette & Seasons',
           'nav.rules': 'Rules & Pairings', 'nav.accessori': 'Accessories', 'nav.profile': 'My Profile',
           'me.title': 'My Profile',
+          'me.gender': 'Tips are for', 'me.genderM': 'Man', 'me.genderF': 'Woman',
+          'profile.chipGender': 'Tips for',
+          'fit.typeHourglass': 'Hourglass', 'fit.typePear': 'Pear / Triangle', 'fit.typeApple': 'Apple / Oval',
+          'fit.typeRectangle': 'Rectangle', 'fit.typeInvTriangle': 'Inverted Triangle',
+          'home.guide1Title.f': 'Hair and makeup, tailored',
+          'home.guide1Text.f': 'Cuts, parting and makeup that flatter your face shape.',
+          'home.guide2Text.f': 'Gold jewelry, a leather bag, a silk scarf: warm details that pull the outfit together.',
+          'home.f2d.f': 'Face shape, hair and makeup guide.',
+          'home.f4d.f': 'Jewelry, bags and glasses.',
+          'home.tipFaceNone.f': '<strong>Face:</strong> set your face shape in your profile for cuts, makeup and earrings that suit you.',
+          'grooming.needData.f': 'Choose your face shape to see hair, makeup and earring advice.',
+          'accessori.watches.f': '<strong>Jewelry:</strong> Yellow gold, bronze and warm stones like amber, carnelian or tiger’s eye.',
+          'accessori.glasses.f': '<strong>Glasses:</strong> Amber tortoiseshell or olive/brown acetate frames.',
+          'accessori.hats.f': '<strong>Bags:</strong> Cognac leather, mocha or mustard suede, with gold buckles.',
+          'accessori.metals.f': '<strong>Scarves and hats:</strong> Printed silk in rust and olive tones, a camel fedora or beret.',
+          'img.hero.autumn.f': 'Woman in a rust sweater under a tree with yellow leaves',
+          'img.hero.winter.f': 'Woman in a turquoise dress and black jacket in a snowy landscape',
+          'img.hero.spring.f': 'Woman in a floral corset and light trousers among red tulips',
+          'img.hero.summer.f': 'Woman in a powder pink suit by a lake',
+          'img.capsule.autumn.f': 'Woman in a checked coat, mustard sweater and hat in an autumn park',
+          'img.capsule.winter.f': 'Woman in a white coat and black scarf on a snowy bench',
+          'img.capsule.spring.f': 'Woman in a light denim jacket among orange flowers',
+          'img.capsule.summer.f': 'Pastel trousers and dresses: lavender, mint and light blue with sneakers and sandals',
+          'img.accessories.autumn.f': 'Women’s autumn accessories: leather bag, brown hat and cream knit',
+          'img.accessories.winter.f': 'Women’s winter accessories: black pumps, black bag and lipstick on a white background',
+          'img.accessories.spring.f': 'Women’s spring accessories: peach bag, peonies and gold jewelry with pearls',
+          'img.accessories.summer.f': 'Women’s summer accessories: powder pink bags, pale flowers and an eyeshadow palette',
+          'img.grooming.f': 'Makeup brushes and a wooden comb on a light background',
           'me.intro': 'Enter your details: the Home page, the tips and even the site colors adapt to you.',
           'me.season': 'Your color season', 'me.pick': '— Choose —',
           'me.privacy': 'Your data stays on this device only and saves automatically: no account, nothing sent.',
@@ -923,7 +987,7 @@
           'quiz.result': 'You are probably {s}. It is a pointer: compare it with the palette before choosing.',
           'quiz.apply': 'Use {s} as my season',
           'profile.createTitle': 'Create Your Profile',
-          'profile.createText': 'Enter your season, height, build and face shape: tips and site colors adapt to you. Your data stays on this device.',
+          'profile.createText': 'Choose man or woman, then your season, height, build and face shape: tips and site colors adapt to you. Your data stays on this device.',
           'profile.createBtn': 'Create your profile →', 'profile.editBtn': 'Edit profile',
           'profile.setText': 'Tips and site colors are tuned to you.',
           'profile.chipHeight': 'Height', 'profile.chipBody': 'Build',
@@ -995,7 +1059,14 @@
         }
       };
 
-      function t(key) { return (I18N[LANG] && I18N[LANG][key]) || I18N.it[key] || ''; }
+      // Per la donna si usa la versione ".f" della chiave, se c'è
+      function t(key) {
+        if (isWoman()) {
+          var f = (I18N[LANG] && I18N[LANG][key + '.f']) || I18N.it[key + '.f'];
+          if (f) return f;
+        }
+        return (I18N[LANG] && I18N[LANG][key]) || I18N.it[key] || '';
+      }
       function tr(obj) { return obj ? (obj[LANG] || obj.it) : ''; }
 
       /* ---------- DATI STAGIONI (bilingue) ---------- */
@@ -1022,6 +1093,15 @@
             { name: { it: 'Panna', en: 'Cream' }, hex: '#FFF8DC', dark: true }
           ],
           comboText: { it: 'Sopracamicia Moka + Chino Oliva + T-shirt Panna infilata', en: 'Mocha overshirt + Olive chinos + tucked-in cream tee' },
+          comboTextF: { it: 'Trench Moka + Gonna midi Oliva + Maglia Panna', en: 'Mocha trench + Olive midi skirt + Cream knit' },
+          capsuleF: [
+            { it: '<strong>Cappotto o trench</strong> — Cammello, Moka, Oliva', en: '<strong>Coat or trench</strong> — Camel, Mocha, Olive' },
+            { it: '<strong>Maglione a collo alto in lana</strong> — Senape, Ruggine, Panna', en: '<strong>Wool turtleneck</strong> — Mustard, Rust, Cream' },
+            { it: '<strong>Camicia in seta o viscosa</strong> — Terracotta, Ottanio, Avorio', en: '<strong>Silk or viscose blouse</strong> — Terracotta, Teal, Ivory' },
+            { it: '<strong>Gonna midi o pantaloni a palazzo</strong> — Marrone, Verde foresta', en: '<strong>Midi skirt or palazzo trousers</strong> — Brown, Forest green' },
+            { it: '<strong>Abito in maglia</strong> — Bordeaux o Moka', en: '<strong>Knit dress</strong> — Bordeaux or Mocha' },
+            { it: '<strong>Stivali in cuoio</strong> — Marrone o cognac', en: '<strong>Leather boots</strong> — Brown or cognac' }
+          ],
           capsule: [
             { it: '<strong>Sopracamicia in camoscio o cotone spesso</strong> — Moka, Oliva, Terracotta', en: '<strong>Suede or heavy cotton overshirt</strong> — Mocha, Olive, Terracotta' },
             { it: '<strong>T-shirt pesanti a manica lunga</strong> — Panna, Oliva, Bordeaux', en: '<strong>Heavyweight long-sleeve tees</strong> — Cream, Olive, Bordeaux' },
@@ -1052,6 +1132,15 @@
             { name: { it: 'Bianco', en: 'White' }, hex: '#FFFFFF', dark: true }
           ],
           comboText: { it: 'Giacca Nero + Chino Blu + T-shirt Bianca pulita', en: 'Black jacket + Blue chinos + clean white tee' },
+          comboTextF: { it: 'Blazer Nero + Pantaloni Blu elettrico + Camicia Bianca', en: 'Black blazer + Electric blue trousers + White shirt' },
+          capsuleF: [
+            { it: '<strong>Cappotto dal taglio netto</strong> — Nero, Antracite', en: '<strong>Sharp-cut coat</strong> — Black, Anthracite' },
+            { it: '<strong>Camicia bianca</strong> — Bianco puro', en: '<strong>White shirt</strong> — Pure white' },
+            { it: '<strong>Maglione in merino</strong> — Blu elettrico, Rosso ciliegia, Verde smeraldo', en: '<strong>Merino sweater</strong> — Electric blue, Cherry red, Emerald green' },
+            { it: '<strong>Pantaloni sartoriali o gonna a tubino</strong> — Nero, Antracite', en: '<strong>Tailored trousers or pencil skirt</strong> — Black, Anthracite' },
+            { it: '<strong>Abito a tubino</strong> — Fucsia freddo o Nero', en: '<strong>Sheath dress</strong> — Cold fuchsia or Black' },
+            { it: '<strong>Décolleté o stivali in pelle liscia</strong> — Neri', en: '<strong>Smooth leather pumps or boots</strong> — Black' }
+          ],
           capsule: [
             { it: '<strong>Cappotto o giacca dal taglio pulito</strong> — Nero, Antracite', en: '<strong>Clean-cut coat or jacket</strong> — Black, Anthracite' },
             { it: '<strong>Camicia bianca</strong> — Bianco puro', en: '<strong>White shirt</strong> — Pure white' },
@@ -1082,6 +1171,15 @@
             { name: { it: 'Avorio', en: 'Ivory' }, hex: '#FAF0CA', dark: true }
           ],
           comboText: { it: 'Sopracamicia Cammello + Polo Turchese + Chino Avorio', en: 'Camel overshirt + Turquoise polo + Ivory chinos' },
+          comboTextF: { it: 'Trench Cammello + Blusa Turchese + Pantaloni Avorio', en: 'Camel trench + Turquoise blouse + Ivory trousers' },
+          capsuleF: [
+            { it: '<strong>Trench o giacca leggera</strong> — Cammello chiaro, Avorio caldo', en: '<strong>Trench or light jacket</strong> — Light camel, Warm ivory' },
+            { it: '<strong>Blusa in cotone o lino</strong> — Pesca, Corallo, Turchese', en: '<strong>Cotton or linen blouse</strong> — Peach, Coral, Turquoise' },
+            { it: '<strong>Abito a fiori o in tinta unita</strong> — Verde mela, Pesca', en: '<strong>Floral or solid dress</strong> — Apple green, Peach' },
+            { it: '<strong>Jeans o pantaloni chiari</strong> — Beige chiaro, Azzurro cielo', en: '<strong>Jeans or light trousers</strong> — Light beige, Sky blue' },
+            { it: '<strong>Cardigan leggero</strong> — Turchese, Avorio', en: '<strong>Light cardigan</strong> — Turquoise, Ivory' },
+            { it: '<strong>Ballerine o sandali</strong> — Cuoio chiaro o nude caldo', en: '<strong>Ballet flats or sandals</strong> — Light tan or warm nude' }
+          ],
           capsule: [
             { it: '<strong>Sopracamicia o giacca leggera</strong> — Cammello chiaro, Avorio caldo', en: '<strong>Overshirt or light jacket</strong> — Light camel, Warm ivory' },
             { it: '<strong>Polo o maglia in cotone</strong> — Turchese, Corallo, Verde mela', en: '<strong>Cotton polo or knit</strong> — Turquoise, Coral, Apple green' },
@@ -1112,6 +1210,15 @@
             { name: { it: 'Grigio Perla', en: 'Pearl Gray' }, hex: '#B0BEC5', dark: true }
           ],
           comboText: { it: 'Cardigan Navy + Camicia Azzurro Polvere + Chino Grigio Perla', en: 'Navy cardigan + Powder blue shirt + Pearl gray chinos' },
+          comboTextF: { it: 'Cardigan Navy + Blusa Azzurro Polvere + Gonna Grigio Perla', en: 'Navy cardigan + Powder blue blouse + Pearl gray skirt' },
+          capsuleF: [
+            { it: '<strong>Blazer o cardigan morbido</strong> — Navy soft, Grigio perla', en: '<strong>Soft blazer or cardigan</strong> — Soft navy, Pearl gray' },
+            { it: '<strong>Camicia o blusa fluida</strong> — Azzurro polvere, Rosa cipria', en: '<strong>Flowing shirt or blouse</strong> — Powder blue, Powder pink' },
+            { it: '<strong>Maglia in cashmere</strong> — Lavanda, Blu avio', en: '<strong>Cashmere knit</strong> — Lavender, Aviation blue' },
+            { it: '<strong>Gonna plissé o pantaloni morbidi</strong> — Grigio perla, Rosa cipria', en: '<strong>Pleated skirt or soft trousers</strong> — Pearl gray, Powder pink' },
+            { it: '<strong>Abito leggero</strong> — Menta, Lavanda', en: '<strong>Light dress</strong> — Mint, Lavender' },
+            { it: '<strong>Ballerine o mocassini</strong> — Grigio o tortora freddo', en: '<strong>Ballet flats or loafers</strong> — Gray or cool taupe' }
+          ],
           capsule: [
             { it: '<strong>Cardigan o giacca morbida</strong> — Navy soft, Grigio perla', en: '<strong>Cardigan or soft jacket</strong> — Soft navy, Pearl gray' },
             { it: '<strong>Camicia oxford</strong> — Azzurro polvere, Rosa cipria', en: '<strong>Oxford shirt</strong> — Powder blue, Powder pink' },
@@ -1127,17 +1234,23 @@
       // Un solo oggetto: { season, height, body, face }. Prima c'erano chiavi separate
       // per stagione e viso: si leggono una volta e si portano nel profilo.
       var PROFILE_KEY = 'armocromatic_profile';
-      var BODIES = ['athletic', 'slim', 'robust'];
-      var PROFILE = { season: '', height: null, body: '', face: '' };
+      // Corporature: per l'uomo tre tipi, per la donna le cinque forme classiche
+      var BODIES = { m: ['athletic', 'slim', 'robust'], f: ['hourglass', 'pear', 'apple', 'rectangle', 'invtriangle'] };
+      var PROFILE = { gender: '', season: '', height: null, body: '', face: '' };
+      // Senza scelta i consigli restano quelli da uomo, come prima
+      function isWoman() { return PROFILE.gender === 'f'; }
+      function myBodies() { return BODIES[isWoman() ? 'f' : 'm']; }
 
       function validHeight(h) { return typeof h === 'number' && h >= 140 && h <= 220; }
       function cleanProfile(p) {
         p = p || {};
         var h = Math.round(Number(p.height));
+        var gender = p.gender === 'f' || p.gender === 'm' ? p.gender : '';
         return {
+          gender: gender,
           season: SEASONS[p.season] ? p.season : '',
           height: validHeight(h) ? h : null,
-          body: BODIES.indexOf(p.body) !== -1 ? p.body : '',
+          body: BODIES[gender === 'f' ? 'f' : 'm'].indexOf(p.body) !== -1 ? p.body : '',
           face: FACE_NAMES[p.face] ? p.face : ''
         };
       }
@@ -1155,7 +1268,7 @@
           localStorage.removeItem('armocromatic_face');
         } catch (err) { /* ignora */ }
       }
-      function hasProfile() { return !!(PROFILE.season || PROFILE.height || PROFILE.body || PROFILE.face); }
+      function hasProfile() { return !!(PROFILE.gender || PROFILE.season || PROFILE.height || PROFILE.body || PROFILE.face); }
 
       var FACE_NAMES = {
         'square-full': { it: 'Mascella Marcata / Guance Piene', en: 'Strong Jaw / Full Cheeks' },
@@ -1163,7 +1276,10 @@
         'round': { it: 'Viso Rotondo', en: 'Round Face' },
         'elongated': { it: 'Viso Allungato', en: 'Elongated Face' }
       };
-      var BODY_KEYS = { athletic: 'fit.typeAthletic', slim: 'fit.typeSlim', robust: 'fit.typeRobust' };
+      var BODY_KEYS = {
+        athletic: 'fit.typeAthletic', slim: 'fit.typeSlim', robust: 'fit.typeRobust',
+        hourglass: 'fit.typeHourglass', pear: 'fit.typePear', apple: 'fit.typeApple', rectangle: 'fit.typeRectangle', invtriangle: 'fit.typeInvTriangle'
+      };
       var THEME_BG = { autumn: '#F1E5D3', winter: '#E2F0FA', spring: '#FDE6D4', summer: '#F2E4EB' };
       var SEASONAL_IMAGES = {
         autumn: { hero: 'img/hero-autumn.webp', capsule: 'img/capsule-autumn.webp', accessories: 'img/accessories-autumn.webp' },
@@ -1188,13 +1304,19 @@
         document.documentElement.setAttribute('data-season', key);
         var meta = document.querySelector('meta[name="theme-color"]');
         if (meta) meta.setAttribute('content', THEME_BG[key]);
+        // Le foto della donna hanno lo stesso nome con "-donna" in fondo
+        var suffix = isWoman() ? '-donna.webp' : '.webp';
         Object.keys(SEASONAL_IMAGES[key]).forEach(function (kind) {
           var altKey = 'img.' + kind + '.' + key;
           document.querySelectorAll('[data-season-image="' + kind + '"]').forEach(function (image) {
-            image.setAttribute('src', SEASONAL_IMAGES[key][kind]);
+            image.setAttribute('src', SEASONAL_IMAGES[key][kind].replace(/\.webp$/, suffix));
             image.setAttribute('data-i18n-alt', altKey);
             image.setAttribute('alt', t(altKey));
           });
+        });
+        document.querySelectorAll('[data-gender-image]').forEach(function (image) {
+          image.setAttribute('src', 'img/' + image.getAttribute('data-gender-image') + suffix);
+          image.setAttribute('alt', t(image.getAttribute('data-i18n-alt')));
         });
       }
 
@@ -1255,6 +1377,9 @@
         }
       }
 
+      // Capsule e combo hanno una versione da donna (capsuleF, comboTextF)
+      function forMe(data, field) { return (isWoman() && data[field + 'F']) || data[field]; }
+
       function renderSeasonParts() {
         var data = SEASONS[mySeason()];
         // Regole (sezione Regole)
@@ -1264,7 +1389,7 @@
         if (rulesDont) rulesDont.innerHTML = '<strong>' + t('rules.avoided') + '</strong> ' + tr(data.donts);
         var do2 = document.getElementById('rules-do2');
         if (do2) do2.innerHTML = '<strong>' + t('rules.do2Label') + '</strong> ' +
-          data.capsule.slice(0, 3).map(function (c) { return tr(c).replace(/<\/?strong>/g, ''); }).join('; ') + '.';
+          forMe(data, 'capsule').slice(0, 3).map(function (c) { return tr(c).replace(/<\/?strong>/g, ''); }).join('; ') + '.';
         // Combo in Home
         var banner = document.getElementById('combo-banner-box');
         if (banner) {
@@ -1277,15 +1402,17 @@
           banner.innerHTML = bh;
         }
         var sub = document.getElementById('combo-text-sub');
-        if (sub) sub.textContent = tr(data.comboText);
+        if (sub) sub.textContent = tr(forMe(data, 'comboText'));
         // Guardaroba capsule della stagione
         var capIntro = document.getElementById('capsule-intro');
         if (capIntro) capIntro.textContent = fmt('home.capsuleIntro', mySeason());
         var capList = document.getElementById('capsule-list');
-        if (capList) capList.innerHTML = data.capsule.map(function (c) { return '<li>' + tr(c) + '</li>'; }).join('');
+        if (capList) capList.innerHTML = forMe(data, 'capsule').map(function (c) { return '<li>' + tr(c) + '</li>'; }).join('');
       }
 
-      function heightBand(h) { return h <= 172 ? 'short' : (h >= 184 ? 'tall' : 'medium'); }
+      // Fasce di altezza diverse per uomo e donna
+      function heightBand(h) { return isWoman() ? (h <= 160 ? 'short' : (h >= 172 ? 'tall' : 'medium')) : (h <= 172 ? 'short' : (h >= 184 ? 'tall' : 'medium')); }
+      function myFitHeight() { return isWoman() ? FIT_HEIGHT_F : FIT_HEIGHT; }
 
       function renderHomeProfile() {
         var title = document.getElementById('home-profile-title');
@@ -1298,6 +1425,7 @@
         text.textContent = t(set ? 'profile.setText' : 'profile.createText');
         btn.innerHTML = t(set ? 'profile.editBtn' : 'profile.createBtn');
         var c = [];
+        if (PROFILE.gender) c.push([t('profile.chipGender'), t(isWoman() ? 'me.genderF' : 'me.genderM')]);
         if (PROFILE.season) c.push([t('profile.chipSeason'), tr(SEASONS[PROFILE.season].name)]);
         if (PROFILE.height) c.push([t('profile.chipHeight'), PROFILE.height + ' cm']);
         if (PROFILE.body) c.push([t('profile.chipBody'), t(BODY_KEYS[PROFILE.body])]);
@@ -1317,21 +1445,38 @@
           : t('home.tipColorNone'));
         if (PROFILE.height || PROFILE.body) {
           var fig = [];
-          if (PROFILE.height) fig.push(tr(FIT_HEIGHT[heightBand(PROFILE.height)].tip));
+          if (PROFILE.height) fig.push(tr(myFitHeight()[heightBand(PROFILE.height)].tip));
           if (PROFILE.body) fig.push(tr(FIT_BODY[PROFILE.body].tip));
           tips.push('<strong>' + t('home.tip2Label') + '</strong> ' + fig.join(' '));
         } else {
           tips.push(t('home.tipFigNone'));
         }
         tips.push(PROFILE.face
-          ? '<strong>' + t('home.tip3Label') + '</strong> ' + tr(GROOMING_CONTENT[PROFILE.face].items[0]).replace(/<strong>.*?<\/strong>\s*/, '')
+          ? '<strong>' + t('home.tip3Label') + '</strong> ' + tr(myGrooming()[PROFILE.face].items[0]).replace(/<strong>.*?<\/strong>\s*/, '')
           : t('home.tipFaceNone'));
         box.innerHTML = tips.map(function (x) { return '<div class="rule-box do">' + x + '</div>'; }).join('');
       }
 
+      // Le opzioni di corporatura dipendono da uomo/donna
+      var renderedBodyOptions = '';
+      function renderBodyOptions() {
+        // Si ricostruiscono solo se cambiano uomo/donna o la lingua, per non disturbare chi sta scegliendo
+        var key = (isWoman() ? 'f' : 'm') + LANG;
+        if (key === renderedBodyOptions) return;
+        renderedBodyOptions = key;
+        var html = '<option value="">' + t('me.pick') + '</option>' + myBodies().map(function (b) {
+          return '<option value="' + b + '">' + t(BODY_KEYS[b]) + '</option>';
+        }).join('');
+        ['me-body', 'body-type'].forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) { el.innerHTML = html; el.value = PROFILE.body || ''; }
+        });
+      }
+
       // Riporta il profilo in tutti i campi che lo mostrano (Profilo, Proporzioni, Grooming)
       function syncInputs() {
-        var map = { 'me-season': PROFILE.season, 'me-body': PROFILE.body, 'body-type': PROFILE.body, 'me-face': PROFILE.face, 'face-shape-select': PROFILE.face };
+        renderBodyOptions();
+        var map = { 'me-gender': PROFILE.gender || 'm', 'me-season': PROFILE.season, 'me-body': PROFILE.body, 'body-type': PROFILE.body, 'me-face': PROFILE.face, 'face-shape-select': PROFILE.face };
         Object.keys(map).forEach(function (id) {
           var el = document.getElementById(id);
           if (el && document.activeElement !== el) el.value = map[id] || '';
@@ -1367,7 +1512,7 @@
         PROFILE = cleanProfile(PROFILE);
         if (changes.season !== undefined && PROFILE.season) paletteSeason = PROFILE.season;
         saveProfile();
-        renderAll();
+        if (changes.gender !== undefined) applyLang(); else renderAll();
         if (!silent) showSaved();
       }
 
@@ -1634,7 +1779,76 @@
           tip: { it: 'spezza la verticale con strati e contrasto; cappotti lunghi e risvolti stanno bene.', en: 'break the vertical line with layers and contrast; long coats and cuffs work well.' }
         }
       };
+      var FIT_HEIGHT_F = {
+        short: {
+          title: { it: 'Altezza fino a 160 cm: slanciare la figura', en: 'Up to 160 cm: elongate your figure' },
+          dos: [
+            { it: '<strong>Linea continua:</strong> tinta unita o pantaloni e scarpe dello stesso tono; un piccolo tacco o una zeppa aiutano.', en: '<strong>Continuous line:</strong> one color, or trousers and shoes in the same shade; a small heel or wedge helps.' },
+            { it: '<strong>Vita alta:</strong> pantaloni e gonne a vita alta, maglie infilate o corte.', en: '<strong>High waist:</strong> high-rise trousers and skirts, tucked-in or cropped tops.' }
+          ],
+          dont: { it: '<strong>Da evitare:</strong> gonne a metà polpaccio, cappotti lunghi e oversize, cinturini alla caviglia: accorciano la gamba.', en: '<strong>Avoid:</strong> mid-calf skirts, long oversized coats and ankle straps: they shorten the leg.' },
+          tip: { it: 'tinta unita e vita alta per slanciare.', en: 'one color and a high waist to elongate.' }
+        },
+        medium: {
+          title: { it: 'Altezza tra 161 e 171 cm: proporzioni equilibrate', en: '161 to 171 cm: balanced proportions' },
+          dos: [
+            { it: '<strong>Libertà di scelta:</strong> funzionano gonne corte, midi e lunghe.', en: '<strong>Freedom of choice:</strong> short, midi and long skirts all work.' },
+            { it: '<strong>Contrasto:</strong> puoi alternare colori diversi sopra e sotto senza perdere slancio.', en: '<strong>Contrast:</strong> you can mix different colors top and bottom without losing length.' }
+          ],
+          dont: { it: '<strong>Da evitare:</strong> solo gli eccessi, come tutto oversize sopra e sotto.', en: '<strong>Avoid:</strong> only extremes, like oversized everything top and bottom.' },
+          tip: { it: 'proporzioni equilibrate: puoi giocare con il contrasto tra sopra e sotto.', en: 'balanced proportions: you can play with contrast between top and bottom.' }
+        },
+        tall: {
+          title: { it: 'Altezza da 172 cm: bilanciare la verticale', en: 'From 172 cm: balance the vertical line' },
+          dos: [
+            { it: '<strong>Spezzare la linea:</strong> strati, cinture e contrasto tra sopra e sotto.', en: '<strong>Break the line:</strong> layers, belts and contrast between top and bottom.' },
+            { it: '<strong>Capi lunghi:</strong> maxi gonne, cappotti lunghi e pantaloni a palazzo ti stanno bene.', en: '<strong>Long pieces:</strong> maxi skirts, long coats and palazzo trousers suit you.' }
+          ],
+          dont: { it: '<strong>Da evitare:</strong> capi troppo corti di busto o di gamba.', en: '<strong>Avoid:</strong> pieces too short in the torso or leg.' },
+          tip: { it: 'spezza la verticale con strati e cinture; maxi gonne e cappotti lunghi stanno bene.', en: 'break the vertical line with layers and belts; maxi skirts and long coats work well.' }
+        }
+      };
       var FIT_BODY = {
+        hourglass: {
+          dos: [
+            { it: '<strong>Punto vita in evidenza:</strong> cinture, abiti a portafoglio e giacche sciancrate.', en: '<strong>Show the waist:</strong> belts, wrap dresses and fitted jackets.' },
+            { it: '<strong>Gonne e pantaloni:</strong> vita alta, gonne a tubino o a matita.', en: '<strong>Skirts and trousers:</strong> high waist, sheath or pencil skirts.' }
+          ],
+          dont: { it: '<strong>Da evitare:</strong> capi squadrati e oversize che nascondono la vita.', en: '<strong>Avoid:</strong> boxy, oversized pieces that hide the waist.' },
+          tip: { it: 'Segna il punto vita con cinture e tagli sciancrati.', en: 'Mark your waist with belts and fitted cuts.' }
+        },
+        pear: {
+          dos: [
+            { it: '<strong>Attenzione in alto:</strong> scolli a barca, colori chiari e dettagli sulle spalle.', en: '<strong>Draw the eye up:</strong> boat necks, light colors and shoulder details.' },
+            { it: '<strong>Sotto:</strong> gonne ad A, pantaloni dritti o a zampa in tinte scure.', en: '<strong>Below:</strong> A-line skirts, straight or flared trousers in dark shades.' }
+          ],
+          dont: { it: '<strong>Da evitare:</strong> pantaloni skinny chiari, tasche e fantasie sui fianchi.', en: '<strong>Avoid:</strong> light skinny trousers, pockets and patterns on the hips.' },
+          tip: { it: 'Luce e dettagli in alto, linee morbide e scure sotto.', en: 'Light and details on top, soft dark lines below.' }
+        },
+        apple: {
+          dos: [
+            { it: '<strong>Busto:</strong> scollo a V e capi fluidi che scendono morbidi senza stringere in vita.', en: '<strong>Torso:</strong> V-necks and flowing pieces that fall softly without cinching the waist.' },
+            { it: '<strong>Gambe in evidenza:</strong> gonne al ginocchio, pantaloni dritti.', en: '<strong>Show your legs:</strong> knee-length skirts, straight trousers.' }
+          ],
+          dont: { it: '<strong>Da evitare:</strong> cinture strette in vita e tessuti rigidi o lucidi sul busto.', en: '<strong>Avoid:</strong> tight waist belts and stiff or shiny fabrics on the torso.' },
+          tip: { it: 'Scollo a V e tessuti fluidi; valorizza le gambe.', en: 'V-necks and flowing fabrics; show off your legs.' }
+        },
+        rectangle: {
+          dos: [
+            { it: '<strong>Creare curve:</strong> peplum, cinture morbide, giacche sciancrate.', en: '<strong>Create curves:</strong> peplums, soft belts, fitted jackets.' },
+            { it: '<strong>Volumi:</strong> gonne a ruota o plissé e strati sovrapposti.', en: '<strong>Volume:</strong> circle or pleated skirts and layering.' }
+          ],
+          dont: { it: '<strong>Da evitare:</strong> capi dritti e larghi dalla testa ai piedi.', en: '<strong>Avoid:</strong> straight, loose pieces from head to toe.' },
+          tip: { it: 'Cinture e volumi creano le curve.', en: 'Belts and volume create curves.' }
+        },
+        invtriangle: {
+          dos: [
+            { it: '<strong>Spalle morbide:</strong> scolli a V, maniche raglan, tessuti morbidi in alto.', en: '<strong>Soft shoulders:</strong> V-necks, raglan sleeves, soft fabrics on top.' },
+            { it: '<strong>Volume sotto:</strong> gonne ad A, pantaloni a palazzo, colori chiari o fantasie in basso.', en: '<strong>Volume below:</strong> A-line skirts, palazzo trousers, light colors or patterns at the bottom.' }
+          ],
+          dont: { it: '<strong>Da evitare:</strong> spalline imbottite, maniche a sbuffo e scolli a barca.', en: '<strong>Avoid:</strong> shoulder pads, puff sleeves and boat necks.' },
+          tip: { it: 'Spalle morbide e più volume sotto.', en: 'Soft shoulders and more volume below.' }
+        },
         athletic: {
           dos: [
             { it: '<strong>Top consigliati:</strong> maglie o camicie infilate per valorizzare le spalle e definire il punto vita. Sopracamicie strutturate.', en: '<strong>Recommended tops:</strong> tucked-in shirts or tees to highlight the shoulders and define the waist. Structured overshirts.' },
@@ -1668,7 +1882,7 @@
         if (!PROFILE.height && !PROFILE.body) { resContainer.style.display = 'none'; return; }
         var html = '';
         if (PROFILE.height) {
-          var hb = FIT_HEIGHT[heightBand(PROFILE.height)];
+          var hb = myFitHeight()[heightBand(PROFILE.height)];
           html += '<h3 style="font-size:1rem;margin:4px 0 10px;">' + tr(hb.title) + '</h3>';
           hb.dos.forEach(function (d) { html += '<div class="rule-box do">' + tr(d) + '</div>'; });
           html += '<div class="rule-box dont">' + tr(hb.dont) + '</div>';
@@ -1745,9 +1959,47 @@
         }
       };
 
+      var GROOMING_CONTENT_F = {
+        'square-full': {
+          title: { it: 'Consigli per Mascella Marcata / Guance Piene', en: 'Tips for Strong Jaw / Full Cheeks' },
+          items: [
+            { it: '<strong>Capelli:</strong> Scalati morbidi sotto il mento, onde e ciuffi laterali per ammorbidire gli angoli.', en: '<strong>Hair:</strong> Soft layers below the chin, waves and side-swept pieces to soften the angles.' },
+            { it: '<strong>Riga:</strong> Laterale. Evita la riga centrale con capelli lisci e piatti.', en: '<strong>Parting:</strong> On the side. Avoid a center part with flat, straight hair.' },
+            { it: '<strong>Trucco:</strong> Contouring leggero sotto gli zigomi e sugli angoli della mascella, blush alto verso le tempie.', en: '<strong>Makeup:</strong> Light contour under the cheekbones and on the jaw corners, blush high toward the temples.' },
+            { it: '<strong>Orecchini:</strong> Pendenti tondi o a goccia. Evita quelli squadrati.', en: '<strong>Earrings:</strong> Round or teardrop drops. Avoid square shapes.' },
+            { it: '<strong>Scolli:</strong> A V o a cuore per slanciare il collo.', en: '<strong>Necklines:</strong> V or sweetheart to elongate the neck.' }
+          ]
+        },
+        'oval': {
+          title: { it: 'Consigli per Viso Ovale', en: 'Tips for an Oval Face' },
+          items: [
+            { it: '<strong>Capelli:</strong> Adatti quasi tutti i tagli, dal pixie al lungo scalato.', en: '<strong>Hair:</strong> Almost every cut works, from pixie to long layers.' },
+            { it: '<strong>Trucco:</strong> Blush sulle guance; puoi mettere in risalto occhi o labbra.', en: '<strong>Makeup:</strong> Blush on the cheeks; you can play up either eyes or lips.' },
+            { it: '<strong>Orecchini e occhiali:</strong> Qualsiasi forma.', en: '<strong>Earrings and glasses:</strong> Any shape.' }
+          ]
+        },
+        'round': {
+          title: { it: 'Consigli per Viso Rotondo', en: 'Tips for a Round Face' },
+          items: [
+            { it: '<strong>Capelli:</strong> Volume in alto e lunghezze oltre il mento, scalati o lob asimmetrico, riga laterale.', en: '<strong>Hair:</strong> Height on top and lengths past the chin, layers or an asymmetric lob, side part.' },
+            { it: '<strong>Trucco:</strong> Contouring ai lati del viso e blush in diagonale verso le tempie.', en: '<strong>Makeup:</strong> Contour on the sides of the face and blush angled toward the temples.' },
+            { it: '<strong>Orecchini e occhiali:</strong> Orecchini lunghi e verticali, montature rettangolari o squadrate.', en: '<strong>Earrings and glasses:</strong> Long vertical earrings, rectangular or square frames.' }
+          ]
+        },
+        'elongated': {
+          title: { it: 'Consigli per Viso Allungato', en: 'Tips for an Elongated Face' },
+          items: [
+            { it: '<strong>Capelli:</strong> Frangia dritta o a tendina e volume ai lati, lunghezze medie con onde.', en: '<strong>Hair:</strong> Straight or curtain bangs and side volume, medium lengths with waves.' },
+            { it: '<strong>Trucco:</strong> Blush orizzontale sulle guance, poco contouring su fronte e mento.', en: '<strong>Makeup:</strong> Horizontal blush on the cheeks, a little contour on forehead and chin.' },
+            { it: '<strong>Orecchini e occhiali:</strong> Cerchi o orecchini al lobo, più larghi che lunghi; montature grandi e tonde.', en: '<strong>Earrings and glasses:</strong> Hoops or studs, wider than long; large round frames.' }
+          ]
+        }
+      };
+      function myGrooming() { return isWoman() ? GROOMING_CONTENT_F : GROOMING_CONTENT; }
+
       function updateGroomingAdvice() {
         var card = document.getElementById('grooming-advice-card');
-        var data = GROOMING_CONTENT[PROFILE.face];
+        var data = myGrooming()[PROFILE.face];
         if (!data) { card.innerHTML = '<p>' + t('grooming.needData') + '</p>'; return; }
         var html = '<h2>' + tr(data.title) + '</h2><ul class="clean-list">';
         data.items.forEach(function (item) {
@@ -1766,6 +2018,8 @@
       var meHeight = document.getElementById('me-height');
       var meBody = document.getElementById('me-body');
       var meFace = document.getElementById('me-face');
+      var meGender = document.getElementById('me-gender');
+      meGender.addEventListener('change', function () { updateProfile({ gender: meGender.value }); });
       meSeason.addEventListener('change', function () { updateProfile({ season: meSeason.value }); });
       meBody.addEventListener('change', function () { updateProfile({ body: meBody.value }); });
       meFace.addEventListener('change', function () { updateProfile({ face: meFace.value }); });
@@ -1783,7 +2037,7 @@
         paletteSeason = mySeason();
         quiz = {};
         renderQuiz();
-        renderAll();
+        applyLang();
         showSaved('me.cleared');
       });
 
