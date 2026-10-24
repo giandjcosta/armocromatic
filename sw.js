@@ -1,5 +1,5 @@
 /* Service worker minimale: cache dell'app per uso offline (Add to Home Screen) */
-var CACHE = 'armocromatic-v10';
+var CACHE = 'armocromatic-v11';
 var ASSETS = [
   './',
   './index.html',
@@ -16,7 +16,10 @@ var ASSETS = [
   './img/capsule-winter.webp',
   './img/capsule-spring.webp',
   './img/capsule-summer.webp',
-  './img/accessories.webp',
+  './img/accessories-autumn.webp',
+  './img/accessories-winter.webp',
+  './img/accessories-spring.webp',
+  './img/accessories-summer.webp',
   './img/grooming.webp'
 ];
 

@@ -1,6 +1,6 @@
 # Foto stagionali
 
-Le otto foto stagionali sono state scaricate da Pexels e ritagliate in WebP.
+Le dodici foto stagionali sono state scaricate da Pexels e ritagliate in WebP.
 La licenza Pexels consente l'uso gratuito sui siti e la modifica delle immagini;
 non richiede attribuzione: https://www.pexels.com/license/
 
@@ -14,3 +14,7 @@ non richiede attribuzione: https://www.pexels.com/license/
 | `capsule-winter.webp` | https://www.pexels.com/photo/photo-of-men-in-puffer-jackets-wearing-beanies-7026421/ |
 | `capsule-spring.webp` | https://www.pexels.com/photo/trendy-young-man-in-denim-with-sunglasses-outdoors-29571693/ |
 | `capsule-summer.webp` | https://www.pexels.com/photo/a-man-walking-on-the-street-7823899/ |
+| `accessories-autumn.webp` | https://www.pexels.com/photo/elegant-neckties-and-accessories-21928749/ |
+| `accessories-winter.webp` | https://www.pexels.com/photo/black-leather-shoes-and-accessories-flat-lay-37008332/ |
+| `accessories-spring.webp` | https://www.pexels.com/photo/white-tulips-on-brown-jacket-10622270/ |
+| `accessories-summer.webp` | https://www.pexels.com/photo/beach-essentials-hat-sunglasses-and-towel-30982094/ |
