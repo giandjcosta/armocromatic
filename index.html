@@ -46,29 +46,32 @@
     }
 
     /* ── Colori del sito secondo la stagione del profilo (data-season su <html>) ── */
+    /* Inverno: azzurro ghiaccio come fondo, blu elettrico per schede e pulsanti */
     html[data-season="winter"] {
-      --bg-main: #E3EAF6; --card-bg: #F8FAFF; --soft-bg: #DCE3F3; --text-muted: #535D73;
-      --page-wash: rgba(53, 83, 174, 0.12);
-      --text-dark: #1A1D27;
-      --accent: #2A4BC0; --accent-deep: #1B2F86; --border-color: #B8C3D9; --heading: #141826;
-      --success-bg: #E3EFEA; --danger-bg: #F5E5EC;
-      --blob-1: rgba(54, 91, 204, 0.24); --blob-2: rgba(198, 64, 125, 0.18); --blob-3: rgba(107, 129, 183, 0.15);
+      --bg-main: #E2F0FA; --card-bg: #F6FBFF; --soft-bg: #D3E8F6; --text-muted: #4E5D70;
+      --page-wash: rgba(120, 190, 235, 0.22);
+      --text-dark: #141A26;
+      --accent: #1E5EFF; --accent-deep: #1238C9; --border-color: #B3D2EA; --heading: #0F1830;
+      --success-bg: #E1F1EC; --danger-bg: #F5E5EC;
+      --blob-1: rgba(140, 200, 240, 0.38); --blob-2: rgba(30, 94, 255, 0.16); --blob-3: rgba(190, 225, 245, 0.32);
     }
+    /* Primavera: fondo pesca, verde mela vivo (la natura che torna) per schede e pulsanti */
     html[data-season="spring"] {
-      --bg-main: #F8EBD8; --card-bg: #FFFBF2; --soft-bg: #E7F0DA; --text-muted: #655747;
-      --page-wash: rgba(226, 111, 61, 0.11);
+      --bg-main: #FDE6D4; --card-bg: #FFF8F0; --soft-bg: #EAF3DC; --text-muted: #625544;
+      --page-wash: rgba(255, 179, 138, 0.26);
       --text-dark: #2D261D;
-      --accent: #E0663F; --accent-deep: #A9461F; --border-color: #DCC9AA; --heading: #3A2716;
+      --accent: #43931B; --accent-deep: #2B7019; --border-color: #E6C8AE; --heading: #3A2716;
       --success-bg: #E3EFDB; --danger-bg: #F9E7DF;
-      --blob-1: rgba(255, 138, 101, 0.28); --blob-2: rgba(0, 172, 193, 0.2); --blob-3: rgba(124, 179, 66, 0.18);
+      --blob-1: rgba(255, 179, 138, 0.38); --blob-2: rgba(124, 179, 66, 0.24); --blob-3: rgba(255, 112, 67, 0.16);
     }
+    /* Estate: fondo rosa cipria, rosa lampone polveroso per schede e pulsanti, menta e lavanda nello sfondo */
     html[data-season="summer"] {
-      --bg-main: #E4EBF3; --card-bg: #F8FAFD; --soft-bg: #DCE5EF; --text-muted: #526174;
-      --page-wash: rgba(111, 147, 184, 0.12);
-      --text-dark: #202832;
-      --accent: #5F7FA3; --accent-deep: #3D5877; --border-color: #BCC9D8; --heading: #26303D;
+      --bg-main: #F2E4EB; --card-bg: #FCF7FA; --soft-bg: #E4F1EE; --text-muted: #5E5264;
+      --page-wash: rgba(244, 143, 177, 0.2);
+      --text-dark: #262030;
+      --accent: #B85A88; --accent-deep: #9E3F68; --border-color: #DCC3D1; --heading: #2E2433;
       --success-bg: #E5EEE9; --danger-bg: #F5E6EA;
-      --blob-1: rgba(106, 163, 211, 0.28); --blob-2: rgba(213, 126, 163, 0.19); --blob-3: rgba(158, 130, 194, 0.18);
+      --blob-1: rgba(244, 143, 177, 0.3); --blob-2: rgba(128, 203, 196, 0.24); --blob-3: rgba(206, 147, 216, 0.2);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -571,7 +574,7 @@
           </div>
         </a>
         <a class="shop-link" href="#accessori" data-section="accessori">
-          <img src="img/accessories.webp" alt="" width="800" height="1200" loading="lazy" decoding="async" data-i18n-alt="img.accessories">
+          <img alt="" width="800" height="1000" loading="lazy" decoding="async" data-season-image="accessories" data-i18n-alt="img.accessories.autumn">
           <div>
             <h4 data-i18n="home.guide2Title">Accessori che completano tutto</h4>
             <p data-i18n="home.guide2Text">Orologio, occhiali tartarugati, cappellino oliva: i dettagli caldi legano l'outfit.</p>
@@ -766,10 +769,10 @@
     <div id="accessori" class="section">
       <div class="card">
         <h2 data-i18n="accessori.title">Accessori & Dettagli</h2>
-        <p style="margin-bottom:12px;" data-i18n="accessori.note">Esempi in toni caldi autunnali: adatta materiali e colori alla tua stagione.</p>
+        <p style="margin-bottom:12px;" data-i18n="accessori.note">La foto segue i colori della tua stagione. I consigli qui sotto usano toni caldi autunnali: adatta materiali e colori alla tua stagione.</p>
         <div class="accessori-layout">
           <figure class="editorial-media">
-            <img src="img/accessories.webp" alt="" width="800" height="1200" loading="lazy" decoding="async" data-i18n-alt="img.accessories">
+            <img alt="" width="800" height="1000" loading="lazy" decoding="async" data-season-image="accessories" data-i18n-alt="img.accessories.autumn">
           </figure>
           <ul class="clean-list">
             <li data-i18n="accessori.watches"><strong>Orologi:</strong> Cassa in bronzo, ottone spazzolato o nero opaco con cinturino in pelle moka o cuoio.</li>
@@ -782,10 +785,6 @@
     </div>
 
   </main>
-
-  <footer class="container" style="text-align:center; padding: 0 20px 28px;">
-    <p style="font-size:0.75rem; color:var(--text-muted);" data-i18n="footer.note">Le immagini sono illustrative e generate con AI · Armocromatic</p>
-  </footer>
 
   <script>
     (function () {
@@ -857,7 +856,10 @@
           'img.capsule.spring': 'Uomo con giacca di jeans e t-shirt chiara davanti a fiori primaverili',
           'img.capsule.summer': 'Uomo con camicia floreale e bermuda di jeans in una strada estiva',
           'img.grooming': 'Attrezzi da barberia su legno scuro: forbici, pettine e olio per barba alla luce calda',
-          'img.accessories': 'Flat-lay di accessori: orologio con cinturino marrone, occhiali tartarugati, cappellino oliva e cintura',
+          'img.accessories.autumn': 'Accessori autunnali: cravatta bordeaux, orologio con cinturino in cuoio, cintura e scarpe marroni, fazzoletto panna',
+          'img.accessories.winter': 'Accessori invernali: scarpe nere lucide, orologio d\u2019argento, occhiali da sole neri su fondo bianco',
+          'img.accessories.spring': 'Accessori primaverili: giacca cammello chiaro, orologio e tulipani bianchi',
+          'img.accessories.summer': 'Accessori estivi: cappello chiaro, occhiali da sole e telo azzurro a righe bianche',
           'profile.title': 'Il Tuo Profilo', 'profile.seasonLabel': 'Seleziona la tua stagione armocromatica',
           'profile.chipSeason': 'Stagione', 'profile.chipFace': 'Forma del viso',
           'season.autumn': 'Autunno', 'season.winter': 'Inverno', 'season.spring': 'Primavera', 'season.summer': 'Estate',
@@ -893,13 +895,12 @@
           'rules.title': 'Regole Colore & Capi',
           'rules.do1': '<strong>Promossi vicino al viso:</strong> Moka, Terracotta, Ottanio, Verde Foresta, Panna/Avorio.',
           'rules.dont1': '<strong>Da evitare vicino al viso:</strong> Bianco ottico puro, Grigio ghiaccio, Viola freddo, Blu elettrico.',
-          'accessori.note': 'Esempi in toni caldi autunnali: adatta materiali e colori alla tua stagione.',
+          'accessori.note': 'La foto segue i colori della tua stagione. I consigli qui sotto usano toni caldi autunnali: adatta materiali e colori alla tua stagione.',
           'accessori.title': 'Accessori & Dettagli',
           'accessori.watches': '<strong>Orologi:</strong> Cassa in bronzo, ottone spazzolato o nero opaco con cinturino in pelle moka o cuoio.',
           'accessori.glasses': '<strong>Occhiali:</strong> Montature tartarugate ambrate o in acetato verde oliva/marrone.',
           'accessori.hats': '<strong>Cappelli:</strong> Dad hat classici in verde oliva, ruggine o moka.',
-          'accessori.metals': '<strong>Metalli:</strong> Oro giallo satinato, bronzo o argento invecchiato brunito.',
-          'footer.note': 'Le immagini sono illustrative e generate con AI · Armocromatic'
+          'accessori.metals': '<strong>Metalli:</strong> Oro giallo satinato, bronzo o argento invecchiato brunito.'
         },
         en: {
           'aria.openMenu': 'Open menu', 'aria.closeMenu': 'Close menu',
@@ -946,7 +947,10 @@
           'img.capsule.spring': 'Man in a denim jacket and light T-shirt in front of spring flowers',
           'img.capsule.summer': 'Man in a floral shirt and denim shorts on a summer street',
           'img.grooming': 'Barbering tools on dark wood: scissors, comb and beard oil in warm light',
-          'img.accessories': 'Accessories flat-lay: brown-strap watch, tortoiseshell glasses, olive cap and belt',
+          'img.accessories.autumn': 'Autumn accessories: burgundy tie, leather-strap watch, brown belt and shoes, cream pocket square',
+          'img.accessories.winter': 'Winter accessories: shiny black shoes, silver watch, black sunglasses on a white background',
+          'img.accessories.spring': 'Spring accessories: light camel jacket, watch and white tulips',
+          'img.accessories.summer': 'Summer accessories: light hat, sunglasses and a light blue striped towel',
           'profile.title': 'Your Profile', 'profile.seasonLabel': 'Select your color season',
           'profile.chipSeason': 'Season', 'profile.chipFace': 'Face shape',
           'season.autumn': 'Autumn', 'season.winter': 'Winter', 'season.spring': 'Spring', 'season.summer': 'Summer',
@@ -982,13 +986,12 @@
           'rules.title': 'Color Rules & Garments',
           'rules.do1': '<strong>Promoted near the face:</strong> Mocha, Terracotta, Teal, Forest Green, Cream/Ivory.',
           'rules.dont1': '<strong>Avoid near the face:</strong> Pure optic white, Ice gray, Cold violet, Electric blue.',
-          'accessori.note': 'Examples in warm autumn tones: adapt materials and colors to your season.',
+          'accessori.note': 'The photo follows your season\u2019s colors. The tips below use warm autumn tones: adapt materials and colors to your season.',
           'accessori.title': 'Accessories & Details',
           'accessori.watches': '<strong>Watches:</strong> Bronze, brushed brass or matte black cases with mocha or leather straps.',
           'accessori.glasses': '<strong>Glasses:</strong> Amber tortoiseshell or olive/brown acetate frames.',
           'accessori.hats': '<strong>Hats:</strong> Classic dad hats in olive, rust or mocha.',
-          'accessori.metals': '<strong>Metals:</strong> Satin yellow gold, bronze or burnished aged silver.',
-          'footer.note': 'Images are illustrative and AI-generated · Armocromatic'
+          'accessori.metals': '<strong>Metals:</strong> Satin yellow gold, bronze or burnished aged silver.'
         }
       };
 
@@ -1038,7 +1041,7 @@
             { name: { it: 'Rosso Ciliegia', en: 'Cherry Red' }, hex: '#C2185B' },
             { name: { it: 'Verde Smeraldo', en: 'Emerald Green' }, hex: '#00695C' },
             { name: { it: 'Antracite', en: 'Anthracite' }, hex: '#37474F' },
-            { name: { it: 'Grigio Ghiaccio', en: 'Ice Gray' }, hex: '#CFD8DC', dark: true },
+            { name: { it: 'Azzurro Ghiaccio', en: 'Ice Blue' }, hex: '#CFE8F7', dark: true },
             { name: { it: 'Fucsia Freddo', en: 'Cold Fuchsia' }, hex: '#AD1457' }
           ],
           dos: { it: 'Nero, Bianco puro, Blu elettrico, Antracite e Rosso freddo.', en: 'Black, pure white, electric blue, anthracite and cool red.' },
@@ -1054,7 +1057,7 @@
             { it: '<strong>Camicia bianca</strong> — Bianco puro', en: '<strong>White shirt</strong> — Pure white' },
             { it: '<strong>Maglione girocollo in merino</strong> — Blu elettrico, Rosso ciliegia, Verde smeraldo', en: '<strong>Merino crewneck sweater</strong> — Electric blue, Cherry red, Emerald green' },
             { it: '<strong>Pantaloni sartoriali o chino</strong> — Antracite, Nero', en: '<strong>Tailored trousers or chinos</strong> — Anthracite, Black' },
-            { it: '<strong>T-shirt essenziali</strong> — Bianco, Nero, Grigio ghiaccio', en: '<strong>Essential tees</strong> — White, Black, Ice gray' },
+            { it: '<strong>T-shirt essenziali</strong> — Bianco, Nero, Azzurro ghiaccio', en: '<strong>Essential tees</strong> — White, Black, Ice blue' },
             { it: '<strong>Scarpe in pelle liscia</strong> — Nere', en: '<strong>Smooth leather shoes</strong> — Black' }
           ]
         },
@@ -1062,7 +1065,7 @@
           name: { it: 'Primavera', en: 'Spring' },
           intro: { it: 'Tonalità calde, luminose e brillanti.', en: 'Warm, bright and lively tones.' },
           colors: [
-            { name: { it: 'Pesca', en: 'Peach' }, hex: '#FF8A65', dark: true },
+            { name: { it: 'Pesca', en: 'Peach' }, hex: '#FFB38A', dark: true },
             { name: { it: 'Verde Mela', en: 'Apple Green' }, hex: '#7CB342', dark: true },
             { name: { it: 'Cammello Chiaro', en: 'Light Camel' }, hex: '#D4A373', dark: true },
             { name: { it: 'Turchese', en: 'Turquoise' }, hex: '#00ACC1', dark: true },
@@ -1161,12 +1164,12 @@
         'elongated': { it: 'Viso Allungato', en: 'Elongated Face' }
       };
       var BODY_KEYS = { athletic: 'fit.typeAthletic', slim: 'fit.typeSlim', robust: 'fit.typeRobust' };
-      var THEME_BG = { autumn: '#F1E5D3', winter: '#E3EAF6', spring: '#F8EBD8', summer: '#E4EBF3' };
+      var THEME_BG = { autumn: '#F1E5D3', winter: '#E2F0FA', spring: '#FDE6D4', summer: '#F2E4EB' };
       var SEASONAL_IMAGES = {
-        autumn: { hero: 'img/hero-autumn.webp', capsule: 'img/capsule-autumn.webp' },
-        winter: { hero: 'img/hero-winter.webp', capsule: 'img/capsule-winter.webp' },
-        spring: { hero: 'img/hero-spring.webp', capsule: 'img/capsule-spring.webp' },
-        summer: { hero: 'img/hero-summer.webp', capsule: 'img/capsule-summer.webp' }
+        autumn: { hero: 'img/hero-autumn.webp', capsule: 'img/capsule-autumn.webp', accessories: 'img/accessories-autumn.webp' },
+        winter: { hero: 'img/hero-winter.webp', capsule: 'img/capsule-winter.webp', accessories: 'img/accessories-winter.webp' },
+        spring: { hero: 'img/hero-spring.webp', capsule: 'img/capsule-spring.webp', accessories: 'img/accessories-spring.webp' },
+        summer: { hero: 'img/hero-summer.webp', capsule: 'img/capsule-summer.webp', accessories: 'img/accessories-summer.webp' }
       };
 
       loadProfile();
@@ -1186,12 +1189,12 @@
         var meta = document.querySelector('meta[name="theme-color"]');
         if (meta) meta.setAttribute('content', THEME_BG[key]);
         Object.keys(SEASONAL_IMAGES[key]).forEach(function (kind) {
-          var image = document.querySelector('[data-season-image="' + kind + '"]');
-          if (!image) return;
           var altKey = 'img.' + kind + '.' + key;
-          image.setAttribute('src', SEASONAL_IMAGES[key][kind]);
-          image.setAttribute('data-i18n-alt', altKey);
-          image.setAttribute('alt', t(altKey));
+          document.querySelectorAll('[data-season-image="' + kind + '"]').forEach(function (image) {
+            image.setAttribute('src', SEASONAL_IMAGES[key][kind]);
+            image.setAttribute('data-i18n-alt', altKey);
+            image.setAttribute('alt', t(altKey));
+          });
         });
       }
 
