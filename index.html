@@ -32,12 +32,31 @@
       --border-color: #CFC7B9;
       --success: #2E7D32;
       --danger: #C62828;
+      --heading: #2B1D18;
+      --blob-1: rgba(200, 100, 70, 0.22);
+      --blob-2: rgba(85, 107, 47, 0.16);
+      --blob-3: rgba(74, 44, 42, 0.12);
       --topbar-h: 65px;
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
 
+    /* ── Colori del sito secondo la stagione del profilo (data-season su <html>) ── */
+    html[data-season="winter"] {
+      --bg-main: #ECEEF2; --accent: #2A4BC0; --accent-deep: #1B2F86; --border-color: #C6CCD8; --heading: #141826;
+      --blob-1: rgba(0, 51, 170, 0.16); --blob-2: rgba(173, 20, 87, 0.10); --blob-3: rgba(17, 17, 17, 0.08);
+    }
+    html[data-season="spring"] {
+      --bg-main: #F7F1E3; --accent: #E0663F; --accent-deep: #A9461F; --border-color: #E2D5B8; --heading: #3A2716;
+      --blob-1: rgba(255, 138, 101, 0.22); --blob-2: rgba(0, 172, 193, 0.14); --blob-3: rgba(124, 179, 66, 0.14);
+    }
+    html[data-season="summer"] {
+      --bg-main: #EDF0F4; --accent: #5F7FA3; --accent-deep: #3D5877; --border-color: #C9D1DC; --heading: #26303D;
+      --blob-1: rgba(144, 202, 249, 0.24); --blob-2: rgba(244, 143, 177, 0.14); --blob-3: rgba(206, 147, 216, 0.14);
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    [hidden] { display: none !important; }
 
     /* ── Sfondo dinamico ─────────────────────────────── */
     .bg-anim { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
@@ -46,9 +65,9 @@
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
     }
     .bg-blob { position: absolute; border-radius: 50%; filter: blur(70px); will-change: transform; }
-    .bg-blob-1 { background: rgba(200, 100, 70, 0.22); width: 70vmax; height: 70vmax; top: -30vmax; left: -28vmax; animation: blobFloat1 44s ease-in-out infinite; }
-    .bg-blob-2 { background: rgba(85, 107, 47, 0.16); width: 62vmax; height: 62vmax; bottom: -30vmax; right: -26vmax; animation: blobFloat2 38s ease-in-out infinite; }
-    .bg-blob-3 { background: rgba(74, 44, 42, 0.12); width: 50vmax; height: 50vmax; top: 55%; left: -22vmax; animation: blobFloat3 52s ease-in-out infinite; }
+    .bg-blob-1 { background: var(--blob-1); width: 70vmax; height: 70vmax; top: -30vmax; left: -28vmax; animation: blobFloat1 44s ease-in-out infinite; }
+    .bg-blob-2 { background: var(--blob-2); width: 62vmax; height: 62vmax; bottom: -30vmax; right: -26vmax; animation: blobFloat2 38s ease-in-out infinite; }
+    .bg-blob-3 { background: var(--blob-3); width: 50vmax; height: 50vmax; top: 55%; left: -22vmax; animation: blobFloat3 52s ease-in-out infinite; }
     @keyframes blobFloat1 { 0%,100% { transform: translate(0,0) scale(1);} 33% { transform: translate(14vmax,10vmax) scale(1.1);} 66% { transform: translate(5vmax,24vmax) scale(0.94);} }
     @keyframes blobFloat2 { 0%,100% { transform: translate(0,0) scale(1);} 40% { transform: translate(-15vmax,-12vmax) scale(1.08);} 75% { transform: translate(-5vmax,-25vmax) scale(0.95);} }
     @keyframes blobFloat3 { 0%,100% { transform: translate(0,0) rotate(0deg);} 50% { transform: translate(11vmax,-13vmax) rotate(18deg);} }
@@ -82,7 +101,7 @@
       padding: 12px; border-radius: 12px; background: var(--bg-main);
       border: 1.5px solid var(--border-color); margin-bottom: 12px;
       text-decoration: none; color: var(--text-dark); cursor: pointer; touch-action: manipulation;
-      transition: transform 0.15s ease;
+      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
     }
     .shop-link:active { transform: scale(0.98); }
     .shop-link img { width: 86px; height: 86px; border-radius: 8px; object-fit: cover; display: block; }
@@ -106,6 +125,7 @@
       padding-bottom: calc(40px + var(--safe-bottom));
       min-height: 100vh;
       min-height: 100dvh;
+      transition: background-color 0.4s ease;
     }
 
     /* Blocco scroll di sfondo quando il menu è aperto (pattern standard iOS) */
@@ -222,7 +242,7 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.02);
     }
     .card h2 {
-      font-size: 1.25rem; font-weight: 700; color: var(--text-dark);
+      font-size: 1.25rem; font-weight: 700; color: var(--heading);
       margin-bottom: 12px; border-bottom: 1.5px solid var(--border-color); padding-bottom: 8px;
     }
     .card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
@@ -230,7 +250,7 @@
     /* HOME HERO & GRID */
     .hero { text-align: center; padding: 26px 15px; }
     .hero h1 {
-      font-size: 2.2rem; font-weight: 800; margin-bottom: 10px; color: var(--text-dark);
+      font-size: 2.2rem; font-weight: 800; margin-bottom: 10px; color: var(--heading);
       line-height: 1.15; letter-spacing: -0.5px;
     }
     .title-divider {
@@ -254,9 +274,14 @@
       border-radius: 10px; padding: 14px; text-align: left;
       font: inherit; color: var(--text-dark); display: block; width: 100%;
       cursor: pointer; touch-action: manipulation;
-      transition: transform 0.15s ease;
+      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
     }
     .feature-card:active { transform: scale(0.97); }
+    @media (hover: hover) {
+      .feature-card:hover, .shop-link:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.06); }
+      .feature-card:hover h4, .shop-link:hover h4 { color: var(--accent-deep); }
+    }
+    .shop-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
     .feature-card h4 { font-size: 0.95rem; margin-bottom: 4px; }
     .feature-card p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.3; }
 
@@ -279,6 +304,30 @@
     }
     .btn-action:active { opacity: 0.85; }
 
+    .btn-secondary {
+      background: transparent; color: var(--text-dark); border: 1.5px solid var(--border-color);
+      padding: 13px 14px; border-radius: 8px; font-weight: 600; font-size: 0.95rem;
+      font-family: inherit; cursor: pointer; min-height: 48px; touch-action: manipulation;
+    }
+    .btn-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+    .btn-row .btn-action, .btn-row .btn-secondary { width: auto; flex: 1 1 180px; margin-top: 0; }
+    .btn-secondary:focus-visible, .choice-btn:focus-visible, .quiz summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .form-hint { font-size: 0.8rem; color: var(--text-muted); line-height: 1.45; margin-top: 6px; }
+    .save-note { font-size: 0.82rem; color: var(--success); font-weight: 600; min-height: 1.3em; margin-top: 4px; }
+
+    /* Mini quiz per trovare la stagione */
+    .quiz { margin: 4px 0 16px; padding: 12px 14px; border-radius: 10px; background: var(--bg-main); border: 1.5px dashed var(--border-color); }
+    .quiz summary { cursor: pointer; font-weight: 700; font-size: 0.9rem; color: var(--accent-deep); padding: 4px 0; }
+    .quiz-q { font-size: 0.88rem; color: var(--text-dark); margin: 12px 0 8px; line-height: 1.45; }
+    .choice-group { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .choice-btn {
+      background: var(--card-bg); border: 1.5px solid var(--border-color); border-radius: 8px;
+      padding: 10px 8px; font: inherit; font-size: 0.85rem; font-weight: 600; color: var(--text-dark);
+      cursor: pointer; min-height: 44px; touch-action: manipulation;
+    }
+    .choice-btn[aria-pressed="true"] { background: var(--text-dark); border-color: var(--text-dark); color: #FFF; }
+    .quiz-result { margin-top: 12px; }
+
     /* COLOR SWATCHES */
     .color-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
     /* Etichette in testo grande (>= 18.66px bold) per garantire contrasto >= 3:1 anche su Terracotta */
@@ -293,6 +342,22 @@
     ul.clean-list li { padding: 8px 0; border-bottom: 1px solid var(--border-color); font-size: 0.88rem; color: var(--text-muted); line-height: 1.4; }
     ul.clean-list li:last-child { border-bottom: none; }
     ul.clean-list strong { color: var(--text-dark); }
+
+    /* ── Telefoni stretti ─────────────────────────────── */
+    @media (max-width: 480px) {
+      .shop-link { grid-template-columns: 64px 1fr; gap: 10px; padding: 10px; }
+      .shop-link img { width: 64px; height: 64px; }
+    }
+    @media (max-width: 360px) {
+      .top-bar { padding-left: 10px; padding-right: 10px; }
+      .menu-trigger { padding: 8px; }
+      .brand-container { gap: 7px; }
+      .brand-logo { width: 28px; height: 28px; }
+      .brand-title { font-size: 1.05rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .lang-btn { min-width: 34px; padding: 6px 7px; }
+      .container { padding: 0 14px; }
+      .card { padding: 18px 16px; }
+    }
 
     /* ── Layout desktop / tablet ─────────────────────── */
     @media (min-width: 700px) {
@@ -384,6 +449,7 @@
     </div>
     <nav class="nav-links" aria-label="Sezioni del sito" data-i18n-aria="aria.sections">
       <a href="#home" data-section="home" class="active" data-i18n="nav.home">Home</a>
+      <a href="#profilo" data-section="profilo" data-i18n="nav.profile">Il Mio Profilo</a>
       <a href="#fit" data-section="fit" data-i18n="nav.fit">Proporzioni Corporee</a>
       <a href="#grooming" data-section="grooming" data-i18n="nav.grooming">Grooming & Forme Viso</a>
       <a href="#palette" data-section="palette" data-i18n="nav.palette">Palette & Stagioni</a>
@@ -411,34 +477,19 @@
       </div>
 
       <div class="home-cards">
-      <div class="card hero-span">
-        <h2 data-i18n="profile.title">Il Tuo Profilo</h2>
-        <div class="form-group">
-          <label for="home-season-select" data-i18n="profile.seasonLabel">Seleziona la tua stagione armocromatica</label>
-          <select id="home-season-select" class="form-control">
-            <option value="autumn" data-i18n="season.autumn">Autunno</option>
-            <option value="winter" data-i18n="season.winter">Inverno</option>
-            <option value="spring" data-i18n="season.spring">Primavera</option>
-            <option value="summer" data-i18n="season.summer">Estate</option>
-          </select>
-        </div>
-        <div class="profile-chips">
-          <span class="chip"><b data-i18n="profile.chipSeason">Stagione</b>: <span id="chip-season">Autunno</span></span>
-          <span class="chip"><b data-i18n="profile.chipFace">Forma del viso</b>: <span id="chip-face">—</span></span>
+      <!-- Profilo in Home: riepilogo o invito a crearlo (riempito da JS) -->
+      <div class="card hero-span" id="home-profile">
+        <h2 id="home-profile-title">Il Tuo Profilo</h2>
+        <p id="home-profile-text"></p>
+        <div class="profile-chips" id="home-profile-chips"></div>
+        <div class="btn-row">
+          <button class="btn-action js-goto" type="button" data-section="profilo" id="home-profile-btn">Crea il tuo profilo</button>
         </div>
       </div>
 
       <div class="card">
-        <h2 data-i18n="home.tipsTitle">Consigli Chiave di Stile</h2>
-        <div class="rule-box do" id="tip-season-box">
-          <strong>Colore vicino al viso:</strong> Prediligi i toni guida della tua stagione.
-        </div>
-        <div class="rule-box do" data-i18n="home.tip2">
-          <strong>Slanciare la figura:</strong> Infila la maglia nei pantaloni (tuck-in) e usa pantaloni a vita media/alta per allungare le gambe.
-        </div>
-        <div class="rule-box do" data-i18n="home.tip3">
-          <strong>Grooming Viso:</strong> Mantieni i lati dei capelli corti o sfumati (Taper Fade) per allungare il profilo e ridurre l'ampiezza delle guance.
-        </div>
+        <h2 id="home-tips-title">Consigli Chiave di Stile</h2>
+        <div id="home-tips"></div>
       </div>
 
       <div class="card">
@@ -455,15 +506,8 @@
             <img src="img/fabrics.webp" alt="" width="800" height="1200" loading="lazy" decoding="async" data-i18n-alt="img.fabrics">
           </figure>
           <div>
-            <p data-i18n="home.capsuleIntro">Una base di capi versatili da combinare, in toni coerenti con l'Autunno Profondo:</p>
-            <ul class="capsule-list">
-              <li data-i18n="home.capsule1"><strong>Sopracamicia in camoscio o cotone spesso</strong> — Moka, Oliva, Terracotta</li>
-              <li data-i18n="home.capsule2"><strong>T-shirt pesanti a manica lunga</strong> — Panna, Oliva, Bordeaux</li>
-              <li data-i18n="home.capsule3"><strong>Chino a vita media/alta con pinces</strong> — Beige caldo, Grigio carbone</li>
-              <li data-i18n="home.capsule4"><strong>Maglione girocollo in lana</strong> — Senape, Verde foresta, Moka</li>
-              <li data-i18n="home.capsule5"><strong>Trench o giacca campo</strong> — Cammello o Oliva</li>
-              <li data-i18n="home.capsule6"><strong>Scarpe in cuoio marrone</strong> — Derby o Chukka</li>
-            </ul>
+            <p id="capsule-intro"></p>
+            <ul class="capsule-list" id="capsule-list"></ul>
           </div>
         </div>
       </div>
@@ -512,22 +556,87 @@
       </div>
     </div>
 
+    <!-- PROFILO SECTION: i dati di chi usa il sito, salvati solo sul dispositivo -->
+    <div id="profilo" class="section">
+      <div class="card">
+        <h2 data-i18n="me.title">Il Mio Profilo</h2>
+        <p style="margin-bottom:16px;" data-i18n="me.intro">Inserisci i tuoi dati: la Home, i consigli e perfino i colori del sito si adattano a te.</p>
+
+        <div class="form-group">
+          <label for="me-season" data-i18n="me.season">La tua stagione armocromatica</label>
+          <select id="me-season" class="form-control">
+            <option value="" data-i18n="me.pick">— Scegli —</option>
+            <option value="autumn" data-i18n="season.autumn">Autunno</option>
+            <option value="winter" data-i18n="season.winter">Inverno</option>
+            <option value="spring" data-i18n="season.spring">Primavera</option>
+            <option value="summer" data-i18n="season.summer">Estate</option>
+          </select>
+        </div>
+
+        <details class="quiz" id="me-quiz">
+          <summary data-i18n="quiz.summary">Non conosci la tua stagione? Rispondi a 2 domande</summary>
+          <p class="quiz-q" data-i18n="quiz.q1">1. Sottotono: le vene del polso sembrano verdi e ti sta meglio l'oro, oppure sembrano blu o viola e ti sta meglio l'argento?</p>
+          <div class="choice-group" data-q="tone" role="group">
+            <button type="button" class="choice-btn" data-v="warm" aria-pressed="false" data-i18n="quiz.warm">Caldo (oro, vene verdi)</button>
+            <button type="button" class="choice-btn" data-v="cool" aria-pressed="false" data-i18n="quiz.cool">Freddo (argento, vene blu)</button>
+          </div>
+          <p class="quiz-q" data-i18n="quiz.q2">2. I tuoi colori naturali (capelli, occhi, pelle) sono più intensi e profondi o chiari e delicati?</p>
+          <div class="choice-group" data-q="depth" role="group">
+            <button type="button" class="choice-btn" data-v="deep" aria-pressed="false" data-i18n="quiz.deep">Intensi e profondi</button>
+            <button type="button" class="choice-btn" data-v="light" aria-pressed="false" data-i18n="quiz.light">Chiari e delicati</button>
+          </div>
+          <div class="quiz-result" id="quiz-result" aria-live="polite" hidden>
+            <p class="form-hint" id="quiz-result-text"></p>
+            <div class="btn-row"><button type="button" class="btn-secondary" id="quiz-apply"></button></div>
+          </div>
+        </details>
+
+        <div class="form-group">
+          <label for="me-height" data-i18n="fit.height">Altezza (cm)</label>
+          <input type="number" id="me-height" class="form-control" min="140" max="220" step="1" inputmode="numeric" placeholder="175">
+        </div>
+        <div class="form-group">
+          <label for="me-body" data-i18n="fit.bodyType">Corporatura</label>
+          <select id="me-body" class="form-control">
+            <option value="" data-i18n="me.pick">— Scegli —</option>
+            <option value="athletic" data-i18n="fit.typeAthletic">Atletica / Compatta</option>
+            <option value="slim" data-i18n="fit.typeSlim">Sottile / Slanciata</option>
+            <option value="robust" data-i18n="fit.typeRobust">Robusta / Imponente</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="me-face" data-i18n="profile.chipFace">Forma del viso</label>
+          <select id="me-face" class="form-control">
+            <option value="" data-i18n="me.pick">— Scegli —</option>
+            <option value="square-full" data-i18n="grooming.square">Mascella Marcata / Guance Piene</option>
+            <option value="oval" data-i18n="grooming.oval">Viso Ovale</option>
+            <option value="round" data-i18n="grooming.round">Viso Rotondo</option>
+            <option value="elongated" data-i18n="grooming.elongated">Viso Allungato / Rettangolare</option>
+          </select>
+        </div>
+
+        <p class="save-note" id="me-saved" aria-live="polite"></p>
+        <p class="form-hint" data-i18n="me.privacy">I dati restano solo su questo dispositivo e si salvano da soli: niente account, niente invii.</p>
+        <div class="btn-row">
+          <button class="btn-action js-goto" type="button" data-section="home" data-i18n="me.done">Vedi i consigli per te</button>
+          <button class="btn-secondary" type="button" id="me-reset" data-i18n="me.reset">Cancella i miei dati</button>
+        </div>
+      </div>
+    </div>
+
     <!-- FIT SECTION -->
     <div id="fit" class="section">
       <div class="card">
         <h2 data-i18n="fit.title">Calcolatore Proporzioni Fisiche</h2>
         <div class="form-group">
           <label for="height" data-i18n="fit.height">Altezza (cm)</label>
-          <input type="number" id="height" class="form-control" value="170" inputmode="numeric">
-        </div>
-        <div class="form-group">
-          <label for="weight" data-i18n="fit.weight">Peso (kg)</label>
-          <input type="number" id="weight" class="form-control" value="75" inputmode="decimal">
+          <input type="number" id="height" class="form-control" min="140" max="220" step="1" inputmode="numeric" placeholder="175">
         </div>
         <div class="form-group">
           <label for="body-type" data-i18n="fit.bodyType">Corporatura</label>
           <select id="body-type" class="form-control">
-            <option value="athletic" selected data-i18n="fit.typeAthletic">Atletica / Compatta</option>
+            <option value="" data-i18n="me.pick">— Scegli —</option>
+            <option value="athletic" data-i18n="fit.typeAthletic">Atletica / Compatta</option>
             <option value="slim" data-i18n="fit.typeSlim">Sottile / Slanciata</option>
             <option value="robust" data-i18n="fit.typeRobust">Robusta / Imponente</option>
           </select>
@@ -551,7 +660,8 @@
         <div class="form-group">
           <label for="face-shape-select" data-i18n="grooming.label">Seleziona Forma del Viso</label>
           <select id="face-shape-select" class="form-control">
-            <option value="square-full" selected data-i18n="grooming.square">Mascella Marcata / Guance Piene</option>
+            <option value="" data-i18n="me.pick">— Scegli —</option>
+            <option value="square-full" data-i18n="grooming.square">Mascella Marcata / Guance Piene</option>
             <option value="oval" data-i18n="grooming.oval">Viso Ovale</option>
             <option value="round" data-i18n="grooming.round">Viso Rotondo</option>
             <option value="elongated" data-i18n="grooming.elongated">Viso Allungato / Rettangolare</option>
@@ -579,6 +689,9 @@
         </div>
         <p id="palette-intro" style="margin-bottom:12px;"></p>
         <div class="color-grid" id="palette-grid"></div>
+        <div class="btn-row" id="palette-mine-row" hidden>
+          <button class="btn-secondary" type="button" id="palette-set-mine"></button>
+        </div>
       </div>
 
       <div class="card">
@@ -597,9 +710,7 @@
         <div class="rule-box dont" id="rules-season-dont">
           <strong>Da evitare vicino al viso:</strong> Bianco ottico puro, Grigio ghiaccio, Viola freddo, Blu elettrico.
         </div>
-        <div class="rule-box do" data-i18n="rules.do2">
-          <strong>Capi chiave Smart Streetwear:</strong> Sopracamicie in camoscio/cotone spesso, Chino a vita media/alta con pinces, Trench cammello o oliva.
-        </div>
+        <div class="rule-box do" id="rules-do2"></div>
       </div>
     </div>
 
@@ -644,7 +755,7 @@
       var savedScrollY = 0;
       var menuIsOpen = false;
       var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var SECTIONS = ['home', 'fit', 'grooming', 'palette', 'rules', 'accessori'];
+      var SECTIONS = ['home', 'profilo', 'fit', 'grooming', 'palette', 'rules', 'accessori'];
 
       /* ---------- LINGUA (i18n IT/EN) ---------- */
 
@@ -658,7 +769,36 @@
           'aria.sections': 'Sezioni del sito', 'aria.menuLabel': 'Menu principale',
           'nav.menu': 'Menu', 'nav.home': 'Home', 'nav.fit': 'Proporzioni Corporee',
           'nav.grooming': 'Grooming & Forme Viso', 'nav.palette': 'Palette & Stagioni',
-          'nav.rules': 'Regole & Abbinamenti', 'nav.accessori': 'Accessori',
+          'nav.rules': 'Regole & Abbinamenti', 'nav.accessori': 'Accessori', 'nav.profile': 'Il Mio Profilo',
+          'me.title': 'Il Mio Profilo',
+          'me.intro': 'Inserisci i tuoi dati: la Home, i consigli e perfino i colori del sito si adattano a te.',
+          'me.season': 'La tua stagione armocromatica', 'me.pick': '— Scegli —',
+          'me.privacy': 'I dati restano solo su questo dispositivo e si salvano da soli: niente account, niente invii.',
+          'me.done': 'Vedi i consigli per te', 'me.reset': 'Cancella i miei dati',
+          'me.saved': 'Salvato su questo dispositivo ✓', 'me.cleared': 'Dati cancellati da questo dispositivo.',
+          'me.confirmReset': 'Vuoi cancellare i tuoi dati da questo dispositivo?',
+          'quiz.summary': 'Non conosci la tua stagione? Rispondi a 2 domande',
+          'quiz.q1': '1. Sottotono: le vene del polso sembrano verdi e ti sta meglio l\u2019oro, oppure sembrano blu o viola e ti sta meglio l\u2019argento?',
+          'quiz.warm': 'Caldo (oro, vene verdi)', 'quiz.cool': 'Freddo (argento, vene blu)',
+          'quiz.q2': '2. I tuoi colori naturali (capelli, occhi, pelle) sono più intensi e profondi o chiari e delicati?',
+          'quiz.deep': 'Intensi e profondi', 'quiz.light': 'Chiari e delicati',
+          'quiz.result': 'Probabilmente sei {s}. È un\u2019indicazione: confrontala con la palette prima di sceglierla.',
+          'quiz.apply': 'Usa {s} come mia stagione',
+          'profile.createTitle': 'Crea il Tuo Profilo',
+          'profile.createText': 'Inserisci stagione, altezza, corporatura e forma del viso: consigli e colori del sito si adattano a te. I dati restano su questo dispositivo.',
+          'profile.createBtn': 'Crea il tuo profilo →', 'profile.editBtn': 'Modifica il profilo',
+          'profile.setText': 'Consigli e colori del sito sono calibrati su di te.',
+          'profile.chipHeight': 'Altezza', 'profile.chipBody': 'Corporatura',
+          'home.tipsTitleMine': 'Consigli per Te',
+          'home.tip2Label': 'La tua figura:', 'home.tip3Label': 'Il tuo viso:',
+          'home.tipColorNone': '<strong>Colore vicino al viso:</strong> scegli la tua stagione nel profilo per sapere quali toni ti illuminano.',
+          'home.tipFigNone': '<strong>Proporzioni:</strong> inserisci altezza e corporatura nel profilo per consigli su misura.',
+          'home.tipFaceNone': '<strong>Viso:</strong> indica la forma del viso nel profilo per capelli, barba e cappelli adatti a te.',
+          'fit.needData': 'Inserisci altezza e corporatura per vedere i consigli.',
+          'fit.badHeight': 'Inserisci un\u2019altezza tra 140 e 220 cm.',
+          'grooming.needData': 'Scegli la forma del viso per vedere i consigli su capelli, barba e cappelli.',
+          'palette.setMine': 'Imposta {s} come mia stagione',
+          'rules.do2Label': 'Capi chiave per la tua stagione:',
           'home.subtitle': "Guida d'immagine personale per l'equilibrio cromatico, le proporzioni fisiche e il grooming.",
           'img.hero': 'Flat-lay editoriale: sopracamicia moka, t-shirt panna e chino oliva su fondo lino chiaro',
           'img.fabrics': 'Dettaglio di tessuti piegati: lana moka, cotone terracotta, twill oliva, cashmere cammello e lino panna',
@@ -672,18 +812,10 @@
           'home.tip1Body': 'Prediligi i toni guida della tua stagione:',
           'rules.promoted': 'Promossi vicino al viso:',
           'rules.avoided': 'Da evitare vicino al viso:',
-          'home.tip2': '<strong>Slanciare la figura:</strong> Infila la maglia nei pantaloni (tuck-in) e usa pantaloni a vita media/alta per allungare le gambe.',
-          'home.tip3': '<strong>Grooming Viso:</strong> Mantieni i lati dei capelli corti o sfumati (Taper Fade) per allungare il profilo e ridurre l\u2019ampiezza delle guance.',
           'home.comboTitle': 'Combo Cromatica della Settimana',
           'home.comboDesc': 'L\u2019abbinamento chiave per la tua stagione nello Smart Streetwear:',
           'home.capsuleTitle': 'Guardaroba Capsule',
-          'home.capsuleIntro': 'Una base di capi versatili da combinare, in toni coerenti con l\u2019Autunno Profondo:',
-          'home.capsule1': '<strong>Sopracamicia in camoscio o cotone spesso</strong> — Moka, Oliva, Terracotta',
-          'home.capsule2': '<strong>T-shirt pesanti a manica lunga</strong> — Panna, Oliva, Bordeaux',
-          'home.capsule3': '<strong>Chino a vita media/alta con pinces</strong> — Beige caldo, Grigio carbone',
-          'home.capsule4': '<strong>Maglione girocollo in lana</strong> — Senape, Verde foresta, Moka',
-          'home.capsule5': '<strong>Trench o giacca campo</strong> — Cammello o Oliva',
-          'home.capsule6': '<strong>Scarpe in cuoio marrone</strong> — Derby o Chukka',
+          'home.capsuleIntro': 'Una base di capi versatili da combinare, in toni coerenti con la tua stagione ({s}):',
           'home.guidesTitle': 'Guide da Esplorare',
           'home.guide1Title': 'Capelli e barba su misura',
           'home.guide1Text': 'Le linee che valorizzano il tuo viso: volume laterale, barba curata, texture definita.',
@@ -692,11 +824,11 @@
           'home.guide2Text': 'Orologio, occhiali tartarugati, cappellino oliva: i dettagli caldi legano l\u2019outfit.',
           'home.guide2Cta': 'Vedi la guida Accessori&nbsp;→',
           'home.sectionsTitle': 'Sezioni Principali',
-          'home.f1': 'Proporzioni', 'home.f1d': 'Calcolo volumi per fisico compatto.',
+          'home.f1': 'Proporzioni', 'home.f1d': 'Consigli in base ad altezza e corporatura.',
           'home.f2': 'Grooming', 'home.f2d': 'Guida forme viso, barba e sfumature.',
           'home.f3': 'Palette', 'home.f3d': 'Le 4 stagioni armocromiche.',
           'home.f4': 'Accessori', 'home.f4d': 'Occhiali, cappellini e orologi.',
-          'fit.title': 'Calcolatore Proporzioni Fisiche', 'fit.height': 'Altezza (cm)', 'fit.weight': 'Peso (kg)',
+          'fit.title': 'Calcolatore Proporzioni Fisiche', 'fit.height': 'Altezza (cm)',
           'fit.bodyType': 'Corporatura', 'fit.typeAthletic': 'Atletica / Compatta', 'fit.typeSlim': 'Sottile / Slanciata',
           'fit.typeRobust': 'Robusta / Imponente', 'fit.cta': 'Genera Analisi Fit', 'fit.results': 'Raccomandazioni di Vestibilità',
           'grooming.title': 'Analisi Viso & Grooming', 'grooming.label': 'Seleziona Forma del Viso',
@@ -707,7 +839,6 @@
           'rules.title': 'Regole Colore & Capi',
           'rules.do1': '<strong>Promossi vicino al viso:</strong> Moka, Terracotta, Ottanio, Verde Foresta, Panna/Avorio.',
           'rules.dont1': '<strong>Da evitare vicino al viso:</strong> Bianco ottico puro, Grigio ghiaccio, Viola freddo, Blu elettrico.',
-          'rules.do2': '<strong>Capi chiave Smart Streetwear (esempio in toni autunnali):</strong> Sopracamicie in camoscio/cotone spesso, Chino a vita media/alta con pinces, Trench cammello o oliva.',
           'accessori.note': 'Esempi in toni caldi autunnali: adatta materiali e colori alla tua stagione.',
           'accessori.title': 'Accessori & Dettagli',
           'accessori.watches': '<strong>Orologi:</strong> Cassa in bronzo, ottone spazzolato o nero opaco con cinturino in pelle moka o cuoio.',
@@ -721,7 +852,36 @@
           'aria.sections': 'Site sections', 'aria.menuLabel': 'Main menu',
           'nav.menu': 'Menu', 'nav.home': 'Home', 'nav.fit': 'Body Proportions',
           'nav.grooming': 'Grooming & Face Shapes', 'nav.palette': 'Palette & Seasons',
-          'nav.rules': 'Rules & Pairings', 'nav.accessori': 'Accessories',
+          'nav.rules': 'Rules & Pairings', 'nav.accessori': 'Accessories', 'nav.profile': 'My Profile',
+          'me.title': 'My Profile',
+          'me.intro': 'Enter your details: the Home page, the tips and even the site colors adapt to you.',
+          'me.season': 'Your color season', 'me.pick': '— Choose —',
+          'me.privacy': 'Your data stays on this device only and saves automatically: no account, nothing sent.',
+          'me.done': 'See your tips', 'me.reset': 'Delete my data',
+          'me.saved': 'Saved on this device ✓', 'me.cleared': 'Data deleted from this device.',
+          'me.confirmReset': 'Delete your data from this device?',
+          'quiz.summary': 'Don\u2019t know your season? Answer 2 questions',
+          'quiz.q1': '1. Undertone: do the veins on your wrist look green and gold suits you, or do they look blue or purple and silver suits you?',
+          'quiz.warm': 'Warm (gold, green veins)', 'quiz.cool': 'Cool (silver, blue veins)',
+          'quiz.q2': '2. Are your natural colors (hair, eyes, skin) deep and intense, or light and soft?',
+          'quiz.deep': 'Deep and intense', 'quiz.light': 'Light and soft',
+          'quiz.result': 'You are probably {s}. It is a pointer: compare it with the palette before choosing.',
+          'quiz.apply': 'Use {s} as my season',
+          'profile.createTitle': 'Create Your Profile',
+          'profile.createText': 'Enter your season, height, build and face shape: tips and site colors adapt to you. Your data stays on this device.',
+          'profile.createBtn': 'Create your profile →', 'profile.editBtn': 'Edit profile',
+          'profile.setText': 'Tips and site colors are tuned to you.',
+          'profile.chipHeight': 'Height', 'profile.chipBody': 'Build',
+          'home.tipsTitleMine': 'Tips for You',
+          'home.tip2Label': 'Your figure:', 'home.tip3Label': 'Your face:',
+          'home.tipColorNone': '<strong>Color near the face:</strong> choose your season in your profile to see which tones light you up.',
+          'home.tipFigNone': '<strong>Proportions:</strong> enter your height and build in your profile for tailored advice.',
+          'home.tipFaceNone': '<strong>Face:</strong> set your face shape in your profile for hair, beard and hats that suit you.',
+          'fit.needData': 'Enter your height and build to see the advice.',
+          'fit.badHeight': 'Enter a height between 140 and 220 cm.',
+          'grooming.needData': 'Choose your face shape to see hair, beard and hat advice.',
+          'palette.setMine': 'Set {s} as my season',
+          'rules.do2Label': 'Key pieces for your season:',
           'home.subtitle': 'Your personal image guide to color balance, body proportions and grooming.',
           'img.hero': 'Editorial flat-lay: mocha overshirt, cream tee and olive chinos on a light linen background',
           'img.fabrics': 'Close-up of folded fabrics: mocha wool, terracotta cotton, olive twill, camel cashmere and cream linen',
@@ -735,18 +895,10 @@
           'home.tip1Body': 'Favor your season\u2019s guide tones:',
           'rules.promoted': 'Promoted near the face:',
           'rules.avoided': 'Avoid near the face:',
-          'home.tip2': '<strong>Elongate your figure:</strong> Tuck your shirt in and choose mid/high-rise trousers to lengthen your legs.',
-          'home.tip3': '<strong>Face grooming:</strong> Keep the sides of your hair short or faded (Taper Fade) to lengthen your profile and slim full cheeks.',
           'home.comboTitle': 'Combo of the Week',
           'home.comboDesc': 'The key pairing for your season in smart streetwear:',
           'home.capsuleTitle': 'Capsule Wardrobe',
-          'home.capsuleIntro': 'A base of versatile pieces to mix and match, in tones consistent with Deep Autumn:',
-          'home.capsule1': '<strong>Suede or heavy cotton overshirt</strong> — Mocha, Olive, Terracotta',
-          'home.capsule2': '<strong>Heavyweight long-sleeve tees</strong> — Cream, Olive, Bordeaux',
-          'home.capsule3': '<strong>Mid/high-rise pleated chinos</strong> — Warm beige, Charcoal',
-          'home.capsule4': '<strong>Wool crewneck sweater</strong> — Mustard, Forest green, Mocha',
-          'home.capsule5': '<strong>Trench or field jacket</strong> — Camel or Olive',
-          'home.capsule6': '<strong>Brown leather shoes</strong> — Derby or Chukka',
+          'home.capsuleIntro': 'A base of versatile pieces to mix and match, in tones consistent with your season ({s}):',
           'home.guidesTitle': 'Guides to Explore',
           'home.guide1Title': 'Hair and beard, tailored',
           'home.guide1Text': 'The lines that flatter your face: side volume, well-kept beard, defined texture.',
@@ -755,11 +907,11 @@
           'home.guide2Text': 'Watch, tortoiseshell glasses, olive cap: warm details that pull the outfit together.',
           'home.guide2Cta': 'See the Accessories guide&nbsp;→',
           'home.sectionsTitle': 'Main Sections',
-          'home.f1': 'Proportions', 'home.f1d': 'Volume calculation for a compact build.',
+          'home.f1': 'Proportions', 'home.f1d': 'Advice based on height and build.',
           'home.f2': 'Grooming', 'home.f2d': 'Face shape, beard and fade guide.',
           'home.f3': 'Palette', 'home.f3d': 'The 4 color seasons.',
           'home.f4': 'Accessories', 'home.f4d': 'Glasses, hats and watches.',
-          'fit.title': 'Body Proportion Calculator', 'fit.height': 'Height (cm)', 'fit.weight': 'Weight (kg)',
+          'fit.title': 'Body Proportion Calculator', 'fit.height': 'Height (cm)',
           'fit.bodyType': 'Body type', 'fit.typeAthletic': 'Athletic / Compact', 'fit.typeSlim': 'Slim',
           'fit.typeRobust': 'Robust / Large', 'fit.cta': 'Generate Fit Analysis', 'fit.results': 'Fit Recommendations',
           'grooming.title': 'Face Analysis & Grooming', 'grooming.label': 'Select Face Shape',
@@ -770,7 +922,6 @@
           'rules.title': 'Color Rules & Garments',
           'rules.do1': '<strong>Promoted near the face:</strong> Mocha, Terracotta, Teal, Forest Green, Cream/Ivory.',
           'rules.dont1': '<strong>Avoid near the face:</strong> Pure optic white, Ice gray, Cold violet, Electric blue.',
-          'rules.do2': '<strong>Key smart streetwear pieces (autumn-toned example):</strong> Suede/heavy cotton overshirts, mid/high-rise pleated chinos, camel or olive trench.',
           'accessori.note': 'Examples in warm autumn tones: adapt materials and colors to your season.',
           'accessori.title': 'Accessories & Details',
           'accessori.watches': '<strong>Watches:</strong> Bronze, brushed brass or matte black cases with mocha or leather straps.',
@@ -807,7 +958,15 @@
             { name: { it: 'Oliva', en: 'Olive' }, hex: '#556B2F' },
             { name: { it: 'Panna', en: 'Cream' }, hex: '#FFF8DC', dark: true }
           ],
-          comboText: { it: 'Sopracamicia Moka + Chino Oliva + T-shirt Panna infilata', en: 'Mocha overshirt + Olive chinos + tucked-in cream tee' }
+          comboText: { it: 'Sopracamicia Moka + Chino Oliva + T-shirt Panna infilata', en: 'Mocha overshirt + Olive chinos + tucked-in cream tee' },
+          capsule: [
+            { it: '<strong>Sopracamicia in camoscio o cotone spesso</strong> — Moka, Oliva, Terracotta', en: '<strong>Suede or heavy cotton overshirt</strong> — Mocha, Olive, Terracotta' },
+            { it: '<strong>T-shirt pesanti a manica lunga</strong> — Panna, Oliva, Bordeaux', en: '<strong>Heavyweight long-sleeve tees</strong> — Cream, Olive, Bordeaux' },
+            { it: '<strong>Chino a vita media/alta con pinces</strong> — Beige caldo, Grigio carbone', en: '<strong>Mid/high-rise pleated chinos</strong> — Warm beige, Charcoal' },
+            { it: '<strong>Maglione girocollo in lana</strong> — Senape, Verde foresta, Moka', en: '<strong>Wool crewneck sweater</strong> — Mustard, Forest green, Mocha' },
+            { it: '<strong>Trench o giacca campo</strong> — Cammello o Oliva', en: '<strong>Trench or field jacket</strong> — Camel or Olive' },
+            { it: '<strong>Scarpe in cuoio marrone</strong> — Derby o Chukka', en: '<strong>Brown leather shoes</strong> — Derby or Chukka' }
+          ]
         },
         winter: {
           name: { it: 'Inverno', en: 'Winter' },
@@ -829,7 +988,15 @@
             { name: { it: 'Blu', en: 'Blue' }, hex: '#0033AA' },
             { name: { it: 'Bianco', en: 'White' }, hex: '#FFFFFF', dark: true }
           ],
-          comboText: { it: 'Giacca Nero + Chino Blu + T-shirt Bianca pulita', en: 'Black jacket + Blue chinos + clean white tee' }
+          comboText: { it: 'Giacca Nero + Chino Blu + T-shirt Bianca pulita', en: 'Black jacket + Blue chinos + clean white tee' },
+          capsule: [
+            { it: '<strong>Cappotto o giacca dal taglio pulito</strong> — Nero, Antracite', en: '<strong>Clean-cut coat or jacket</strong> — Black, Anthracite' },
+            { it: '<strong>Camicia bianca</strong> — Bianco puro', en: '<strong>White shirt</strong> — Pure white' },
+            { it: '<strong>Maglione girocollo in merino</strong> — Blu elettrico, Rosso ciliegia, Verde smeraldo', en: '<strong>Merino crewneck sweater</strong> — Electric blue, Cherry red, Emerald green' },
+            { it: '<strong>Pantaloni sartoriali o chino</strong> — Antracite, Nero', en: '<strong>Tailored trousers or chinos</strong> — Anthracite, Black' },
+            { it: '<strong>T-shirt essenziali</strong> — Bianco, Nero, Grigio ghiaccio', en: '<strong>Essential tees</strong> — White, Black, Ice gray' },
+            { it: '<strong>Scarpe in pelle liscia</strong> — Nere', en: '<strong>Smooth leather shoes</strong> — Black' }
+          ]
         },
         spring: {
           name: { it: 'Primavera', en: 'Spring' },
@@ -851,7 +1018,15 @@
             { name: { it: 'Turchese', en: 'Turquoise' }, hex: '#00ACC1', dark: true },
             { name: { it: 'Avorio', en: 'Ivory' }, hex: '#FAF0CA', dark: true }
           ],
-          comboText: { it: 'Sopracamicia Cammello + Polo Turchese + Chino Avorio', en: 'Camel overshirt + Turquoise polo + Ivory chinos' }
+          comboText: { it: 'Sopracamicia Cammello + Polo Turchese + Chino Avorio', en: 'Camel overshirt + Turquoise polo + Ivory chinos' },
+          capsule: [
+            { it: '<strong>Sopracamicia o giacca leggera</strong> — Cammello chiaro, Avorio caldo', en: '<strong>Overshirt or light jacket</strong> — Light camel, Warm ivory' },
+            { it: '<strong>Polo o maglia in cotone</strong> — Turchese, Corallo, Verde mela', en: '<strong>Cotton polo or knit</strong> — Turquoise, Coral, Apple green' },
+            { it: '<strong>Camicia in lino</strong> — Avorio, Azzurro cielo, Pesca', en: '<strong>Linen shirt</strong> — Ivory, Sky blue, Peach' },
+            { it: '<strong>Chino</strong> — Beige chiaro, Cammello, Verde prato', en: '<strong>Chinos</strong> — Light beige, Camel, Grass green' },
+            { it: '<strong>Maglione leggero in cotone</strong> — Pesca, Turchese', en: '<strong>Light cotton sweater</strong> — Peach, Turquoise' },
+            { it: '<strong>Scarpe</strong> — Cuoio chiaro o sneakers avorio', en: '<strong>Shoes</strong> — Light tan leather or ivory sneakers' }
+          ]
         },
         summer: {
           name: { it: 'Estate', en: 'Summer' },
@@ -873,15 +1048,51 @@
             { name: { it: 'Azzurro Polvere', en: 'Powder Blue' }, hex: '#90CAF9', dark: true },
             { name: { it: 'Grigio Perla', en: 'Pearl Gray' }, hex: '#B0BEC5', dark: true }
           ],
-          comboText: { it: 'Cardigan Navy + Camicia Azzurro Polvere + Chino Grigio Perla', en: 'Navy cardigan + Powder blue shirt + Pearl gray chinos' }
+          comboText: { it: 'Cardigan Navy + Camicia Azzurro Polvere + Chino Grigio Perla', en: 'Navy cardigan + Powder blue shirt + Pearl gray chinos' },
+          capsule: [
+            { it: '<strong>Cardigan o giacca morbida</strong> — Navy soft, Grigio perla', en: '<strong>Cardigan or soft jacket</strong> — Soft navy, Pearl gray' },
+            { it: '<strong>Camicia oxford</strong> — Azzurro polvere, Rosa cipria', en: '<strong>Oxford shirt</strong> — Powder blue, Powder pink' },
+            { it: '<strong>Maglione in merino o cashmere</strong> — Lavanda, Blu avio, Grigio perla', en: '<strong>Merino or cashmere sweater</strong> — Lavender, Aviation blue, Pearl gray' },
+            { it: '<strong>Chino o pantaloni in lana fredda</strong> — Grigio perla, Navy soft', en: '<strong>Chinos or cool-wool trousers</strong> — Pearl gray, Soft navy' },
+            { it: '<strong>T-shirt</strong> — Grigio perla, Menta, Azzurro polvere', en: '<strong>Tees</strong> — Pearl gray, Mint, Powder blue' },
+            { it: '<strong>Scarpe in camoscio</strong> — Grigio o blu navy', en: '<strong>Suede shoes</strong> — Gray or navy blue' }
+          ]
         }
       };
 
-      var currentSeason = 'autumn';
-      try {
-        var s = localStorage.getItem('armocromatic_season');
-        if (s && SEASONS[s]) currentSeason = s;
-      } catch (err) { /* storage non disponibile */ }
+      /* ---------- PROFILO PERSONALE (salvato solo sul dispositivo) ---------- */
+      // Un solo oggetto: { season, height, body, face }. Prima c'erano chiavi separate
+      // per stagione e viso: si leggono una volta e si portano nel profilo.
+      var PROFILE_KEY = 'armocromatic_profile';
+      var BODIES = ['athletic', 'slim', 'robust'];
+      var PROFILE = { season: '', height: null, body: '', face: '' };
+
+      function validHeight(h) { return typeof h === 'number' && h >= 140 && h <= 220; }
+      function cleanProfile(p) {
+        p = p || {};
+        var h = Math.round(Number(p.height));
+        return {
+          season: SEASONS[p.season] ? p.season : '',
+          height: validHeight(h) ? h : null,
+          body: BODIES.indexOf(p.body) !== -1 ? p.body : '',
+          face: FACE_NAMES[p.face] ? p.face : ''
+        };
+      }
+      function loadProfile() {
+        try {
+          var raw = localStorage.getItem(PROFILE_KEY);
+          if (raw) { PROFILE = cleanProfile(JSON.parse(raw)); return; }
+          PROFILE = cleanProfile({ season: localStorage.getItem('armocromatic_season'), face: localStorage.getItem('armocromatic_face') });
+        } catch (err) { /* storage non disponibile o dati rovinati: profilo vuoto */ }
+      }
+      function saveProfile() {
+        try {
+          localStorage.setItem(PROFILE_KEY, JSON.stringify(PROFILE));
+          localStorage.removeItem('armocromatic_season');
+          localStorage.removeItem('armocromatic_face');
+        } catch (err) { /* ignora */ }
+      }
+      function hasProfile() { return !!(PROFILE.season || PROFILE.height || PROFILE.body || PROFILE.face); }
 
       var FACE_NAMES = {
         'square-full': { it: 'Mascella Marcata / Guance Piene', en: 'Strong Jaw / Full Cheeks' },
@@ -889,15 +1100,28 @@
         'round': { it: 'Viso Rotondo', en: 'Round Face' },
         'elongated': { it: 'Viso Allungato', en: 'Elongated Face' }
       };
+      var BODY_KEYS = { athletic: 'fit.typeAthletic', slim: 'fit.typeSlim', robust: 'fit.typeRobust' };
+      var THEME_BG = { autumn: '#EFECE6', winter: '#ECEEF2', spring: '#F7F1E3', summer: '#EDF0F4' };
 
-      function renderSeason() {
-        var data = SEASONS[currentSeason];
-        var homeSel = document.getElementById('home-season-select');
+      loadProfile();
+      // Stagione che colora il sito e i consigli; senza profilo si parte dall'Autunno
+      function mySeason() { return PROFILE.season || 'autumn'; }
+      // La Palette si può sfogliare senza cambiare la propria stagione
+      var paletteSeason = mySeason();
+
+      function fmt(key, season) { return t(key).replace('{s}', tr(SEASONS[season].name)); }
+
+      function applyTheme() {
+        var key = mySeason();
+        document.documentElement.setAttribute('data-season', key);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', THEME_BG[key]);
+      }
+
+      function renderPalette() {
+        var data = SEASONS[paletteSeason];
         var palSel = document.getElementById('palette-season-select');
-        if (homeSel) homeSel.value = currentSeason;
-        if (palSel) palSel.value = currentSeason;
-
-        // Griglia palette
+        if (palSel) palSel.value = paletteSeason;
         var grid = document.getElementById('palette-grid');
         if (grid) {
           var html = '';
@@ -910,19 +1134,31 @@
         }
         var intro = document.getElementById('palette-intro');
         if (intro) intro.textContent = tr(data.intro);
-
-        // Regole di stagione (sia nella sezione Palette sia nella sezione Regole)
         var rules = document.getElementById('season-rules');
         if (rules) {
           rules.innerHTML =
             '<div class="rule-box do"><strong>' + t('rules.promoted') + '</strong> ' + tr(data.dos) + '</div>' +
             '<div class="rule-box dont"><strong>' + t('rules.avoided') + '</strong> ' + tr(data.donts) + '</div>';
         }
+        // Pulsante per scegliere come propria la stagione che si sta guardando
+        var row = document.getElementById('palette-mine-row');
+        var btn = document.getElementById('palette-set-mine');
+        if (row && btn) {
+          row.hidden = paletteSeason === PROFILE.season;
+          btn.textContent = fmt('palette.setMine', paletteSeason);
+        }
+      }
+
+      function renderSeasonParts() {
+        var data = SEASONS[mySeason()];
+        // Regole (sezione Regole)
         var rulesDo = document.getElementById('rules-season-do');
         var rulesDont = document.getElementById('rules-season-dont');
         if (rulesDo) rulesDo.innerHTML = '<strong>' + t('rules.promoted') + '</strong> ' + tr(data.dos);
         if (rulesDont) rulesDont.innerHTML = '<strong>' + t('rules.avoided') + '</strong> ' + tr(data.donts);
-
+        var do2 = document.getElementById('rules-do2');
+        if (do2) do2.innerHTML = '<strong>' + t('rules.do2Label') + '</strong> ' +
+          data.capsule.slice(0, 3).map(function (c) { return tr(c).replace(/<\/?strong>/g, ''); }).join('; ') + '.';
         // Combo in Home
         var banner = document.getElementById('combo-banner-box');
         if (banner) {
@@ -936,34 +1172,105 @@
         }
         var sub = document.getElementById('combo-text-sub');
         if (sub) sub.textContent = tr(data.comboText);
-
-        // Pillola stagionale in Home (sostituisce il consiglio fisso)
-        var tip1 = document.getElementById('tip-season-box');
-        if (tip1) tip1.innerHTML = '<strong>' + t('home.tip1Label') + '</strong> ' + t('home.tip1Body') + ' ' + tr(data.dos);
-
-        // Chip profilo
-        var chipSeason = document.getElementById('chip-season');
-        if (chipSeason) chipSeason.textContent = tr(data.name);
-        updateFaceChip();
+        // Guardaroba capsule della stagione
+        var capIntro = document.getElementById('capsule-intro');
+        if (capIntro) capIntro.textContent = fmt('home.capsuleIntro', mySeason());
+        var capList = document.getElementById('capsule-list');
+        if (capList) capList.innerHTML = data.capsule.map(function (c) { return '<li>' + tr(c) + '</li>'; }).join('');
       }
 
-      function updateFaceChip() {
-        var chip = document.getElementById('chip-face');
-        var sel = document.getElementById('face-shape-select');
-        if (chip && sel) chip.textContent = tr(FACE_NAMES[sel.value] || FACE_NAMES['square-full']);
+      function heightBand(h) { return h <= 172 ? 'short' : (h >= 184 ? 'tall' : 'medium'); }
+
+      function renderHomeProfile() {
+        var title = document.getElementById('home-profile-title');
+        var text = document.getElementById('home-profile-text');
+        var chips = document.getElementById('home-profile-chips');
+        var btn = document.getElementById('home-profile-btn');
+        if (!title) return;
+        var set = hasProfile();
+        title.textContent = t(set ? 'profile.title' : 'profile.createTitle');
+        text.textContent = t(set ? 'profile.setText' : 'profile.createText');
+        btn.innerHTML = t(set ? 'profile.editBtn' : 'profile.createBtn');
+        var c = [];
+        if (PROFILE.season) c.push([t('profile.chipSeason'), tr(SEASONS[PROFILE.season].name)]);
+        if (PROFILE.height) c.push([t('profile.chipHeight'), PROFILE.height + ' cm']);
+        if (PROFILE.body) c.push([t('profile.chipBody'), t(BODY_KEYS[PROFILE.body])]);
+        if (PROFILE.face) c.push([t('profile.chipFace'), tr(FACE_NAMES[PROFILE.face])]);
+        chips.innerHTML = c.map(function (x) { return '<span class="chip"><b>' + x[0] + '</b>: ' + x[1] + '</span>'; }).join('');
+        chips.hidden = !c.length;
       }
 
-      function setSeason(key) {
-        if (!SEASONS[key]) return;
-        currentSeason = key;
-        try { localStorage.setItem('armocromatic_season', key); } catch (err) { /* ignora */ }
-        renderSeason();
+      function renderHomeTips() {
+        var box = document.getElementById('home-tips');
+        var title = document.getElementById('home-tips-title');
+        if (!box) return;
+        title.textContent = t(hasProfile() ? 'home.tipsTitleMine' : 'home.tipsTitle');
+        var tips = [];
+        tips.push(PROFILE.season
+          ? '<strong>' + t('home.tip1Label') + '</strong> ' + t('home.tip1Body') + ' ' + tr(SEASONS[PROFILE.season].dos)
+          : t('home.tipColorNone'));
+        if (PROFILE.height || PROFILE.body) {
+          var fig = [];
+          if (PROFILE.height) fig.push(tr(FIT_HEIGHT[heightBand(PROFILE.height)].tip));
+          if (PROFILE.body) fig.push(tr(FIT_BODY[PROFILE.body].tip));
+          tips.push('<strong>' + t('home.tip2Label') + '</strong> ' + fig.join(' '));
+        } else {
+          tips.push(t('home.tipFigNone'));
+        }
+        tips.push(PROFILE.face
+          ? '<strong>' + t('home.tip3Label') + '</strong> ' + tr(GROOMING_CONTENT[PROFILE.face].items[0]).replace(/<strong>.*?<\/strong>\s*/, '')
+          : t('home.tipFaceNone'));
+        box.innerHTML = tips.map(function (x) { return '<div class="rule-box do">' + x + '</div>'; }).join('');
       }
 
-      ['home-season-select', 'palette-season-select'].forEach(function (id) {
-        var sel = document.getElementById(id);
-        if (sel) sel.addEventListener('change', function () { setSeason(sel.value); });
-      });
+      // Riporta il profilo in tutti i campi che lo mostrano (Profilo, Proporzioni, Grooming)
+      function syncInputs() {
+        var map = { 'me-season': PROFILE.season, 'me-body': PROFILE.body, 'body-type': PROFILE.body, 'me-face': PROFILE.face, 'face-shape-select': PROFILE.face };
+        Object.keys(map).forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el && document.activeElement !== el) el.value = map[id] || '';
+        });
+        ['me-height', 'height'].forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el && document.activeElement !== el) el.value = PROFILE.height || '';
+        });
+      }
+
+      function renderAll() {
+        applyTheme();
+        syncInputs();
+        renderPalette();
+        renderSeasonParts();
+        renderHomeProfile();
+        renderHomeTips();
+        renderFit();
+        updateGroomingAdvice();
+      }
+
+      var savedTimer = null;
+      function showSaved(key) {
+        var note = document.getElementById('me-saved');
+        if (!note) return;
+        note.textContent = t(key || 'me.saved');
+        clearTimeout(savedTimer);
+        savedTimer = setTimeout(function () { note.textContent = ''; }, 2500);
+      }
+
+      function updateProfile(changes, silent) {
+        Object.keys(changes).forEach(function (k) { PROFILE[k] = changes[k]; });
+        PROFILE = cleanProfile(PROFILE);
+        if (changes.season !== undefined && PROFILE.season) paletteSeason = PROFILE.season;
+        saveProfile();
+        renderAll();
+        if (!silent) showSaved();
+      }
+
+      function readHeight(el) {
+        var v = el.value.trim();
+        if (!v) return null;
+        var h = Math.round(Number(v));
+        return validHeight(h) ? h : undefined;   // undefined: valore non valido, non si salva
+      }
 
       /* ---------- CAMBIO LINGUA ---------- */
 
@@ -992,9 +1299,7 @@
         openBtn.setAttribute('aria-label', t('aria.openMenu'));
         closeBtn.setAttribute('aria-label', t('aria.closeMenu'));
 
-        renderSeason();
-        updateGroomingAdvice();
-        calculateFit();
+        renderAll();
       }
 
       function setLang(l) {
@@ -1153,7 +1458,8 @@
         // mai interrompere l'attivazione della sezione o la chiusura del menu.
         if (history.replaceState) {
           try {
-            history.replaceState(null, '', '#/' + tabId);
+            var base = location.pathname.replace(/[^\/]*$/, '');
+            history.replaceState(null, '', base + '#/' + tabId);
           } catch (err) { /* sandbox: si prosegue senza aggiornare l'URL */ }
         }
 
@@ -1192,27 +1498,104 @@
 
       /* ---------- CALCOLATORE PROPORZIONI (contenuto bilingue) ---------- */
 
-      var FIT_CONTENT = {
-        athletic: {
-          it: '<div class="rule-box do"><strong>Top consigliati:</strong> Maglie o camicie infilate nei pantaloni (tuck-in) per valorizzare le spalle e definire il punto vita. Sopracamicie strutturate.</div><div class="rule-box do"><strong>Pantaloni ideali:</strong> Taglio regular o tapered a vita media/alta per allungare la figura.</div><div class="rule-box dont"><strong>Da evitare:</strong> Fit ultra-baggy contemporanei sopra e sotto.</div>',
-          en: '<div class="rule-box do"><strong>Recommended tops:</strong> Tucked-in shirts or tees to highlight shoulders and define the waist. Structured overshirts.</div><div class="rule-box do"><strong>Ideal trousers:</strong> Regular or tapered cut, mid/high-rise, to elongate your figure.</div><div class="rule-box dont"><strong>Avoid:</strong> Ultra-baggy fits on top and bottom.</div>'
+      // Consigli per fascia di altezza e per corporatura. "tip" è la versione breve per la Home.
+      var FIT_HEIGHT = {
+        short: {
+          title: { it: 'Altezza fino a 172 cm: slanciare la figura', en: 'Up to 172 cm: elongate your figure' },
+          dos: [
+            { it: '<strong>Linea continua:</strong> tonalità simili sopra e sotto, o pantaloni e scarpe dello stesso tono, allungano la figura.', en: '<strong>Continuous line:</strong> similar tones top and bottom, or trousers and shoes in the same shade, elongate your figure.' },
+            { it: '<strong>Punto vita alto:</strong> maglia infilata o capi che finiscono sui fianchi, pantaloni a vita media/alta.', en: '<strong>Higher waist:</strong> tucked-in tops or pieces ending at the hips, mid/high-rise trousers.' }
+          ],
+          dont: { it: '<strong>Da evitare:</strong> capispalla sotto il ginocchio e risvolti alti sui pantaloni, che accorciano la gamba.', en: '<strong>Avoid:</strong> outerwear below the knee and deep trouser cuffs, which shorten the leg.' },
+          tip: { it: 'tonalità simili sopra e sotto e vita media/alta per slanciare.', en: 'similar tones top and bottom and a mid/high rise to elongate.' }
         },
-        other: {
-          it: '<div class="rule-box do"><strong>Consiglio generale:</strong> Prediligi linee verticali e pulite con capispalla di media lunghezza.</div>',
-          en: '<div class="rule-box do"><strong>General advice:</strong> Prefer clean vertical lines with mid-length outerwear.</div>'
+        medium: {
+          title: { it: 'Altezza tra 173 e 183 cm: proporzioni equilibrate', en: '173 to 183 cm: balanced proportions' },
+          dos: [
+            { it: '<strong>Libertà di scelta:</strong> funzionano sia i capi corti sia le giacche a metà coscia.', en: '<strong>Freedom of choice:</strong> both short pieces and mid-thigh jackets work.' },
+            { it: '<strong>Contrasto:</strong> puoi alternare colori diversi sopra e sotto senza perdere slancio.', en: '<strong>Contrast:</strong> you can mix different colors top and bottom without losing length.' }
+          ],
+          dont: { it: '<strong>Da evitare:</strong> solo gli eccessi, come tutto oversize sopra e sotto.', en: '<strong>Avoid:</strong> only extremes, like oversized everything top and bottom.' },
+          tip: { it: 'proporzioni equilibrate: puoi giocare con il contrasto tra sopra e sotto.', en: 'balanced proportions: you can play with contrast between top and bottom.' }
+        },
+        tall: {
+          title: { it: 'Altezza da 184 cm: bilanciare la verticale', en: 'From 184 cm: balance the vertical line' },
+          dos: [
+            { it: '<strong>Spezzare la linea:</strong> strati sovrapposti e contrasto tra sopra e sotto.', en: '<strong>Break the line:</strong> layering and contrast between top and bottom.' },
+            { it: '<strong>Capi lunghi:</strong> cappotti lunghi, risvolti e cinture a vista ti stanno bene.', en: '<strong>Long pieces:</strong> long coats, cuffs and visible belts suit you.' }
+          ],
+          dont: { it: '<strong>Da evitare:</strong> capi troppo corti di busto o di gamba.', en: '<strong>Avoid:</strong> pieces too short in the torso or leg.' },
+          tip: { it: 'spezza la verticale con strati e contrasto; cappotti lunghi e risvolti stanno bene.', en: 'break the vertical line with layers and contrast; long coats and cuffs work well.' }
+        }
+      };
+      var FIT_BODY = {
+        athletic: {
+          dos: [
+            { it: '<strong>Top consigliati:</strong> maglie o camicie infilate per valorizzare le spalle e definire il punto vita. Sopracamicie strutturate.', en: '<strong>Recommended tops:</strong> tucked-in shirts or tees to highlight the shoulders and define the waist. Structured overshirts.' },
+            { it: '<strong>Pantaloni:</strong> taglio regular o tapered.', en: '<strong>Trousers:</strong> regular or tapered cut.' }
+          ],
+          dont: { it: '<strong>Da evitare:</strong> fit ultra-baggy sopra e sotto.', en: '<strong>Avoid:</strong> ultra-baggy fits top and bottom.' },
+          tip: { it: 'Capi strutturati e infilati valorizzano le spalle.', en: 'Structured, tucked-in pieces highlight your shoulders.' }
+        },
+        slim: {
+          dos: [
+            { it: '<strong>Volume:</strong> tessuti con corpo (oxford, flanella, maglia spessa) e strati sovrapposti.', en: '<strong>Volume:</strong> fabrics with body (oxford, flannel, chunky knit) and layering.' },
+            { it: '<strong>Pantaloni:</strong> dritti o leggermente tapered, né skinny né larghi.', en: '<strong>Trousers:</strong> straight or slightly tapered, neither skinny nor wide.' }
+          ],
+          dont: { it: '<strong>Da evitare:</strong> capi molto aderenti o troppo larghi: entrambi accentuano la magrezza.', en: '<strong>Avoid:</strong> very tight or very loose pieces: both exaggerate slimness.' },
+          tip: { it: 'Tessuti con corpo e strati danno volume.', en: 'Fabrics with body and layers add volume.' }
+        },
+        robust: {
+          dos: [
+            { it: '<strong>Linee verticali:</strong> tessuti con caduta morbida, scollo a V o camicia aperta.', en: '<strong>Vertical lines:</strong> fabrics that drape, V-necks or open shirts.' },
+            { it: '<strong>Taglia giusta:</strong> spalle al posto giusto e tinte più scure in basso.', en: '<strong>Right size:</strong> shoulders in the right place and darker shades below.' }
+          ],
+          dont: { it: '<strong>Da evitare:</strong> capi aderenti e fantasie grandi e orizzontali sul busto.', en: '<strong>Avoid:</strong> tight pieces and large horizontal patterns on the torso.' },
+          tip: { it: 'Linee verticali e capi della taglia giusta.', en: 'Vertical lines and the right size.' }
         }
       };
 
-      function calculateFit() {
-        var type = document.getElementById('body-type').value;
+      // Mostra i consigli con altezza e corporatura del profilo (non salva niente)
+      function renderFit() {
         var resContainer = document.getElementById('fit-results');
         var resContent = document.getElementById('fit-content');
-        var html = FIT_CONTENT.athletic[LANG] || FIT_CONTENT.athletic.it;
-        if (type !== 'athletic') {
-          html = FIT_CONTENT.other[LANG] || FIT_CONTENT.other.it;
+        if (!PROFILE.height && !PROFILE.body) { resContainer.style.display = 'none'; return; }
+        var html = '';
+        if (PROFILE.height) {
+          var hb = FIT_HEIGHT[heightBand(PROFILE.height)];
+          html += '<h3 style="font-size:1rem;margin:4px 0 10px;">' + tr(hb.title) + '</h3>';
+          hb.dos.forEach(function (d) { html += '<div class="rule-box do">' + tr(d) + '</div>'; });
+          html += '<div class="rule-box dont">' + tr(hb.dont) + '</div>';
         }
+        if (PROFILE.body) {
+          var bd = FIT_BODY[PROFILE.body];
+          html += '<h3 style="font-size:1rem;margin:16px 0 10px;">' + t('fit.bodyType') + ': ' + t(BODY_KEYS[PROFILE.body]) + '</h3>';
+          bd.dos.forEach(function (d) { html += '<div class="rule-box do">' + tr(d) + '</div>'; });
+          html += '<div class="rule-box dont">' + tr(bd.dont) + '</div>';
+        }
+        if (!PROFILE.height || !PROFILE.body) html += '<p class="form-hint">' + t('fit.needData') + '</p>';
         resContent.innerHTML = html;
         resContainer.style.display = 'block';
+      }
+
+      // Il pulsante salva altezza e corporatura nel profilo e mostra i consigli
+      function calculateFit() {
+        var h = readHeight(document.getElementById('height'));
+        var resContainer = document.getElementById('fit-results');
+        var resContent = document.getElementById('fit-content');
+        if (h === undefined) {
+          resContent.innerHTML = '<p class="form-hint">' + t('fit.badHeight') + '</p>';
+          resContainer.style.display = 'block';
+          return;
+        }
+        var body = document.getElementById('body-type').value;
+        if (!h && !body) {
+          resContent.innerHTML = '<p class="form-hint">' + t('fit.needData') + '</p>';
+          resContainer.style.display = 'block';
+          return;
+        }
+        updateProfile({ height: h, body: body }, true);
+        resContainer.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' });
       }
 
       document.getElementById('calcBtn').addEventListener('click', calculateFit);
@@ -1257,9 +1640,9 @@
       };
 
       function updateGroomingAdvice() {
-        var shape = document.getElementById('face-shape-select').value;
-        var data = GROOMING_CONTENT[shape] || GROOMING_CONTENT['square-full'];
         var card = document.getElementById('grooming-advice-card');
+        var data = GROOMING_CONTENT[PROFILE.face];
+        if (!data) { card.innerHTML = '<p>' + t('grooming.needData') + '</p>'; return; }
         var html = '<h2>' + tr(data.title) + '</h2><ul class="clean-list">';
         data.items.forEach(function (item) {
           html += '<li>' + tr(item) + '</li>';
@@ -1269,10 +1652,76 @@
       }
 
       var faceSelect = document.getElementById('face-shape-select');
-      faceSelect.addEventListener('change', function () {
-        try { localStorage.setItem('armocromatic_face', faceSelect.value); } catch (err) { /* ignora */ }
-        updateGroomingAdvice();
-        updateFaceChip();
+      faceSelect.addEventListener('change', function () { updateProfile({ face: faceSelect.value }, true); });
+
+      /* ---------- SCHEDA PROFILO ---------- */
+
+      var meSeason = document.getElementById('me-season');
+      var meHeight = document.getElementById('me-height');
+      var meBody = document.getElementById('me-body');
+      var meFace = document.getElementById('me-face');
+      meSeason.addEventListener('change', function () { updateProfile({ season: meSeason.value }); });
+      meBody.addEventListener('change', function () { updateProfile({ body: meBody.value }); });
+      meFace.addEventListener('change', function () { updateProfile({ face: meFace.value }); });
+      // L'altezza si salva quando è valida (mentre si scrive) e si sistema all'uscita dal campo
+      meHeight.addEventListener('input', function () {
+        var h = readHeight(meHeight);
+        if (h !== undefined && h !== PROFILE.height) updateProfile({ height: h });
+      });
+      meHeight.addEventListener('change', function () { syncInputs(); });
+
+      document.getElementById('me-reset').addEventListener('click', function () {
+        if (!window.confirm(t('me.confirmReset'))) return;
+        PROFILE = cleanProfile({});
+        try { localStorage.removeItem(PROFILE_KEY); } catch (err) { /* ignora */ }
+        paletteSeason = mySeason();
+        quiz = {};
+        renderQuiz();
+        renderAll();
+        showSaved('me.cleared');
+      });
+
+      // Mini quiz: sottotono + intensità → stagione suggerita (non si salva finché non si conferma)
+      var QUIZ_MAP = { 'warm-deep': 'autumn', 'warm-light': 'spring', 'cool-deep': 'winter', 'cool-light': 'summer' };
+      var quiz = {};
+      function quizSeason() { return QUIZ_MAP[quiz.tone + '-' + quiz.depth] || ''; }
+      function renderQuiz() {
+        document.querySelectorAll('.choice-group').forEach(function (g) {
+          g.querySelectorAll('.choice-btn').forEach(function (b) {
+            b.setAttribute('aria-pressed', quiz[g.dataset.q] === b.dataset.v ? 'true' : 'false');
+          });
+        });
+        var res = document.getElementById('quiz-result');
+        var key = quizSeason();
+        res.hidden = !key;
+        if (key) {
+          document.getElementById('quiz-result-text').textContent = fmt('quiz.result', key);
+          document.getElementById('quiz-apply').textContent = fmt('quiz.apply', key);
+        }
+      }
+      document.querySelectorAll('.choice-group').forEach(function (g) {
+        g.addEventListener('click', function (e) {
+          var b = e.target.closest('.choice-btn');
+          if (!b) return;
+          quiz[g.dataset.q] = b.dataset.v;
+          renderQuiz();
+        });
+      });
+      document.getElementById('quiz-apply').addEventListener('click', function () {
+        var key = quizSeason();
+        if (key) updateProfile({ season: key });
+      });
+
+      // Palette: sfogliare le stagioni non cambia il profilo; il pulsante sì
+      var palSelect = document.getElementById('palette-season-select');
+      palSelect.addEventListener('change', function () { paletteSeason = palSelect.value; renderPalette(); });
+      document.getElementById('palette-set-mine').addEventListener('click', function () {
+        updateProfile({ season: paletteSeason });
+      });
+
+      // Pulsanti che portano a una sezione (Home → Profilo, Profilo → Home)
+      Array.prototype.forEach.call(document.querySelectorAll('.js-goto'), function (b) {
+        b.addEventListener('click', function () { switchTab(b.dataset.section, 'top'); });
       });
 
       /* ---------- NAVIGAZIONE TRAMITE HASH (stesso documento) ---------- */
@@ -1295,17 +1744,13 @@
 
       /* ---------- AVVIO ---------- */
 
-      // Ripristina la forma del viso salvata
-      try {
-        var savedFace = localStorage.getItem('armocromatic_face');
-        if (savedFace && FACE_NAMES[savedFace]) faceSelect.value = savedFace;
-      } catch (err) { /* ignora */ }
-
       syncSidebarMode();
       applyLang();
+      renderQuiz();
 
-      // Permette link diretti tipo .../index.html#/palette e ricarica della pagina
-      var initial = (location.hash || '').replace(/^#\/?/, '') || 'home';
+      // Link diretti: .../#/palette e anche /palette (Netlify lo serve con _redirects)
+      var fromPath = (location.pathname.split('/').pop() || '').replace(/\.html$/, '');
+      var initial = (location.hash || '').replace(/^#\/?/, '') || (SECTIONS.indexOf(fromPath) !== -1 ? fromPath : '') || 'home';
       if (SECTIONS.indexOf(initial) !== -1) {
         switchTab(initial);
       }
