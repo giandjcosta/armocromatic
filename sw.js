@@ -1,5 +1,5 @@
 /* Service worker minimale: cache dell'app per uso offline (Add to Home Screen) */
-var CACHE = 'armocromatic-v5';
+var CACHE = 'armocromatic-v6';
 var ASSETS = [
   './',
   './index.html',
