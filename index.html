@@ -40,7 +40,6 @@
       --blob-1: rgba(200, 100, 70, 0.28);
       --blob-2: rgba(85, 107, 47, 0.2);
       --blob-3: rgba(74, 44, 42, 0.14);
-      --editorial-filter: saturate(1.08) sepia(0.06);
       --topbar-h: 65px;
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
@@ -54,7 +53,6 @@
       --accent: #2A4BC0; --accent-deep: #1B2F86; --border-color: #B8C3D9; --heading: #141826;
       --success-bg: #E3EFEA; --danger-bg: #F5E5EC;
       --blob-1: rgba(54, 91, 204, 0.24); --blob-2: rgba(198, 64, 125, 0.18); --blob-3: rgba(107, 129, 183, 0.15);
-      --editorial-filter: saturate(0.82) hue-rotate(7deg);
     }
     html[data-season="spring"] {
       --bg-main: #F8EBD8; --card-bg: #FFFBF2; --soft-bg: #E7F0DA; --text-muted: #655747;
@@ -63,7 +61,6 @@
       --accent: #E0663F; --accent-deep: #A9461F; --border-color: #DCC9AA; --heading: #3A2716;
       --success-bg: #E3EFDB; --danger-bg: #F9E7DF;
       --blob-1: rgba(255, 138, 101, 0.28); --blob-2: rgba(0, 172, 193, 0.2); --blob-3: rgba(124, 179, 66, 0.18);
-      --editorial-filter: saturate(1.12) sepia(0.08);
     }
     html[data-season="summer"] {
       --bg-main: #E4EBF3; --card-bg: #F8FAFD; --soft-bg: #DCE5EF; --text-muted: #526174;
@@ -72,14 +69,18 @@
       --accent: #5F7FA3; --accent-deep: #3D5877; --border-color: #BCC9D8; --heading: #26303D;
       --success-bg: #E5EEE9; --danger-bg: #F5E6EA;
       --blob-1: rgba(106, 163, 211, 0.28); --blob-2: rgba(213, 126, 163, 0.19); --blob-3: rgba(158, 130, 194, 0.18);
-      --editorial-filter: saturate(0.74) hue-rotate(5deg);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     [hidden] { display: none !important; }
 
     /* ── Sfondo dinamico ─────────────────────────────── */
-    .bg-anim { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+    .bg-anim {
+      position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none;
+      background:
+        radial-gradient(ellipse at 18% 12%, var(--page-wash), transparent 54%),
+        radial-gradient(ellipse at 88% 82%, var(--blob-2), transparent 48%);
+    }
     .bg-grain {
       position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0.4;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
@@ -94,7 +95,7 @@
 
     /* ── Immagini editoriali ─────────────────────────── */
     .editorial-media { border-radius: 12px; overflow: hidden; margin-bottom: 12px; border: 1.5px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.05); background: var(--soft-bg); transition: background-color 0.4s ease, border-color 0.4s ease; }
-    .editorial-media img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; filter: var(--editorial-filter); transition: filter 0.6s ease; }
+    .editorial-media img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
     .editorial-media.wide img { aspect-ratio: 16 / 10; }
     .hero-media { margin-bottom: 20px; }
 
@@ -140,18 +141,13 @@
 
     body {
       background-color: var(--bg-main);
-      background-image:
-        radial-gradient(ellipse at 18% 12%, var(--page-wash), transparent 54%),
-        radial-gradient(ellipse at 88% 82%, var(--blob-2), transparent 48%);
-      background-attachment: fixed;
-      background-repeat: no-repeat;
       color: var(--text-dark);
       font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
       padding-top: calc(var(--topbar-h) + var(--safe-top) + 10px);
       padding-bottom: calc(40px + var(--safe-bottom));
       min-height: 100vh;
       min-height: 100dvh;
-      transition: background-color 0.6s ease, background-image 0.6s ease;
+      transition: background-color 0.6s ease;
     }
 
     /* Blocco scroll di sfondo quando il menu è aperto (pattern standard iOS) */
@@ -368,8 +364,8 @@
     /* Etichette in testo grande (>= 18.66px bold) per garantire contrasto >= 3:1 anche su Terracotta */
     .swatch {
       position: relative; overflow: hidden; border: 0; border-radius: 14px; padding: 18px 10px;
-      text-align: center; font-family: 'Playfair Display', Georgia, serif; font-size: 1.08rem;
-      font-weight: 600; letter-spacing: 0.01em; color: #FFF;
+      text-align: center; font-family: 'Playfair Display', Georgia, serif; font-size: 1.2rem;
+      font-weight: 700; letter-spacing: 0.01em; color: #FFF;
       text-shadow: 0 1px 3px rgba(0,0,0,0.4);
       background-image: linear-gradient(145deg, rgba(255,255,255,0.24), transparent 48%, rgba(0,0,0,0.12));
       box-shadow: inset 0 0 0 1px rgba(255,255,255,0.28), 0 5px 14px rgba(40,32,25,0.1);
@@ -523,7 +519,7 @@
             <p class="hero-subtitle" data-i18n="home.subtitle">Guida d'immagine personale per l'equilibrio cromatico, le proporzioni fisiche e il grooming.</p>
           </div>
           <figure class="editorial-media hero-media">
-            <img src="img/hero-outfit.webp" alt="" width="800" height="1200" decoding="async" data-i18n-alt="img.hero">
+            <img alt="" width="800" height="1200" decoding="async" data-season-image="hero" data-i18n-alt="img.hero.autumn">
           </figure>
         </div>
       </div>
@@ -555,7 +551,7 @@
         <h2 data-i18n="home.capsuleTitle">Guardaroba Capsule</h2>
         <div class="capsule-layout">
           <figure class="editorial-media">
-            <img src="img/fabrics.webp" alt="" width="800" height="1200" loading="lazy" decoding="async" data-i18n-alt="img.fabrics">
+            <img alt="" width="800" height="1200" loading="lazy" decoding="async" data-season-image="capsule" data-i18n-alt="img.capsule.autumn">
           </figure>
           <div>
             <p id="capsule-intro"></p>
@@ -788,7 +784,7 @@
   </main>
 
   <footer class="container" style="text-align:center; padding: 0 20px 28px;">
-    <p style="font-size:0.75rem; color:var(--text-muted);" data-i18n="footer.note">Le immagini sono illustrative · Armocromatic</p>
+    <p style="font-size:0.75rem; color:var(--text-muted);" data-i18n="footer.note">Le immagini sono illustrative e generate con AI · Armocromatic</p>
   </footer>
 
   <script>
@@ -852,8 +848,14 @@
           'palette.setMine': 'Imposta {s} come mia stagione',
           'rules.do2Label': 'Capi chiave per la tua stagione:',
           'home.subtitle': "Guida d'immagine personale per l'equilibrio cromatico, le proporzioni fisiche e il grooming.",
-          'img.hero': 'Flat-lay editoriale: sopracamicia moka, t-shirt panna e chino oliva su fondo lino chiaro',
-          'img.fabrics': 'Dettaglio di tessuti piegati: lana moka, cotone terracotta, twill oliva, cashmere cammello e lino panna',
+          'img.hero.autumn': 'Uomo con giacca a quadri nei toni caldi davanti al foliage autunnale',
+          'img.hero.winter': 'Uomo con piumino viola in un paesaggio innevato',
+          'img.hero.spring': 'Uomo con cappotto beige davanti a una siepe fiorita in primavera',
+          'img.hero.summer': 'Uomo vestito di bianco davanti a una parete chiara in estate',
+          'img.capsule.autumn': 'Tre uomini con cappotti marroni, neri e cammello in un parco autunnale',
+          'img.capsule.winter': 'Tre uomini con piumini chiari e maglieria in un paesaggio innevato',
+          'img.capsule.spring': 'Uomo con giacca di jeans e t-shirt chiara davanti a fiori primaverili',
+          'img.capsule.summer': 'Uomo con camicia floreale e bermuda di jeans in una strada estiva',
           'img.grooming': 'Attrezzi da barberia su legno scuro: forbici, pettine e olio per barba alla luce calda',
           'img.accessories': 'Flat-lay di accessori: orologio con cinturino marrone, occhiali tartarugati, cappellino oliva e cintura',
           'profile.title': 'Il Tuo Profilo', 'profile.seasonLabel': 'Seleziona la tua stagione armocromatica',
@@ -897,7 +899,7 @@
           'accessori.glasses': '<strong>Occhiali:</strong> Montature tartarugate ambrate o in acetato verde oliva/marrone.',
           'accessori.hats': '<strong>Cappelli:</strong> Dad hat classici in verde oliva, ruggine o moka.',
           'accessori.metals': '<strong>Metalli:</strong> Oro giallo satinato, bronzo o argento invecchiato brunito.',
-          'footer.note': 'Le immagini sono illustrative · Armocromatic'
+          'footer.note': 'Le immagini sono illustrative e generate con AI · Armocromatic'
         },
         en: {
           'aria.openMenu': 'Open menu', 'aria.closeMenu': 'Close menu',
@@ -935,8 +937,14 @@
           'palette.setMine': 'Set {s} as my season',
           'rules.do2Label': 'Key pieces for your season:',
           'home.subtitle': 'Your personal image guide to color balance, body proportions and grooming.',
-          'img.hero': 'Editorial flat-lay: mocha overshirt, cream tee and olive chinos on a light linen background',
-          'img.fabrics': 'Close-up of folded fabrics: mocha wool, terracotta cotton, olive twill, camel cashmere and cream linen',
+          'img.hero.autumn': 'Man wearing a warm-toned checked jacket among autumn foliage',
+          'img.hero.winter': 'Man in a purple puffer jacket in a snowy landscape',
+          'img.hero.spring': 'Man in a beige coat in front of a flowering spring hedge',
+          'img.hero.summer': 'Man dressed in white against a light wall in summer',
+          'img.capsule.autumn': 'Three men in brown, black and camel coats in an autumn park',
+          'img.capsule.winter': 'Three men in light puffer jackets and knitwear in a snowy landscape',
+          'img.capsule.spring': 'Man in a denim jacket and light T-shirt in front of spring flowers',
+          'img.capsule.summer': 'Man in a floral shirt and denim shorts on a summer street',
           'img.grooming': 'Barbering tools on dark wood: scissors, comb and beard oil in warm light',
           'img.accessories': 'Accessories flat-lay: brown-strap watch, tortoiseshell glasses, olive cap and belt',
           'profile.title': 'Your Profile', 'profile.seasonLabel': 'Select your color season',
@@ -980,7 +988,7 @@
           'accessori.glasses': '<strong>Glasses:</strong> Amber tortoiseshell or olive/brown acetate frames.',
           'accessori.hats': '<strong>Hats:</strong> Classic dad hats in olive, rust or mocha.',
           'accessori.metals': '<strong>Metals:</strong> Satin yellow gold, bronze or burnished aged silver.',
-          'footer.note': 'Images are illustrative · Armocromatic'
+          'footer.note': 'Images are illustrative and AI-generated · Armocromatic'
         }
       };
 
@@ -1154,6 +1162,12 @@
       };
       var BODY_KEYS = { athletic: 'fit.typeAthletic', slim: 'fit.typeSlim', robust: 'fit.typeRobust' };
       var THEME_BG = { autumn: '#F1E5D3', winter: '#E3EAF6', spring: '#F8EBD8', summer: '#E4EBF3' };
+      var SEASONAL_IMAGES = {
+        autumn: { hero: 'img/hero-autumn.webp', capsule: 'img/capsule-autumn.webp' },
+        winter: { hero: 'img/hero-winter.webp', capsule: 'img/capsule-winter.webp' },
+        spring: { hero: 'img/hero-spring.webp', capsule: 'img/capsule-spring.webp' },
+        summer: { hero: 'img/hero-summer.webp', capsule: 'img/capsule-summer.webp' }
+      };
 
       loadProfile();
       // Stagione che colora il sito e i consigli; senza profilo si parte dall'Autunno
@@ -1171,6 +1185,14 @@
         document.documentElement.setAttribute('data-season', key);
         var meta = document.querySelector('meta[name="theme-color"]');
         if (meta) meta.setAttribute('content', THEME_BG[key]);
+        Object.keys(SEASONAL_IMAGES[key]).forEach(function (kind) {
+          var image = document.querySelector('[data-season-image="' + kind + '"]');
+          if (!image) return;
+          var altKey = 'img.' + kind + '.' + key;
+          image.setAttribute('src', SEASONAL_IMAGES[key][kind]);
+          image.setAttribute('data-i18n-alt', altKey);
+          image.setAttribute('alt', t(altKey));
+        });
       }
 
       function renderPaletteGrid(grid, data) {
