@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Armocromatic - Personal Style Hub</title>
+  <style>
+    :root {
+      --bg-dark: #121212;
+      --card-bg: #1e1e1e;
+      --accent-moka: #4a2c2a;
+      --accent-gold: #d4af37;
+      --accent-olive: #556b2f;
+      --accent-terracotta: #c86446;
+      --text-light: #f0f0f0;
+      --text-muted: #a0a0a0;
+      --danger: #d9534f;
+      --success: #5cb85c;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    body { background-color: var(--bg-dark); color: var(--text-light); padding-top: 70px; padding-bottom: 40px; }
+
+    /* NAVBAR A TENDINA / FISSA */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      background-color: rgba(30, 30, 30, 0.95);
+      backdrop-filter: blur(10px);
+      display: flex; justify-content: space-around;
+      padding: 15px 10px; border-bottom: 1px solid #333; z-index: 1000;
+    }
+    nav a {
+      color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.85rem;
+      text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.3s;
+    }
+    nav a.active, nav a:hover { color: var(--accent-gold); }
+
+    .container { max-width: 800px; margin: 0 auto; padding: 0 15px; }
+
+    header { text-align: center; margin-bottom: 30px; }
+    header h1 { font-size: 1.8rem; color: var(--accent-gold); margin-bottom: 5px; }
+    header p { color: var(--text-muted); font-size: 0.95rem; }
+
+    .section { display: none; }
+    .section.active { display: block; }
+
+    .card { background-color: var(--card-bg); border-radius: 12px; padding: 20px; margin-bottom: 20px; border: 1px solid #2a2a2a; }
+    .card h2 { font-size: 1.2rem; color: var(--accent-gold); margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 8px; }
+
+    /* PALETTE SWATCHES */
+    .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; }
+    .swatch { border-radius: 8px; padding: 15px 10px; text-align: center; font-size: 0.8rem; font-weight: bold; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.8); }
+
+    /* DOS AND DONTS */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } }
+    .dos { border-left: 4px solid var(--success); }
+    .donts { border-left: 4px solid var(--danger); }
+    ul { list-style-type: none; }
+    li { margin-bottom: 10px; font-size: 0.9rem; line-height: 1.4; }
+
+    /* OUTFIT GENERATOR */
+    .btn-group { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; }
+    .btn { background: #333; color: #fff; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-weight: 600; flex: 1; text-align: center; }
+    .btn.active, .btn:hover { background: var(--accent-gold); color: #000; }
+
+    /* ACCESSORI GRID */
+    .acc-item { margin-bottom: 15px; }
+    .acc-item h3 { font-size: 1rem; color: #fff; margin-bottom: 5px; }
+    .acc-item p { font-size: 0.85rem; color: var(--text-muted); }
+
+    /* CHECKLIST */
+    .chk-item { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 0.9rem; }
+    .chk-item input { accent-color: var(--accent-gold); width: 18px; height: 18px; }
+
+    .link-btn { display: inline-block; background: var(--accent-moka); color: #fff; text-decoration: none; padding: 8px 12px; border-radius: 6px; font-size: 0.85rem; margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION BAR -->
+  <nav>
+    <a href="#" onclick="showTab('palette')" id="nav-palette" class="active">Palette</a>
+    <a href="#" onclick="showTab('rules')" id="nav-rules">Regole & Fit</a>
+    <a href="#" onclick="showTab('accessori')" id="nav-accessori">Accessori</a>
+    <a href="#" onclick="showTab('outfit')" id="nav-outfit">Outfit</a>
+    <a href="#" onclick="showTab('capsule')" id="nav-capsule">Capsule</a>
+  </nav>
+
+  <div class="container">
+    <header>
+      <h1>Personal Style Hub</h1>
+      <p>Profilo: Autunno Profondo | Fisico Atletico (1.70m x 75kg)</p>
+    </header>
+
+    <!-- SECTION 1: PALETTE -->
+    <div id="palette" class="section active">
+      <div class="card">
+        <h2>Palette Colori Guida</h2>
+        <div class="color-grid">
+          <div class="swatch" style="background-color: #3b1e1a;">Moka</div>
+          <div class="swatch" style="background-color: #556b2f;">Oliva</div>
+          <div class="swatch" style="background-color: #c86446;">Terracotta</div>
+          <div class="swatch" style="background-color: #1b4d3e;">Ottanio</div>
+          <div class="swatch" style="background-color: #8b0000;">Bordeaux</div>
+          <div class="swatch" style="background-color: #c19a6b;">Cammello</div>
+          <div class="swatch" style="background-color: #fff8dc; color:#000; text-shadow:none;">Panna/Avorio</div>
+          <div class="swatch" style="background-color: #4f423a;">Fango</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: REGOLE & FIT -->
+    <div id="rules" class="section">
+      <div class="grid-2">
+        <div class="card dos">
+          <h2 style="color:var(--success)">🟢 Promossi (Sì)</h2>
+          <ul>
+            <li><strong>Sopra:</strong> Moka, Terracotta, Ottanio, Panna caldo vicini al viso.</li>
+            <li><strong>Pantaloni:</strong> Vita media/alta con pinces. Definiscono il punto vita e allungano la gamba.</li>
+            <li><strong>Vestibilità:</strong> Regular / Tapered. Bilancia i volumi (es. sopra morbido + sotto strutturato).</li>
+            <li><strong>Giacche:</strong> Spalle strutturate e lunghezza media (metà bacino).</li>
+          </ul>
+        </div>
+        <div class="card donts">
+          <h2 style="color:var(--danger)">🔴 Bocciati (No)</h2>
+          <ul>
+            <li><strong>Colori vicini al viso:</strong> Bianco ottico, grigio ghiaccio, viola freddo saturo, blu elettrico.</li>
+            <li><strong>Fit ultra-baggy:</strong> Evita volumi abbondanti contemporaneamente sopra e sotto.</li>
+            <li><strong>Pantaloni troppo lunghi:</strong> Evita troppi doppi fondi sulla scarpa che accorciano la statura.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 3: ACCESSORI -->
+    <div id="accessori" class="section">
+      <div class="card">
+        <h2>Guida Accessori & Dettagli</h2>
+        <div class="acc-item">
+          <h3>⌚ Orologi & Cinturini</h3>
+          <p>Cassa in bronzo, ottone spazzolato o PVD nero opaco. Cinturini in pelle o camoscio moka, cuoio o verde militare.</p>
+        </div>
+        <div class="acc-item">
+          <h3>🕶️ Occhiali da Sole</h3>
+          <p>Montature tartarugate ambrate/scure, acetato marrone trasparente o verde oliva. Lenti sfumate marrone/verde G-15.</p>
+        </div>
+        <div class="acc-item">
+          <h3>🧢 Cappelli & Beanie</h3>
+          <p>Cappellini da baseball e berretti in verde oliva/foresta, ruggine, fango, arancio bruciato o marrone scuro.</p>
+        </div>
+        <div class="acc-item">
+          <h3>📿 Gioielli & Metalli</h3>
+          <p>Prediligi oro giallo satinato, bronzo o argento invecchiato brunito. Evita l'acciaio lucidissimo a specchio.</p>
+        </div>
+        <div class="acc-item">
+          <h3>💼 Pelletteria & Cinture</h3>
+          <p>Cinture e borse in camoscio o pelle morbida testa di moro/cognac. Abbina sempre la tonalità di pelle a quella delle scarpe.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 4: OUTFIT GENERATOR -->
+    <div id="outfit" class="section">
+      <div class="card">
+        <h2>Generatore Outfit per Occasione</h2>
+        <div class="btn-group">
+          <button class="btn active" onclick="genOutfit('work')">Ufficio / Smart</button>
+          <button class="btn" onclick="genOutfit('drink')">Aperitivo / Uscita</button>
+          <button class="btn" onclick="genOutfit('casual')">Weekend / Casual</button>
+          <button class="btn" onclick="genOutfit('gym')">Gym & Sport</button>
+        </div>
+        <div id="outfit-result" style="background:#282828; padding:15px; border-radius:8px; line-height:1.5;">
+          <!-- Caricato dinamicamente tramite JavaScript -->
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 5: CAPSULE & PINTEREST -->
+    <div id="capsule" class="section">
+      <div class="card">
+        <h2>Checklist Guardaroba Capsule</h2>
+        <div class="chk-item"><input type="checkbox"> Sopracamicia Camoscio/Cotone Moka</div>
+        <div class="chk-item"><input type="checkbox"> Trench Corto Cammello / Tobacco</div>
+        <div class="chk-item"><input type="checkbox"> Chino Sartoriale Oliva (Vita Alta)</div>
+        <div class="chk-item"><input type="checkbox"> Pantalone Fango / Sabbia</div>
+        <div class="chk-item"><input type="checkbox"> T-shirt & Polo Panna / Avorio</div>
+        <div class="chk-item"><input type="checkbox"> Maglione / Felpa Ruggine o Terracotta</div>
+        <div class="chk-item"><input type="checkbox"> Stivaletto / Scarpa Cuoio/Miele</div>
+        <div class="chk-item"><input type="checkbox"> Sneakers Pelle/Camoscio Panna</div>
+        <br>
+        <h2>Ispirazioni Visuali</h2>
+        <p style="font-size:0.85rem; color:var(--text-muted);">Esplora bacheche stile Pinterest dedicate all'Autunno Profondo Uomo:</p>
+        <a href="https://www.pinterest.com/search/pins/?q=dark%20autumn%20men%20style" target="_blank" class="link-btn">Esplora su Pinterest ↗</a>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      document.getElementById('nav-' + tabId).classList.add('active');
+    }
+
+    const outfits = {
+      work: "<strong>Outfit Ufficio:</strong> Pantalone Chino fango + T-shirt panna/avorio infilata + Sopracamicia/Blazer marrone moka + Sneakers in pelle panna o mocassino cuoio.",
+      drink: "<strong>Outfit Aperitivo:</strong> Jeans denim scuro (lavaggio caldo) + Camicia/Polo ottanio o verde bosco + Giacca in pelle/camoscio testa di moro + Stivaletto cuoio.",
+      casual: "<strong>Outfit Weekend:</strong> Pantalone verde oliva + Felpa/Maglioncino terracotta o ruggine + Cappotto corto cammello aperto + Timberland o sneaker panna.",
+      gym: "<strong>Outfit Gym:</strong> T-shirt o canotta grigio antracite / verde foresta + Shorts nero caldo o grigio scuro + Sneakers sportive con dettagli caldi."
+    };
+
+    function genOutfit(type) {
+      document.querySelectorAll('.btn-group .btn').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById('outfit-result').innerHTML = outfits[type];
+    }
+
+    // Inizializza primo outfit
+    genOutfit('work');
+  </script>
+</body>
+</html>
