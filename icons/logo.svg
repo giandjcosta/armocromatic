@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Armocromatic monogram: A su fondo scuro con barra cromatica Autunno Profondo -->
+  <rect width="512" height="512" rx="112" fill="#1A1817"/>
+  <text x="256" y="330" font-family="Georgia, 'Times New Roman', serif" font-size="300" font-weight="700" fill="#FFF8DC" text-anchor="middle">A</text>
+  <g>
+    <rect x="96" y="392" width="80" height="26" rx="13" fill="#4A2C2A"/>
+    <rect x="184" y="392" width="80" height="26" rx="13" fill="#C86446"/>
+    <rect x="272" y="392" width="80" height="26" rx="13" fill="#556B2F"/>
+    <rect x="360" y="392" width="56" height="26" rx="13" fill="#C19A6B"/>
+  </g>
+</svg>
