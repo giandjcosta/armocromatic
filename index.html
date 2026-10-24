@@ -523,7 +523,7 @@
             <p class="hero-subtitle" data-i18n="home.subtitle">Guida d'immagine personale per l'equilibrio cromatico, le proporzioni fisiche e il grooming.</p>
           </div>
           <figure class="editorial-media hero-media">
-            <img src="img/hero-outfit.webp" alt="" width="800" height="1200" decoding="async" data-i18n-alt="img.hero">
+            <img src="img/hero-autumn.webp" alt="" width="800" height="1200" decoding="async" data-season-image="hero" data-i18n-alt="img.hero.autumn">
           </figure>
         </div>
       </div>
@@ -555,7 +555,7 @@
         <h2 data-i18n="home.capsuleTitle">Guardaroba Capsule</h2>
         <div class="capsule-layout">
           <figure class="editorial-media">
-            <img src="img/fabrics.webp" alt="" width="800" height="1200" loading="lazy" decoding="async" data-i18n-alt="img.fabrics">
+            <img src="img/capsule-autumn.webp" alt="" width="800" height="1200" loading="lazy" decoding="async" data-season-image="capsule" data-i18n-alt="img.capsule.autumn">
           </figure>
           <div>
             <p id="capsule-intro"></p>
@@ -852,8 +852,14 @@
           'palette.setMine': 'Imposta {s} come mia stagione',
           'rules.do2Label': 'Capi chiave per la tua stagione:',
           'home.subtitle': "Guida d'immagine personale per l'equilibrio cromatico, le proporzioni fisiche e il grooming.",
-          'img.hero': 'Flat-lay editoriale: sopracamicia moka, t-shirt panna e chino oliva su fondo lino chiaro',
-          'img.fabrics': 'Dettaglio di tessuti piegati: lana moka, cotone terracotta, twill oliva, cashmere cammello e lino panna',
+          'img.hero.autumn': 'Uomo con giacca a quadri nei toni caldi davanti al foliage autunnale',
+          'img.hero.winter': 'Uomo con piumino viola in un paesaggio innevato',
+          'img.hero.spring': 'Uomo con cappotto beige davanti a una siepe fiorita in primavera',
+          'img.hero.summer': 'Uomo vestito di bianco davanti a una parete chiara in estate',
+          'img.capsule.autumn': 'Tre uomini con cappotti marroni, neri e cammello in un parco autunnale',
+          'img.capsule.winter': 'Tre uomini con piumini chiari e maglieria in un paesaggio innevato',
+          'img.capsule.spring': 'Uomo con giacca di jeans e t-shirt chiara davanti a fiori primaverili',
+          'img.capsule.summer': 'Uomo con camicia floreale e bermuda di jeans in una strada estiva',
           'img.grooming': 'Attrezzi da barberia su legno scuro: forbici, pettine e olio per barba alla luce calda',
           'img.accessories': 'Flat-lay di accessori: orologio con cinturino marrone, occhiali tartarugati, cappellino oliva e cintura',
           'profile.title': 'Il Tuo Profilo', 'profile.seasonLabel': 'Seleziona la tua stagione armocromatica',
@@ -935,8 +941,14 @@
           'palette.setMine': 'Set {s} as my season',
           'rules.do2Label': 'Key pieces for your season:',
           'home.subtitle': 'Your personal image guide to color balance, body proportions and grooming.',
-          'img.hero': 'Editorial flat-lay: mocha overshirt, cream tee and olive chinos on a light linen background',
-          'img.fabrics': 'Close-up of folded fabrics: mocha wool, terracotta cotton, olive twill, camel cashmere and cream linen',
+          'img.hero.autumn': 'Man wearing a warm-toned checked jacket among autumn foliage',
+          'img.hero.winter': 'Man in a purple puffer jacket in a snowy landscape',
+          'img.hero.spring': 'Man in a beige coat in front of a flowering spring hedge',
+          'img.hero.summer': 'Man dressed in white against a light wall in summer',
+          'img.capsule.autumn': 'Three men in brown, black and camel coats in an autumn park',
+          'img.capsule.winter': 'Three men in light puffer jackets and knitwear in a snowy landscape',
+          'img.capsule.spring': 'Man in a denim jacket and light T-shirt in front of spring flowers',
+          'img.capsule.summer': 'Man in a floral shirt and denim shorts on a summer street',
           'img.grooming': 'Barbering tools on dark wood: scissors, comb and beard oil in warm light',
           'img.accessories': 'Accessories flat-lay: brown-strap watch, tortoiseshell glasses, olive cap and belt',
           'profile.title': 'Your Profile', 'profile.seasonLabel': 'Select your color season',
@@ -1154,6 +1166,12 @@
       };
       var BODY_KEYS = { athletic: 'fit.typeAthletic', slim: 'fit.typeSlim', robust: 'fit.typeRobust' };
       var THEME_BG = { autumn: '#F1E5D3', winter: '#E3EAF6', spring: '#F8EBD8', summer: '#E4EBF3' };
+      var SEASONAL_IMAGES = {
+        autumn: { hero: 'img/hero-autumn.webp', capsule: 'img/capsule-autumn.webp' },
+        winter: { hero: 'img/hero-winter.webp', capsule: 'img/capsule-winter.webp' },
+        spring: { hero: 'img/hero-spring.webp', capsule: 'img/capsule-spring.webp' },
+        summer: { hero: 'img/hero-summer.webp', capsule: 'img/capsule-summer.webp' }
+      };
 
       loadProfile();
       // Stagione che colora il sito e i consigli; senza profilo si parte dall'Autunno
@@ -1171,6 +1189,14 @@
         document.documentElement.setAttribute('data-season', key);
         var meta = document.querySelector('meta[name="theme-color"]');
         if (meta) meta.setAttribute('content', THEME_BG[key]);
+        Object.keys(SEASONAL_IMAGES[key]).forEach(function (kind) {
+          var image = document.querySelector('[data-season-image="' + kind + '"]');
+          if (!image) return;
+          var altKey = 'img.' + kind + '.' + key;
+          image.setAttribute('src', SEASONAL_IMAGES[key][kind]);
+          image.setAttribute('data-i18n-alt', altKey);
+          image.setAttribute('alt', t(altKey));
+        });
       }
 
       function renderPaletteGrid(grid, data) {

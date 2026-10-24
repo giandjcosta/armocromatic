@@ -1,5 +1,5 @@
 /* Service worker minimale: cache dell'app per uso offline (Add to Home Screen) */
-var CACHE = 'armocromatic-v8';
+var CACHE = 'armocromatic-v9';
 var ASSETS = [
   './',
   './index.html',
@@ -9,7 +9,15 @@ var ASSETS = [
   './icons/icon-192.png',
   './icons/icon-512.png',
   './img/hero-outfit.webp',
+  './img/hero-autumn.webp',
+  './img/hero-winter.webp',
+  './img/hero-spring.webp',
+  './img/hero-summer.webp',
   './img/fabrics.webp',
+  './img/capsule-autumn.webp',
+  './img/capsule-winter.webp',
+  './img/capsule-spring.webp',
+  './img/capsule-summer.webp',
   './img/accessories.webp',
   './img/grooming.webp'
 ];
