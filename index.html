@@ -95,7 +95,7 @@
       font-family: inherit; font-size: 0.78rem; font-weight: 800; color: var(--text-muted);
       padding: 6px 10px; min-width: 40px; min-height: 36px; cursor: pointer; touch-action: manipulation;
     }
-    .lang-btn.active { background: var(--text-dark); border-color: var(--text-dark); color: #FFF; }
+    .lang-btn.active { background: var(--accent-deep); border-color: var(--accent-deep); color: #FFF; transition: background-color 0.4s ease, border-color 0.4s ease; }
     .shop-link {
       display: grid; grid-template-columns: 86px 1fr; gap: 12px; align-items: center;
       padding: 12px; border-radius: 12px; background: var(--bg-main);
@@ -297,10 +297,11 @@
     }
     .form-control:focus { border-color: var(--accent); }
     .btn-action {
-      width: 100%; background: var(--text-dark); color: #FFF; border: none;
+      width: 100%; background: var(--accent-deep); color: #FFF; border: none;
       padding: 14px; border-radius: 8px; font-weight: 600; font-size: 0.95rem;
       font-family: inherit; cursor: pointer; margin-top: 5px;
       min-height: 48px; touch-action: manipulation;
+      transition: background-color 0.4s ease;
     }
     .btn-action:active { opacity: 0.85; }
 
@@ -324,14 +325,22 @@
       background: var(--card-bg); border: 1.5px solid var(--border-color); border-radius: 8px;
       padding: 10px 8px; font: inherit; font-size: 0.85rem; font-weight: 600; color: var(--text-dark);
       cursor: pointer; min-height: 44px; touch-action: manipulation;
+      transition: background-color 0.4s ease, border-color 0.4s ease;
     }
-    .choice-btn[aria-pressed="true"] { background: var(--text-dark); border-color: var(--text-dark); color: #FFF; }
+    .choice-btn[aria-pressed="true"] { background: var(--accent-deep); border-color: var(--accent-deep); color: #FFF; }
     .quiz-result { margin-top: 12px; }
 
     /* COLOR SWATCHES */
     .color-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
     /* Etichette in testo grande (>= 18.66px bold) per garantire contrasto >= 3:1 anche su Terracotta */
     .swatch { border-radius: 8px; padding: 18px 10px; text-align: center; font-size: 1.2rem; font-weight: 700; color: #FFF; text-shadow: 0 1px 2px rgba(0,0,0,0.3); border: 1px solid rgba(0,0,0,0.1); }
+    #palette-grid.wind-out .swatch { animation: season-wind-out 240ms ease-in both; animation-delay: calc(var(--swatch-index) * 20ms); }
+    #palette-grid.wind-in .swatch { animation: season-wind-in 380ms cubic-bezier(0.2, 0.7, 0.2, 1) both; animation-delay: calc(var(--swatch-index) * 20ms); }
+    @keyframes season-wind-out { to { opacity: 0; filter: blur(4px); transform: translateX(110%) rotate(4deg); } }
+    @keyframes season-wind-in { from { opacity: 0; filter: blur(4px); transform: translateX(-110%) rotate(-4deg); } to { opacity: 1; filter: blur(0); transform: translateX(0) rotate(0); } }
+    @media (prefers-reduced-motion: reduce) {
+      #palette-grid.wind-out .swatch, #palette-grid.wind-in .swatch { animation-duration: 1ms; animation-delay: 0ms; }
+    }
 
     /* RULES & LISTS */
     .rule-box { padding: 12px; border-radius: 8px; font-size: 0.88rem; line-height: 1.45; margin-bottom: 10px; }
@@ -1108,6 +1117,9 @@
       function mySeason() { return PROFILE.season || 'autumn'; }
       // La Palette si può sfogliare senza cambiare la propria stagione
       var paletteSeason = mySeason();
+      var renderedPaletteSeason = null;
+      var paletteWindTimer = null;
+      var paletteWindCleanupTimer = null;
 
       function fmt(key, season) { return t(key).replace('{s}', tr(SEASONS[season].name)); }
 
@@ -1118,19 +1130,45 @@
         if (meta) meta.setAttribute('content', THEME_BG[key]);
       }
 
+      function renderPaletteGrid(grid, data) {
+        var html = '';
+        data.colors.forEach(function (c, i) {
+          var style = 'background:' + c.hex + ';--swatch-index:' + i + ';';
+          if (c.dark) style += 'color:#1A1817;text-shadow:none;';
+          html += '<div class="swatch" style="' + style + '">' + tr(c.name) + '</div>';
+        });
+        grid.innerHTML = html;
+      }
+
       function renderPalette() {
         var data = SEASONS[paletteSeason];
         var palSel = document.getElementById('palette-season-select');
         if (palSel) palSel.value = paletteSeason;
         var grid = document.getElementById('palette-grid');
         if (grid) {
-          var html = '';
-          data.colors.forEach(function (c) {
-            var style = 'background:' + c.hex + ';';
-            if (c.dark) style += 'color:#1A1817;text-shadow:none;';
-            html += '<div class="swatch" style="' + style + '">' + tr(c.name) + '</div>';
-          });
-          grid.innerHTML = html;
+          if (renderedPaletteSeason && renderedPaletteSeason !== paletteSeason) {
+            clearTimeout(paletteWindTimer);
+            clearTimeout(paletteWindCleanupTimer);
+            grid.classList.remove('wind-in');
+            grid.classList.add('wind-out');
+            var windOutDuration = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 470;
+            paletteWindTimer = setTimeout(function () {
+              renderPaletteGrid(grid, SEASONS[paletteSeason]);
+              renderedPaletteSeason = paletteSeason;
+              grid.classList.remove('wind-out');
+              grid.classList.add('wind-in');
+              paletteWindCleanupTimer = setTimeout(function () {
+                grid.classList.remove('wind-in');
+              }, 650);
+            }, windOutDuration);
+          } else {
+            clearTimeout(paletteWindTimer);
+            clearTimeout(paletteWindCleanupTimer);
+            grid.classList.remove('wind-out');
+            grid.classList.remove('wind-in');
+            renderPaletteGrid(grid, data);
+            renderedPaletteSeason = paletteSeason;
+          }
         }
         var intro = document.getElementById('palette-intro');
         if (intro) intro.textContent = tr(data.intro);
