@@ -1,6 +1,6 @@
-# Foto stagionali
+# Foto
 
-Le dodici foto stagionali sono state scaricate da Pexels e ritagliate in WebP.
+Le foto stagionali (uomo e donna) e la foto del grooming donna sono state scaricate da Pexels e ritagliate in WebP.
 La licenza Pexels consente l'uso gratuito sui siti e la modifica delle immagini;
 non richiede attribuzione: https://www.pexels.com/license/
 
@@ -18,3 +18,16 @@ non richiede attribuzione: https://www.pexels.com/license/
 | `accessories-winter.webp` | https://www.pexels.com/photo/black-leather-shoes-and-accessories-flat-lay-37008332/ |
 | `accessories-spring.webp` | https://www.pexels.com/photo/white-tulips-on-brown-jacket-10622270/ |
 | `accessories-summer.webp` | https://www.pexels.com/photo/beach-essentials-hat-sunglasses-and-towel-30982094/ |
+| `hero-autumn-donna.webp` | https://www.pexels.com/photo/28931738/ |
+| `hero-winter-donna.webp` | https://www.pexels.com/photo/15502155/ |
+| `hero-spring-donna.webp` | https://www.pexels.com/photo/22678551/ |
+| `hero-summer-donna.webp` | https://www.pexels.com/photo/37776248/ |
+| `capsule-autumn-donna.webp` | https://www.pexels.com/photo/5279630/ |
+| `capsule-winter-donna.webp` | https://www.pexels.com/photo/19268785/ |
+| `capsule-spring-donna.webp` | https://www.pexels.com/photo/13768968/ |
+| `capsule-summer-donna.webp` | https://www.pexels.com/photo/7872864/ |
+| `accessories-autumn-donna.webp` | https://www.pexels.com/photo/9641263/ |
+| `accessories-winter-donna.webp` | https://www.pexels.com/photo/34789943/ |
+| `accessories-spring-donna.webp` | https://www.pexels.com/photo/4506919/ |
+| `accessories-summer-donna.webp` | https://www.pexels.com/photo/34076070/ |
+| `grooming-donna.webp` | https://www.pexels.com/photo/37575400/ |

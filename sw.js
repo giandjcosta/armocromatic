@@ -1,5 +1,5 @@
 /* Service worker minimale: cache dell'app per uso offline (Add to Home Screen) */
-var CACHE = 'armocromatic-v11';
+var CACHE = 'armocromatic-v12';
 var ASSETS = [
   './',
   './index.html',
@@ -20,7 +20,20 @@ var ASSETS = [
   './img/accessories-winter.webp',
   './img/accessories-spring.webp',
   './img/accessories-summer.webp',
-  './img/grooming.webp'
+  './img/grooming.webp',
+  './img/hero-autumn-donna.webp',
+  './img/hero-winter-donna.webp',
+  './img/hero-spring-donna.webp',
+  './img/hero-summer-donna.webp',
+  './img/capsule-autumn-donna.webp',
+  './img/capsule-winter-donna.webp',
+  './img/capsule-spring-donna.webp',
+  './img/capsule-summer-donna.webp',
+  './img/accessories-autumn-donna.webp',
+  './img/accessories-winter-donna.webp',
+  './img/accessories-spring-donna.webp',
+  './img/accessories-summer-donna.webp',
+  './img/grooming-donna.webp'
 ];
 
 self.addEventListener('install', function (e) {
