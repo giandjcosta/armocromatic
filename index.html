@@ -2,224 +2,1314 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#EFECE6">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23C86446'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='16' font-weight='700' fill='%23FFF8DC' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
+  <meta name="description" content="Armocromatic - Personal Style Hub: guida d'immagine personale per l'equilibrio cromatico e le proporzioni della figura.">
   <title>Armocromatic - Personal Style Hub</title>
+
+  <!-- PWA / WEB APP iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Armocromatic">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+
+  <!-- GOOGLE FONTS ELEGANTI -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --bg-dark: #121212;
-      --card-bg: #1e1e1e;
-      --accent-moka: #4a2c2a;
-      --accent-gold: #d4af37;
-      --accent-olive: #556b2f;
-      --accent-terracotta: #c86446;
-      --text-light: #f0f0f0;
-      --text-muted: #a0a0a0;
-      --danger: #d9534f;
-      --success: #5cb85c;
+      --bg-main: #EFECE6;
+      --card-bg: #FFFFFF;
+      --text-dark: #1A1817;
+      --text-muted: #5E5852;
+      --accent: #C86446;
+      --accent-deep: #9C4429;
+      --border-color: #CFC7B9;
+      --success: #2E7D32;
+      --danger: #C62828;
+      --topbar-h: 65px;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-    body { background-color: var(--bg-dark); color: var(--text-light); padding-top: 70px; padding-bottom: 40px; }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
-    /* NAVBAR A TENDINA / FISSA */
-    nav {
+    /* ── Sfondo dinamico ─────────────────────────────── */
+    .bg-anim { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+    .bg-grain {
+      position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0.4;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    }
+    .bg-blob { position: absolute; border-radius: 50%; filter: blur(70px); will-change: transform; }
+    .bg-blob-1 { background: rgba(200, 100, 70, 0.22); width: 70vmax; height: 70vmax; top: -30vmax; left: -28vmax; animation: blobFloat1 44s ease-in-out infinite; }
+    .bg-blob-2 { background: rgba(85, 107, 47, 0.16); width: 62vmax; height: 62vmax; bottom: -30vmax; right: -26vmax; animation: blobFloat2 38s ease-in-out infinite; }
+    .bg-blob-3 { background: rgba(74, 44, 42, 0.12); width: 50vmax; height: 50vmax; top: 55%; left: -22vmax; animation: blobFloat3 52s ease-in-out infinite; }
+    @keyframes blobFloat1 { 0%,100% { transform: translate(0,0) scale(1);} 33% { transform: translate(14vmax,10vmax) scale(1.1);} 66% { transform: translate(5vmax,24vmax) scale(0.94);} }
+    @keyframes blobFloat2 { 0%,100% { transform: translate(0,0) scale(1);} 40% { transform: translate(-15vmax,-12vmax) scale(1.08);} 75% { transform: translate(-5vmax,-25vmax) scale(0.95);} }
+    @keyframes blobFloat3 { 0%,100% { transform: translate(0,0) rotate(0deg);} 50% { transform: translate(11vmax,-13vmax) rotate(18deg);} }
+
+    /* ── Immagini editoriali ─────────────────────────── */
+    .editorial-media { border-radius: 12px; overflow: hidden; margin-bottom: 12px; border: 1.5px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.05); background: var(--bg-main); }
+    .editorial-media img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
+    .editorial-media.wide img { aspect-ratio: 16 / 10; }
+    .hero-media { margin-bottom: 20px; }
+
+    /* ── Hero con immagine affiancata ───────────────── */
+    .hero-grid { display: block; }
+    .hero-grid .hero-copy { text-align: center; }
+    .hero-grid .hero-media { margin: 18px 0 0; }
+
+    /* ── Profilo & chips ─────────────────────────────── */
+    .profile-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .chip { background: var(--bg-main); border: 1.5px solid var(--border-color); border-radius: 999px; padding: 7px 13px; font-size: 0.8rem; color: var(--text-muted); font-weight: 500; }
+    .chip b { color: var(--text-dark); font-weight: 700; }
+
+    /* ── Switch lingua ──────────────────────────────── */
+    .lang-switch { display: flex; gap: 4px; align-items: center; }
+    .lang-btn {
+      background: none; border: 1.5px solid var(--border-color); border-radius: 8px;
+      font-family: inherit; font-size: 0.78rem; font-weight: 800; color: var(--text-muted);
+      padding: 6px 10px; min-width: 40px; min-height: 36px; cursor: pointer; touch-action: manipulation;
+    }
+    .lang-btn.active { background: var(--text-dark); border-color: var(--text-dark); color: #FFF; }
+    .shop-link {
+      display: grid; grid-template-columns: 86px 1fr; gap: 12px; align-items: center;
+      padding: 12px; border-radius: 12px; background: var(--bg-main);
+      border: 1.5px solid var(--border-color); margin-bottom: 12px;
+      text-decoration: none; color: var(--text-dark); cursor: pointer; touch-action: manipulation;
+      transition: transform 0.15s ease;
+    }
+    .shop-link:active { transform: scale(0.98); }
+    .shop-link img { width: 86px; height: 86px; border-radius: 8px; object-fit: cover; display: block; }
+    .shop-link h4 { font-size: 0.95rem; margin-bottom: 3px; color: var(--text-dark); }
+    .shop-link p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.35; }
+    .shop-link .shop-arrow { font-size: 0.72rem; font-weight: 700; color: var(--accent-deep); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 4px; display: inline-block; }
+
+    .capsule-list { list-style: none; }
+    .capsule-list li { padding: 9px 0 9px 26px; border-bottom: 1px solid var(--border-color); font-size: 0.88rem; color: var(--text-muted); line-height: 1.45; position: relative; }
+    .capsule-list li:last-child { border-bottom: none; }
+    .capsule-list li::before { content: "✓"; position: absolute; left: 2px; top: 9px; color: var(--success); font-weight: 800; }
+    .capsule-list strong { color: var(--text-dark); }
+
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-dark);
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      padding-top: calc(var(--topbar-h) + var(--safe-top) + 10px);
+      padding-bottom: calc(40px + var(--safe-bottom));
+      min-height: 100vh;
+      min-height: 100dvh;
+    }
+
+    /* Blocco scroll di sfondo quando il menu è aperto (pattern standard iOS) */
+    body.menu-open { position: fixed; left: 0; right: 0; width: 100%; overflow: hidden; }
+
+    h1, h2, h3, h4 { font-family: 'Playfair Display', Georgia, serif; }
+
+    .container { max-width: 620px; margin: 0 auto; padding: 0 20px; }
+
+    /* TOP BAR */
+    .top-bar {
       position: fixed; top: 0; left: 0; right: 0;
-      background-color: rgba(30, 30, 30, 0.95);
-      backdrop-filter: blur(10px);
-      display: flex; justify-content: space-around;
-      padding: 15px 10px; border-bottom: 1px solid #333; z-index: 1000;
+      height: calc(var(--topbar-h) + var(--safe-top));
+      padding-top: var(--safe-top);
+      background-color: var(--card-bg);
+      display: flex; align-items: center; justify-content: space-between;
+      padding-left: max(20px, env(safe-area-inset-left, 0px));
+      padding-right: max(20px, env(safe-area-inset-right, 0px));
+      border-bottom: 2px solid var(--border-color); z-index: 1000;
     }
-    nav a {
-      color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.85rem;
-      text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.3s;
+    .brand-container {
+      display: flex; align-items: center; gap: 10px;
+      min-width: 0;
     }
-    nav a.active, nav a:hover { color: var(--accent-gold); }
+    .brand-logo {
+      width: 34px; height: 34px; flex: none; border-radius: 8px;
+      display: block;
+    }
+    .brand-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem; font-weight: 700; color: var(--text-dark);
+      letter-spacing: -0.3px;
+    }
+    .menu-trigger {
+      background: none; border: none; font-size: 1.8rem; line-height: 1;
+      cursor: pointer; color: var(--text-dark);
+      padding: 8px 12px; min-width: 44px; min-height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      touch-action: manipulation; border-radius: 8px;
+    }
+    .menu-trigger:focus-visible, .close-btn:focus-visible,
+    .nav-links a:focus-visible, .feature-card:focus-visible, .btn-action:focus-visible {
+      outline: 2px solid var(--accent); outline-offset: 2px;
+    }
 
-    .container { max-width: 800px; margin: 0 auto; padding: 0 15px; }
+    /* SIDEBAR HAMBURGER MENU (DA SINISTRA) */
+    .sidebar {
+      position: fixed; top: 0; left: 0; width: min(300px, 84vw);
+      height: 100vh;
+      height: 100dvh;
+      background-color: var(--card-bg);
+      box-shadow: 10px 0 30px rgba(0,0,0,0.15);
+      transform: translateX(-100%);
+      visibility: hidden;
+      transition: transform 0.3s ease-in-out, visibility 0s linear 0.3s;
+      z-index: 1200;
+      display: flex; flex-direction: column;
+      padding: calc(25px + var(--safe-top)) max(20px, env(safe-area-inset-left, 0px)) calc(25px + var(--safe-bottom));
+      border-right: 2px solid var(--border-color);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+    }
+    .sidebar.open {
+      transform: translateX(0);
+      visibility: visible;
+      transition: transform 0.3s ease-in-out, visibility 0s;
+    }
 
-    header { text-align: center; margin-bottom: 30px; }
-    header h1 { font-size: 1.8rem; color: var(--accent-gold); margin-bottom: 5px; }
-    header p { color: var(--text-muted); font-size: 0.95rem; }
+    .sidebar-head {
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;
+      border-bottom: 2px solid var(--border-color); padding-bottom: 15px;
+    }
+    .sidebar-head h3 { font-size: 1.1rem; font-weight: 700; color: var(--text-dark); }
+    .close-btn {
+      background: none; border: none; font-size: 1.5rem; line-height: 1;
+      cursor: pointer; color: var(--text-dark);
+      padding: 8px; min-width: 44px; min-height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      touch-action: manipulation; border-radius: 8px;
+    }
 
+    .nav-links { display: flex; flex-direction: column; gap: 8px; }
+    .nav-links a {
+      text-decoration: none; color: var(--text-dark); font-weight: 600; font-size: 0.95rem;
+      padding: 12px 15px; border-radius: 8px; border: 1px solid transparent;
+      display: block; min-height: 44px;
+      touch-action: manipulation;
+    }
+    .nav-links a:active, .nav-links a.active {
+      background-color: var(--bg-main); border-color: var(--border-color); color: var(--accent-deep);
+    }
+
+    .overlay {
+      position: fixed; inset: 0;
+      background: rgba(26, 24, 23, 0.4);
+      -webkit-backdrop-filter: blur(3px);
+      backdrop-filter: blur(3px);
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+      z-index: 1100;
+      touch-action: manipulation;
+    }
+    .overlay.active { opacity: 1; visibility: visible; transition: opacity 0.3s ease, visibility 0s; }
+
+    /* SECTIONS & CARDS */
     .section { display: none; }
     .section.active { display: block; }
 
-    .card { background-color: var(--card-bg); border-radius: 12px; padding: 20px; margin-bottom: 20px; border: 1px solid #2a2a2a; }
-    .card h2 { font-size: 1.2rem; color: var(--accent-gold); margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 8px; }
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 16px; padding: 22px; margin-bottom: 20px;
+      border: 2px solid var(--border-color);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    }
+    .card h2 {
+      font-size: 1.25rem; font-weight: 700; color: var(--text-dark);
+      margin-bottom: 12px; border-bottom: 1.5px solid var(--border-color); padding-bottom: 8px;
+    }
+    .card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
 
-    /* PALETTE SWATCHES */
-    .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; }
-    .swatch { border-radius: 8px; padding: 15px 10px; text-align: center; font-size: 0.8rem; font-weight: bold; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.8); }
+    /* HOME HERO & GRID */
+    .hero { text-align: center; padding: 26px 15px; }
+    .hero h1 {
+      font-size: 2.2rem; font-weight: 800; margin-bottom: 10px; color: var(--text-dark);
+      line-height: 1.15; letter-spacing: -0.5px;
+    }
+    .title-divider {
+      width: 54px; height: 3px; background: var(--accent); border-radius: 2px;
+      margin: 12px auto 16px;
+    }
+    .hero-subtitle {
+      font-size: 0.95rem; color: var(--text-muted); line-height: 1.5;
+      max-width: 460px; margin: 0 auto;
+    }
 
-    /* DOS AND DONTS */
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-    @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } }
-    .dos { border-left: 4px solid var(--success); }
-    .donts { border-left: 4px solid var(--danger); }
-    ul { list-style-type: none; }
-    li { margin-bottom: 10px; font-size: 0.9rem; line-height: 1.4; }
+    .combo-banner {
+      display: flex; height: 60px; border-radius: 10px; overflow: hidden;
+      margin: 15px 0; border: 1.5px solid var(--border-color);
+    }
+    .combo-color { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; color: #FFF; text-shadow: 0 1px 2px rgba(0,0,0,0.4); }
 
-    /* OUTFIT GENERATOR */
-    .btn-group { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; }
-    .btn { background: #333; color: #fff; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-weight: 600; flex: 1; text-align: center; }
-    .btn.active, .btn:hover { background: var(--accent-gold); color: #000; }
+    .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+    .feature-card {
+      background: var(--bg-main); border: 1.5px solid var(--border-color);
+      border-radius: 10px; padding: 14px; text-align: left;
+      font: inherit; color: var(--text-dark); display: block; width: 100%;
+      cursor: pointer; touch-action: manipulation;
+      transition: transform 0.15s ease;
+    }
+    .feature-card:active { transform: scale(0.97); }
+    .feature-card h4 { font-size: 0.95rem; margin-bottom: 4px; }
+    .feature-card p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.3; }
 
-    /* ACCESSORI GRID */
-    .acc-item { margin-bottom: 15px; }
-    .acc-item h3 { font-size: 1rem; color: #fff; margin-bottom: 5px; }
-    .acc-item p { font-size: 0.85rem; color: var(--text-muted); }
+    /* FORM & BUTTONS */
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); margin-bottom: 5px; text-transform: uppercase; }
+    .form-control {
+      width: 100%; padding: 12px; border-radius: 8px;
+      border: 1.5px solid var(--border-color); background: #FFF;
+      font-size: 1rem; color: var(--text-dark); outline: none;
+      font-family: inherit; min-height: 46px;
+      -webkit-appearance: none; appearance: none;
+    }
+    .form-control:focus { border-color: var(--accent); }
+    .btn-action {
+      width: 100%; background: var(--text-dark); color: #FFF; border: none;
+      padding: 14px; border-radius: 8px; font-weight: 600; font-size: 0.95rem;
+      font-family: inherit; cursor: pointer; margin-top: 5px;
+      min-height: 48px; touch-action: manipulation;
+    }
+    .btn-action:active { opacity: 0.85; }
 
-    /* CHECKLIST */
-    .chk-item { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 0.9rem; }
-    .chk-item input { accent-color: var(--accent-gold); width: 18px; height: 18px; }
+    /* COLOR SWATCHES */
+    .color-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    /* Etichette in testo grande (>= 18.66px bold) per garantire contrasto >= 3:1 anche su Terracotta */
+    .swatch { border-radius: 8px; padding: 18px 10px; text-align: center; font-size: 1.2rem; font-weight: 700; color: #FFF; text-shadow: 0 1px 2px rgba(0,0,0,0.3); border: 1px solid rgba(0,0,0,0.1); }
 
-    .link-btn { display: inline-block; background: var(--accent-moka); color: #fff; text-decoration: none; padding: 8px 12px; border-radius: 6px; font-size: 0.85rem; margin-top: 10px; }
+    /* RULES & LISTS */
+    .rule-box { padding: 12px; border-radius: 8px; font-size: 0.88rem; line-height: 1.45; margin-bottom: 10px; }
+    .rule-box.do { background: #E8F5E9; color: var(--success); border-left: 4px solid var(--success); }
+    .rule-box.dont { background: #FFEBEE; color: var(--danger); border-left: 4px solid var(--danger); }
+
+    ul.clean-list { list-style: none; }
+    ul.clean-list li { padding: 8px 0; border-bottom: 1px solid var(--border-color); font-size: 0.88rem; color: var(--text-muted); line-height: 1.4; }
+    ul.clean-list li:last-child { border-bottom: none; }
+    ul.clean-list strong { color: var(--text-dark); }
+
+    /* ── Layout desktop / tablet ─────────────────────── */
+    @media (min-width: 700px) {
+      .container { max-width: 880px; padding: 0 32px; }
+      .color-grid { grid-template-columns: repeat(4, 1fr); gap: 14px; }
+      .swatch { padding: 24px 10px; }
+      .feature-grid { gap: 14px; }
+      .feature-card { padding: 20px; }
+      .card { padding: 28px; }
+      .home-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+      .home-cards .card { margin-bottom: 0; }
+      .hero-span { grid-column: 1 / -1; }
+      .combo-banner { height: 72px; }
+      .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: center; text-align: left; }
+      .hero-grid .hero-copy { text-align: left; }
+      .hero-grid .title-divider { margin-left: 0; }
+      .hero-grid .hero-media { margin: 0; }
+      .hero-grid .hero-media img { aspect-ratio: 4 / 5; }
+      .capsule-layout { display: grid; grid-template-columns: minmax(200px, 260px) 1fr; gap: 22px; align-items: start; }
+      .capsule-layout .editorial-media { margin-bottom: 0; }
+      .accessori-layout { display: grid; grid-template-columns: minmax(200px, 260px) 1fr; gap: 22px; align-items: start; }
+      .accessori-layout .editorial-media { margin-bottom: 0; }
+    }
+    @media (min-width: 1024px) {
+      .container { max-width: 1080px; padding: 0 40px; }
+      .card p { font-size: 0.95rem; }
+      .hero h1 { font-size: 2.6rem; }
+    }
+    @media (min-width: 1224px) {
+      /* 8 colonne per la palette solo quando lo spazio reale (al netto della sidebar) lo consente */
+      .color-grid { grid-template-columns: repeat(8, 1fr); }
+    }
+    @media (min-width: 1440px) {
+      .container { max-width: 1180px; }
+    }
+
+    /* ── Desktop: sidebar fissa a sinistra ──────────── */
+    @media (min-width: 900px) {
+      body { padding-left: 280px; }
+      .menu-trigger { display: none; }
+      .top-bar { padding-left: max(32px, env(safe-area-inset-left, 0px)); }
+      .sidebar {
+        transform: none; visibility: visible; box-shadow: none; width: 280px;
+        top: calc(var(--topbar-h) + var(--safe-top));
+        height: calc(100dvh - var(--topbar-h) - var(--safe-top));
+        z-index: 900;
+      }
+      .sidebar .close-btn { display: none; }
+      .sidebar-head { margin-bottom: 20px; }
+      .overlay { display: none !important; }
+    }
+
+    /* RISPETTO PER CHI PREFERISCE MENO ANIMAZIONI */
+    @media (prefers-reduced-motion: reduce) {
+      .sidebar, .overlay, .feature-card, .shop-link { transition: none; }
+      .bg-blob { animation: none !important; }
+      html { scroll-behavior: auto; }
+    }
   </style>
 </head>
 <body>
 
-  <!-- NAVIGATION BAR -->
-  <nav>
-    <a href="#" onclick="showTab('palette')" id="nav-palette" class="active">Palette</a>
-    <a href="#" onclick="showTab('rules')" id="nav-rules">Regole & Fit</a>
-    <a href="#" onclick="showTab('accessori')" id="nav-accessori">Accessori</a>
-    <a href="#" onclick="showTab('outfit')" id="nav-outfit">Outfit</a>
-    <a href="#" onclick="showTab('capsule')" id="nav-capsule">Capsule</a>
-  </nav>
+  <!-- SFONDO DINAMICO -->
+  <div class="bg-anim" aria-hidden="true">
+    <div class="bg-blob bg-blob-1"></div>
+    <div class="bg-blob bg-blob-2"></div>
+    <div class="bg-blob bg-blob-3"></div>
+  </div>
+  <div class="bg-grain" aria-hidden="true"></div>
 
-  <div class="container">
-    <header>
-      <h1>Personal Style Hub</h1>
-      <p>Profilo: Autunno Profondo | Fisico Atletico (1.70m x 75kg)</p>
-    </header>
+  <!-- TOP BAR -->
+  <header class="top-bar" id="topbar">
+    <button class="menu-trigger" id="openBtn" aria-label="Apri menu" aria-controls="sidebar" aria-expanded="false" data-i18n-aria="aria.openMenu">☰</button>
+    <div class="brand-container">
+      <img class="brand-logo" src="icons/logo.svg" alt="" width="34" height="34">
+      <div class="brand-title">Armocromatic</div>
+    </div>
+    <div class="lang-switch" role="group" aria-label="Lingua / Language">
+      <button class="lang-btn active" id="lang-it" type="button" lang="it">IT</button>
+      <button class="lang-btn" id="lang-en" type="button" lang="en">EN</button>
+    </div>
+  </header>
 
-    <!-- SECTION 1: PALETTE -->
-    <div id="palette" class="section active">
+  <!-- SIDEBAR HAMBURGER MENU (DA SINISTRA) -->
+  <div class="sidebar" id="sidebar" role="dialog" aria-modal="true" aria-label="Menu principale" aria-hidden="true" data-i18n-aria="aria.menuLabel">
+    <div class="sidebar-head">
+      <h3 data-i18n="nav.menu">Menu</h3>
+      <button class="close-btn" id="closeBtn" aria-label="Chiudi menu" data-i18n-aria="aria.closeMenu">✕</button>
+    </div>
+    <nav class="nav-links" aria-label="Sezioni del sito" data-i18n-aria="aria.sections">
+      <a href="#home" data-section="home" class="active" data-i18n="nav.home">Home</a>
+      <a href="#fit" data-section="fit" data-i18n="nav.fit">Proporzioni Corporee</a>
+      <a href="#grooming" data-section="grooming" data-i18n="nav.grooming">Grooming & Forme Viso</a>
+      <a href="#palette" data-section="palette" data-i18n="nav.palette">Palette & Stagioni</a>
+      <a href="#rules" data-section="rules" data-i18n="nav.rules">Regole & Abbinamenti</a>
+      <a href="#accessori" data-section="accessori" data-i18n="nav.accessori">Accessori</a>
+    </nav>
+  </div>
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
+
+  <main class="container" id="main-content">
+
+    <!-- HOME SECTION -->
+    <div id="home" class="section active">
+      <div class="card hero">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <h1>Personal Style Hub</h1>
+            <div class="title-divider" aria-hidden="true"></div>
+            <p class="hero-subtitle" data-i18n="home.subtitle">Guida d'immagine personale per l'equilibrio cromatico, le proporzioni fisiche e il grooming.</p>
+          </div>
+          <figure class="editorial-media hero-media">
+            <img src="img/hero-outfit.webp" alt="" width="800" height="1200" decoding="async" data-i18n-alt="img.hero">
+          </figure>
+        </div>
+      </div>
+
+      <div class="home-cards">
+      <div class="card hero-span">
+        <h2 data-i18n="profile.title">Il Tuo Profilo</h2>
+        <div class="form-group">
+          <label for="home-season-select" data-i18n="profile.seasonLabel">Seleziona la tua stagione armocromatica</label>
+          <select id="home-season-select" class="form-control">
+            <option value="autumn" data-i18n="season.autumn">Autunno</option>
+            <option value="winter" data-i18n="season.winter">Inverno</option>
+            <option value="spring" data-i18n="season.spring">Primavera</option>
+            <option value="summer" data-i18n="season.summer">Estate</option>
+          </select>
+        </div>
+        <div class="profile-chips">
+          <span class="chip"><b data-i18n="profile.chipSeason">Stagione</b>: <span id="chip-season">Autunno</span></span>
+          <span class="chip"><b data-i18n="profile.chipFace">Forma del viso</b>: <span id="chip-face">—</span></span>
+        </div>
+      </div>
+
       <div class="card">
-        <h2>Palette Colori Guida</h2>
-        <div class="color-grid">
-          <div class="swatch" style="background-color: #3b1e1a;">Moka</div>
-          <div class="swatch" style="background-color: #556b2f;">Oliva</div>
-          <div class="swatch" style="background-color: #c86446;">Terracotta</div>
-          <div class="swatch" style="background-color: #1b4d3e;">Ottanio</div>
-          <div class="swatch" style="background-color: #8b0000;">Bordeaux</div>
-          <div class="swatch" style="background-color: #c19a6b;">Cammello</div>
-          <div class="swatch" style="background-color: #fff8dc; color:#000; text-shadow:none;">Panna/Avorio</div>
-          <div class="swatch" style="background-color: #4f423a;">Fango</div>
+        <h2 data-i18n="home.tipsTitle">Consigli Chiave di Stile</h2>
+        <div class="rule-box do" id="tip-season-box">
+          <strong>Colore vicino al viso:</strong> Prediligi i toni guida della tua stagione.
         </div>
+        <div class="rule-box do" data-i18n="home.tip2">
+          <strong>Slanciare la figura:</strong> Infila la maglia nei pantaloni (tuck-in) e usa pantaloni a vita media/alta per allungare le gambe.
+        </div>
+        <div class="rule-box do" data-i18n="home.tip3">
+          <strong>Grooming Viso:</strong> Mantieni i lati dei capelli corti o sfumati (Taper Fade) per allungare il profilo e ridurre l'ampiezza delle guance.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 data-i18n="home.comboTitle">Combo Cromatica della Settimana</h2>
+        <p id="combo-desc" data-i18n="home.comboDesc">L'abbinamento chiave per la tua stagione nello Smart Streetwear:</p>
+        <div class="combo-banner" id="combo-banner-box"></div>
+        <p style="font-size:0.82rem; text-align:center; color:var(--text-muted);" id="combo-text-sub"></p>
+      </div>
+
+      <div class="card hero-span">
+        <h2 data-i18n="home.capsuleTitle">Guardaroba Capsule</h2>
+        <div class="capsule-layout">
+          <figure class="editorial-media">
+            <img src="img/fabrics.webp" alt="" width="800" height="1200" loading="lazy" decoding="async" data-i18n-alt="img.fabrics">
+          </figure>
+          <div>
+            <p data-i18n="home.capsuleIntro">Una base di capi versatili da combinare, in toni coerenti con l'Autunno Profondo:</p>
+            <ul class="capsule-list">
+              <li data-i18n="home.capsule1"><strong>Sopracamicia in camoscio o cotone spesso</strong> — Moka, Oliva, Terracotta</li>
+              <li data-i18n="home.capsule2"><strong>T-shirt pesanti a manica lunga</strong> — Panna, Oliva, Bordeaux</li>
+              <li data-i18n="home.capsule3"><strong>Chino a vita media/alta con pinces</strong> — Beige caldo, Grigio carbone</li>
+              <li data-i18n="home.capsule4"><strong>Maglione girocollo in lana</strong> — Senape, Verde foresta, Moka</li>
+              <li data-i18n="home.capsule5"><strong>Trench o giacca campo</strong> — Cammello o Oliva</li>
+              <li data-i18n="home.capsule6"><strong>Scarpe in cuoio marrone</strong> — Derby o Chukka</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 data-i18n="home.guidesTitle">Guide da Esplorare</h2>
+        <a class="shop-link" href="#grooming" data-section="grooming">
+          <img src="img/grooming.webp" alt="" width="1200" height="800" loading="lazy" decoding="async" data-i18n-alt="img.grooming">
+          <div>
+            <h4 data-i18n="home.guide1Title">Capelli e barba su misura</h4>
+            <p data-i18n="home.guide1Text">Le linee che valorizzano il tuo viso: volume laterale, barba curata, texture definita.</p>
+            <span class="shop-arrow" data-i18n="home.guide1Cta">Vai al selettore Grooming&nbsp;→</span>
+          </div>
+        </a>
+        <a class="shop-link" href="#accessori" data-section="accessori">
+          <img src="img/accessories.webp" alt="" width="800" height="1200" loading="lazy" decoding="async" data-i18n-alt="img.accessories">
+          <div>
+            <h4 data-i18n="home.guide2Title">Accessori che completano tutto</h4>
+            <p data-i18n="home.guide2Text">Orologio, occhiali tartarugati, cappellino oliva: i dettagli caldi legano l'outfit.</p>
+            <span class="shop-arrow" data-i18n="home.guide2Cta">Vedi la guida Accessori&nbsp;→</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="card">
+        <h2 data-i18n="home.sectionsTitle">Sezioni Principali</h2>
+        <div class="feature-grid">
+          <button class="feature-card" data-section="fit">
+            <h4 data-i18n="home.f1">Proporzioni</h4>
+            <p data-i18n="home.f1d">Calcolo volumi per fisico compatto.</p>
+          </button>
+          <button class="feature-card" data-section="grooming">
+            <h4 data-i18n="home.f2">Grooming</h4>
+            <p data-i18n="home.f2d">Guida forme viso, barba e sfumature.</p>
+          </button>
+          <button class="feature-card" data-section="palette">
+            <h4 data-i18n="home.f3">Palette</h4>
+            <p data-i18n="home.f3d">Le 4 stagioni armocromiche.</p>
+          </button>
+          <button class="feature-card" data-section="accessori">
+            <h4 data-i18n="home.f4">Accessori</h4>
+            <p data-i18n="home.f4d">Occhiali, cappellini e orologi.</p>
+          </button>
+        </div>
+      </div>
       </div>
     </div>
 
-    <!-- SECTION 2: REGOLE & FIT -->
+    <!-- FIT SECTION -->
+    <div id="fit" class="section">
+      <div class="card">
+        <h2 data-i18n="fit.title">Calcolatore Proporzioni Fisiche</h2>
+        <div class="form-group">
+          <label for="height" data-i18n="fit.height">Altezza (cm)</label>
+          <input type="number" id="height" class="form-control" value="170" inputmode="numeric">
+        </div>
+        <div class="form-group">
+          <label for="weight" data-i18n="fit.weight">Peso (kg)</label>
+          <input type="number" id="weight" class="form-control" value="75" inputmode="decimal">
+        </div>
+        <div class="form-group">
+          <label for="body-type" data-i18n="fit.bodyType">Corporatura</label>
+          <select id="body-type" class="form-control">
+            <option value="athletic" selected data-i18n="fit.typeAthletic">Atletica / Compatta</option>
+            <option value="slim" data-i18n="fit.typeSlim">Sottile / Slanciata</option>
+            <option value="robust" data-i18n="fit.typeRobust">Robusta / Imponente</option>
+          </select>
+        </div>
+        <button class="btn-action" id="calcBtn" data-i18n="fit.cta">Genera Analisi Fit</button>
+      </div>
+
+      <div id="fit-results" class="card" style="display:none;">
+        <h2 data-i18n="fit.results">Raccomandazioni di Vestibilità</h2>
+        <div id="fit-content"></div>
+      </div>
+    </div>
+
+    <!-- GROOMING SECTION: SELETTORE FORME DEL VISO -->
+    <div id="grooming" class="section">
+      <figure class="editorial-media wide">
+        <img src="img/grooming.webp" alt="" width="1200" height="800" decoding="async" data-i18n-alt="img.grooming">
+      </figure>
+      <div class="card">
+        <h2 data-i18n="grooming.title">Analisi Viso & Grooming</h2>
+        <div class="form-group">
+          <label for="face-shape-select" data-i18n="grooming.label">Seleziona Forma del Viso</label>
+          <select id="face-shape-select" class="form-control">
+            <option value="square-full" selected data-i18n="grooming.square">Mascella Marcata / Guance Piene</option>
+            <option value="oval" data-i18n="grooming.oval">Viso Ovale</option>
+            <option value="round" data-i18n="grooming.round">Viso Rotondo</option>
+            <option value="elongated" data-i18n="grooming.elongated">Viso Allungato / Rettangolare</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="card" id="grooming-advice-card" aria-live="polite">
+        <!-- Contenuto dinamico inserito via JS -->
+      </div>
+    </div>
+
+    <!-- PALETTE SECTION -->
+    <div id="palette" class="section">
+      <div class="card">
+        <h2 data-i18n="palette.title">Palette Cromatica Universale</h2>
+        <div class="form-group">
+          <label for="palette-season-select" data-i18n="palette.label">Seleziona Stagione Armocromatica</label>
+          <select id="palette-season-select" class="form-control">
+            <option value="autumn" data-i18n="season.autumn">Autunno</option>
+            <option value="winter" data-i18n="season.winter">Inverno</option>
+            <option value="spring" data-i18n="season.spring">Primavera</option>
+            <option value="summer" data-i18n="season.summer">Estate</option>
+          </select>
+        </div>
+        <p id="palette-intro" style="margin-bottom:12px;"></p>
+        <div class="color-grid" id="palette-grid"></div>
+      </div>
+
+      <div class="card">
+        <h2 data-i18n="palette.rulesTitle">Regole Colore per la Tua Stagione</h2>
+        <div id="season-rules"></div>
+      </div>
+    </div>
+
+    <!-- RULES SECTION -->
     <div id="rules" class="section">
-      <div class="grid-2">
-        <div class="card dos">
-          <h2 style="color:var(--success)">🟢 Promossi (Sì)</h2>
-          <ul>
-            <li><strong>Sopra:</strong> Moka, Terracotta, Ottanio, Panna caldo vicini al viso.</li>
-            <li><strong>Pantaloni:</strong> Vita media/alta con pinces. Definiscono il punto vita e allungano la gamba.</li>
-            <li><strong>Vestibilità:</strong> Regular / Tapered. Bilancia i volumi (es. sopra morbido + sotto strutturato).</li>
-            <li><strong>Giacche:</strong> Spalle strutturate e lunghezza media (metà bacino).</li>
-          </ul>
+      <div class="card">
+        <h2 data-i18n="rules.title">Regole Colore & Capi</h2>
+        <div class="rule-box do" id="rules-season-do">
+          <strong>Promossi vicino al viso:</strong> Moka, Terracotta, Ottanio, Verde Foresta, Panna/Avorio.
         </div>
-        <div class="card donts">
-          <h2 style="color:var(--danger)">🔴 Bocciati (No)</h2>
-          <ul>
-            <li><strong>Colori vicini al viso:</strong> Bianco ottico, grigio ghiaccio, viola freddo saturo, blu elettrico.</li>
-            <li><strong>Fit ultra-baggy:</strong> Evita volumi abbondanti contemporaneamente sopra e sotto.</li>
-            <li><strong>Pantaloni troppo lunghi:</strong> Evita troppi doppi fondi sulla scarpa che accorciano la statura.</li>
-          </ul>
+        <div class="rule-box dont" id="rules-season-dont">
+          <strong>Da evitare vicino al viso:</strong> Bianco ottico puro, Grigio ghiaccio, Viola freddo, Blu elettrico.
+        </div>
+        <div class="rule-box do" data-i18n="rules.do2">
+          <strong>Capi chiave Smart Streetwear:</strong> Sopracamicie in camoscio/cotone spesso, Chino a vita media/alta con pinces, Trench cammello o oliva.
         </div>
       </div>
     </div>
 
-    <!-- SECTION 3: ACCESSORI -->
+    <!-- ACCESSORI SECTION -->
     <div id="accessori" class="section">
       <div class="card">
-        <h2>Guida Accessori & Dettagli</h2>
-        <div class="acc-item">
-          <h3>⌚ Orologi & Cinturini</h3>
-          <p>Cassa in bronzo, ottone spazzolato o PVD nero opaco. Cinturini in pelle o camoscio moka, cuoio o verde militare.</p>
-        </div>
-        <div class="acc-item">
-          <h3>🕶️ Occhiali da Sole</h3>
-          <p>Montature tartarugate ambrate/scure, acetato marrone trasparente o verde oliva. Lenti sfumate marrone/verde G-15.</p>
-        </div>
-        <div class="acc-item">
-          <h3>🧢 Cappelli & Beanie</h3>
-          <p>Cappellini da baseball e berretti in verde oliva/foresta, ruggine, fango, arancio bruciato o marrone scuro.</p>
-        </div>
-        <div class="acc-item">
-          <h3>📿 Gioielli & Metalli</h3>
-          <p>Prediligi oro giallo satinato, bronzo o argento invecchiato brunito. Evita l'acciaio lucidissimo a specchio.</p>
-        </div>
-        <div class="acc-item">
-          <h3>💼 Pelletteria & Cinture</h3>
-          <p>Cinture e borse in camoscio o pelle morbida testa di moro/cognac. Abbina sempre la tonalità di pelle a quella delle scarpe.</p>
+        <h2 data-i18n="accessori.title">Accessori & Dettagli</h2>
+        <p style="margin-bottom:12px;" data-i18n="accessori.note">Esempi in toni caldi autunnali: adatta materiali e colori alla tua stagione.</p>
+        <div class="accessori-layout">
+          <figure class="editorial-media">
+            <img src="img/accessories.webp" alt="" width="800" height="1200" loading="lazy" decoding="async" data-i18n-alt="img.accessories">
+          </figure>
+          <ul class="clean-list">
+            <li data-i18n="accessori.watches"><strong>Orologi:</strong> Cassa in bronzo, ottone spazzolato o nero opaco con cinturino in pelle moka o cuoio.</li>
+            <li data-i18n="accessori.glasses"><strong>Occhiali:</strong> Montature tartarugate ambrate o in acetato verde oliva/marrone.</li>
+            <li data-i18n="accessori.hats"><strong>Cappelli:</strong> Dad hat classici in verde oliva, ruggine o moka.</li>
+            <li data-i18n="accessori.metals"><strong>Metalli:</strong> Oro giallo satinato, bronzo o argento invecchiato brunito.</li>
+          </ul>
         </div>
       </div>
     </div>
 
-    <!-- SECTION 4: OUTFIT GENERATOR -->
-    <div id="outfit" class="section">
-      <div class="card">
-        <h2>Generatore Outfit per Occasione</h2>
-        <div class="btn-group">
-          <button class="btn active" onclick="genOutfit('work')">Ufficio / Smart</button>
-          <button class="btn" onclick="genOutfit('drink')">Aperitivo / Uscita</button>
-          <button class="btn" onclick="genOutfit('casual')">Weekend / Casual</button>
-          <button class="btn" onclick="genOutfit('gym')">Gym & Sport</button>
-        </div>
-        <div id="outfit-result" style="background:#282828; padding:15px; border-radius:8px; line-height:1.5;">
-          <!-- Caricato dinamicamente tramite JavaScript -->
-        </div>
-      </div>
-    </div>
+  </main>
 
-    <!-- SECTION 5: CAPSULE & PINTEREST -->
-    <div id="capsule" class="section">
-      <div class="card">
-        <h2>Checklist Guardaroba Capsule</h2>
-        <div class="chk-item"><input type="checkbox"> Sopracamicia Camoscio/Cotone Moka</div>
-        <div class="chk-item"><input type="checkbox"> Trench Corto Cammello / Tobacco</div>
-        <div class="chk-item"><input type="checkbox"> Chino Sartoriale Oliva (Vita Alta)</div>
-        <div class="chk-item"><input type="checkbox"> Pantalone Fango / Sabbia</div>
-        <div class="chk-item"><input type="checkbox"> T-shirt & Polo Panna / Avorio</div>
-        <div class="chk-item"><input type="checkbox"> Maglione / Felpa Ruggine o Terracotta</div>
-        <div class="chk-item"><input type="checkbox"> Stivaletto / Scarpa Cuoio/Miele</div>
-        <div class="chk-item"><input type="checkbox"> Sneakers Pelle/Camoscio Panna</div>
-        <br>
-        <h2>Ispirazioni Visuali</h2>
-        <p style="font-size:0.85rem; color:var(--text-muted);">Esplora bacheche stile Pinterest dedicate all'Autunno Profondo Uomo:</p>
-        <a href="https://www.pinterest.com/search/pins/?q=dark%20autumn%20men%20style" target="_blank" class="link-btn">Esplora su Pinterest ↗</a>
-      </div>
-    </div>
-
-  </div>
+  <footer class="container" style="text-align:center; padding: 0 20px 28px;">
+    <p style="font-size:0.75rem; color:var(--text-muted);" data-i18n="footer.note">Le immagini sono illustrative e generate con AI · Armocromatic</p>
+  </footer>
 
   <script>
-    function showTab(tabId) {
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-      document.getElementById(tabId).classList.add('active');
-      document.getElementById('nav-' + tabId).classList.add('active');
-    }
+    (function () {
+      'use strict';
 
-    const outfits = {
-      work: "<strong>Outfit Ufficio:</strong> Pantalone Chino fango + T-shirt panna/avorio infilata + Sopracamicia/Blazer marrone moka + Sneakers in pelle panna o mocassino cuoio.",
-      drink: "<strong>Outfit Aperitivo:</strong> Jeans denim scuro (lavaggio caldo) + Camicia/Polo ottanio o verde bosco + Giacca in pelle/camoscio testa di moro + Stivaletto cuoio.",
-      casual: "<strong>Outfit Weekend:</strong> Pantalone verde oliva + Felpa/Maglioncino terracotta o ruggine + Cappotto corto cammello aperto + Timberland o sneaker panna.",
-      gym: "<strong>Outfit Gym:</strong> T-shirt o canotta grigio antracite / verde foresta + Shorts nero caldo o grigio scuro + Sneakers sportive con dettagli caldi."
-    };
+      var sidebar = document.getElementById('sidebar');
+      var overlay = document.getElementById('overlay');
+      var openBtn = document.getElementById('openBtn');
+      var closeBtn = document.getElementById('closeBtn');
+      var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-links a'));
+      var featureCards = Array.prototype.slice.call(document.querySelectorAll('.feature-card'));
+      var topbar = document.getElementById('topbar');
+      var mainContent = document.getElementById('main-content');
+      var lastFocused = null;
+      var savedScrollY = 0;
+      var menuIsOpen = false;
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var SECTIONS = ['home', 'fit', 'grooming', 'palette', 'rules', 'accessori'];
 
-    function genOutfit(type) {
-      document.querySelectorAll('.btn-group .btn').forEach(b => b.classList.remove('active'));
-      event.target.classList.add('active');
-      document.getElementById('outfit-result').innerHTML = outfits[type];
-    }
+      /* ---------- LINGUA (i18n IT/EN) ---------- */
 
-    // Inizializza primo outfit
-    genOutfit('work');
+      var LANG = 'it';
+      try { LANG = localStorage.getItem('armocromatic_lang') || 'it'; } catch (err) { /* storage non disponibile */ }
+      if (LANG !== 'it' && LANG !== 'en') LANG = 'it';
+
+      var I18N = {
+        it: {
+          'aria.openMenu': 'Apri menu', 'aria.closeMenu': 'Chiudi menu',
+          'aria.sections': 'Sezioni del sito', 'aria.menuLabel': 'Menu principale',
+          'nav.menu': 'Menu', 'nav.home': 'Home', 'nav.fit': 'Proporzioni Corporee',
+          'nav.grooming': 'Grooming & Forme Viso', 'nav.palette': 'Palette & Stagioni',
+          'nav.rules': 'Regole & Abbinamenti', 'nav.accessori': 'Accessori',
+          'home.subtitle': "Guida d'immagine personale per l'equilibrio cromatico, le proporzioni fisiche e il grooming.",
+          'img.hero': 'Flat-lay editoriale: sopracamicia moka, t-shirt panna e chino oliva su fondo lino chiaro',
+          'img.fabrics': 'Dettaglio di tessuti piegati: lana moka, cotone terracotta, twill oliva, cashmere cammello e lino panna',
+          'img.grooming': 'Attrezzi da barberia su legno scuro: forbici, pettine e olio per barba alla luce calda',
+          'img.accessories': 'Flat-lay di accessori: orologio con cinturino marrone, occhiali tartarugati, cappellino oliva e cintura',
+          'profile.title': 'Il Tuo Profilo', 'profile.seasonLabel': 'Seleziona la tua stagione armocromatica',
+          'profile.chipSeason': 'Stagione', 'profile.chipFace': 'Forma del viso',
+          'season.autumn': 'Autunno', 'season.winter': 'Inverno', 'season.spring': 'Primavera', 'season.summer': 'Estate',
+          'home.tipsTitle': 'Consigli Chiave di Stile',
+          'home.tip1Label': 'Colore vicino al viso:',
+          'home.tip1Body': 'Prediligi i toni guida della tua stagione:',
+          'rules.promoted': 'Promossi vicino al viso:',
+          'rules.avoided': 'Da evitare vicino al viso:',
+          'home.tip2': '<strong>Slanciare la figura:</strong> Infila la maglia nei pantaloni (tuck-in) e usa pantaloni a vita media/alta per allungare le gambe.',
+          'home.tip3': '<strong>Grooming Viso:</strong> Mantieni i lati dei capelli corti o sfumati (Taper Fade) per allungare il profilo e ridurre l\u2019ampiezza delle guance.',
+          'home.comboTitle': 'Combo Cromatica della Settimana',
+          'home.comboDesc': 'L\u2019abbinamento chiave per la tua stagione nello Smart Streetwear:',
+          'home.capsuleTitle': 'Guardaroba Capsule',
+          'home.capsuleIntro': 'Una base di capi versatili da combinare, in toni coerenti con l\u2019Autunno Profondo:',
+          'home.capsule1': '<strong>Sopracamicia in camoscio o cotone spesso</strong> — Moka, Oliva, Terracotta',
+          'home.capsule2': '<strong>T-shirt pesanti a manica lunga</strong> — Panna, Oliva, Bordeaux',
+          'home.capsule3': '<strong>Chino a vita media/alta con pinces</strong> — Beige caldo, Grigio carbone',
+          'home.capsule4': '<strong>Maglione girocollo in lana</strong> — Senape, Verde foresta, Moka',
+          'home.capsule5': '<strong>Trench o giacca campo</strong> — Cammello o Oliva',
+          'home.capsule6': '<strong>Scarpe in cuoio marrone</strong> — Derby o Chukka',
+          'home.guidesTitle': 'Guide da Esplorare',
+          'home.guide1Title': 'Capelli e barba su misura',
+          'home.guide1Text': 'Le linee che valorizzano il tuo viso: volume laterale, barba curata, texture definita.',
+          'home.guide1Cta': 'Vai al selettore Grooming&nbsp;→',
+          'home.guide2Title': 'Accessori che completano tutto',
+          'home.guide2Text': 'Orologio, occhiali tartarugati, cappellino oliva: i dettagli caldi legano l\u2019outfit.',
+          'home.guide2Cta': 'Vedi la guida Accessori&nbsp;→',
+          'home.sectionsTitle': 'Sezioni Principali',
+          'home.f1': 'Proporzioni', 'home.f1d': 'Calcolo volumi per fisico compatto.',
+          'home.f2': 'Grooming', 'home.f2d': 'Guida forme viso, barba e sfumature.',
+          'home.f3': 'Palette', 'home.f3d': 'Le 4 stagioni armocromiche.',
+          'home.f4': 'Accessori', 'home.f4d': 'Occhiali, cappellini e orologi.',
+          'fit.title': 'Calcolatore Proporzioni Fisiche', 'fit.height': 'Altezza (cm)', 'fit.weight': 'Peso (kg)',
+          'fit.bodyType': 'Corporatura', 'fit.typeAthletic': 'Atletica / Compatta', 'fit.typeSlim': 'Sottile / Slanciata',
+          'fit.typeRobust': 'Robusta / Imponente', 'fit.cta': 'Genera Analisi Fit', 'fit.results': 'Raccomandazioni di Vestibilità',
+          'grooming.title': 'Analisi Viso & Grooming', 'grooming.label': 'Seleziona Forma del Viso',
+          'grooming.square': 'Mascella Marcata / Guance Piene', 'grooming.oval': 'Viso Ovale',
+          'grooming.round': 'Viso Rotondo', 'grooming.elongated': 'Viso Allungato / Rettangolare',
+          'palette.title': 'Palette Cromatica Universale', 'palette.label': 'Seleziona Stagione Armocromatica',
+          'palette.rulesTitle': 'Regole Colore per la Tua Stagione',
+          'rules.title': 'Regole Colore & Capi',
+          'rules.do1': '<strong>Promossi vicino al viso:</strong> Moka, Terracotta, Ottanio, Verde Foresta, Panna/Avorio.',
+          'rules.dont1': '<strong>Da evitare vicino al viso:</strong> Bianco ottico puro, Grigio ghiaccio, Viola freddo, Blu elettrico.',
+          'rules.do2': '<strong>Capi chiave Smart Streetwear (esempio in toni autunnali):</strong> Sopracamicie in camoscio/cotone spesso, Chino a vita media/alta con pinces, Trench cammello o oliva.',
+          'accessori.note': 'Esempi in toni caldi autunnali: adatta materiali e colori alla tua stagione.',
+          'accessori.title': 'Accessori & Dettagli',
+          'accessori.watches': '<strong>Orologi:</strong> Cassa in bronzo, ottone spazzolato o nero opaco con cinturino in pelle moka o cuoio.',
+          'accessori.glasses': '<strong>Occhiali:</strong> Montature tartarugate ambrate o in acetato verde oliva/marrone.',
+          'accessori.hats': '<strong>Cappelli:</strong> Dad hat classici in verde oliva, ruggine o moka.',
+          'accessori.metals': '<strong>Metalli:</strong> Oro giallo satinato, bronzo o argento invecchiato brunito.',
+          'footer.note': 'Le immagini sono illustrative e generate con AI · Armocromatic'
+        },
+        en: {
+          'aria.openMenu': 'Open menu', 'aria.closeMenu': 'Close menu',
+          'aria.sections': 'Site sections', 'aria.menuLabel': 'Main menu',
+          'nav.menu': 'Menu', 'nav.home': 'Home', 'nav.fit': 'Body Proportions',
+          'nav.grooming': 'Grooming & Face Shapes', 'nav.palette': 'Palette & Seasons',
+          'nav.rules': 'Rules & Pairings', 'nav.accessori': 'Accessories',
+          'home.subtitle': 'Your personal image guide to color balance, body proportions and grooming.',
+          'img.hero': 'Editorial flat-lay: mocha overshirt, cream tee and olive chinos on a light linen background',
+          'img.fabrics': 'Close-up of folded fabrics: mocha wool, terracotta cotton, olive twill, camel cashmere and cream linen',
+          'img.grooming': 'Barbering tools on dark wood: scissors, comb and beard oil in warm light',
+          'img.accessories': 'Accessories flat-lay: brown-strap watch, tortoiseshell glasses, olive cap and belt',
+          'profile.title': 'Your Profile', 'profile.seasonLabel': 'Select your color season',
+          'profile.chipSeason': 'Season', 'profile.chipFace': 'Face shape',
+          'season.autumn': 'Autumn', 'season.winter': 'Winter', 'season.spring': 'Spring', 'season.summer': 'Summer',
+          'home.tipsTitle': 'Key Style Tips',
+          'home.tip1Label': 'Color near the face:',
+          'home.tip1Body': 'Favor your season\u2019s guide tones:',
+          'rules.promoted': 'Promoted near the face:',
+          'rules.avoided': 'Avoid near the face:',
+          'home.tip2': '<strong>Elongate your figure:</strong> Tuck your shirt in and choose mid/high-rise trousers to lengthen your legs.',
+          'home.tip3': '<strong>Face grooming:</strong> Keep the sides of your hair short or faded (Taper Fade) to lengthen your profile and slim full cheeks.',
+          'home.comboTitle': 'Combo of the Week',
+          'home.comboDesc': 'The key pairing for your season in smart streetwear:',
+          'home.capsuleTitle': 'Capsule Wardrobe',
+          'home.capsuleIntro': 'A base of versatile pieces to mix and match, in tones consistent with Deep Autumn:',
+          'home.capsule1': '<strong>Suede or heavy cotton overshirt</strong> — Mocha, Olive, Terracotta',
+          'home.capsule2': '<strong>Heavyweight long-sleeve tees</strong> — Cream, Olive, Bordeaux',
+          'home.capsule3': '<strong>Mid/high-rise pleated chinos</strong> — Warm beige, Charcoal',
+          'home.capsule4': '<strong>Wool crewneck sweater</strong> — Mustard, Forest green, Mocha',
+          'home.capsule5': '<strong>Trench or field jacket</strong> — Camel or Olive',
+          'home.capsule6': '<strong>Brown leather shoes</strong> — Derby or Chukka',
+          'home.guidesTitle': 'Guides to Explore',
+          'home.guide1Title': 'Hair and beard, tailored',
+          'home.guide1Text': 'The lines that flatter your face: side volume, well-kept beard, defined texture.',
+          'home.guide1Cta': 'Go to the Grooming selector&nbsp;→',
+          'home.guide2Title': 'Accessories that tie it all together',
+          'home.guide2Text': 'Watch, tortoiseshell glasses, olive cap: warm details that pull the outfit together.',
+          'home.guide2Cta': 'See the Accessories guide&nbsp;→',
+          'home.sectionsTitle': 'Main Sections',
+          'home.f1': 'Proportions', 'home.f1d': 'Volume calculation for a compact build.',
+          'home.f2': 'Grooming', 'home.f2d': 'Face shape, beard and fade guide.',
+          'home.f3': 'Palette', 'home.f3d': 'The 4 color seasons.',
+          'home.f4': 'Accessories', 'home.f4d': 'Glasses, hats and watches.',
+          'fit.title': 'Body Proportion Calculator', 'fit.height': 'Height (cm)', 'fit.weight': 'Weight (kg)',
+          'fit.bodyType': 'Body type', 'fit.typeAthletic': 'Athletic / Compact', 'fit.typeSlim': 'Slim',
+          'fit.typeRobust': 'Robust / Large', 'fit.cta': 'Generate Fit Analysis', 'fit.results': 'Fit Recommendations',
+          'grooming.title': 'Face Analysis & Grooming', 'grooming.label': 'Select Face Shape',
+          'grooming.square': 'Strong Jaw / Full Cheeks', 'grooming.oval': 'Oval Face',
+          'grooming.round': 'Round Face', 'grooming.elongated': 'Elongated / Rectangular Face',
+          'palette.title': 'Universal Color Palette', 'palette.label': 'Select Color Season',
+          'palette.rulesTitle': 'Color Rules for Your Season',
+          'rules.title': 'Color Rules & Garments',
+          'rules.do1': '<strong>Promoted near the face:</strong> Mocha, Terracotta, Teal, Forest Green, Cream/Ivory.',
+          'rules.dont1': '<strong>Avoid near the face:</strong> Pure optic white, Ice gray, Cold violet, Electric blue.',
+          'rules.do2': '<strong>Key smart streetwear pieces (autumn-toned example):</strong> Suede/heavy cotton overshirts, mid/high-rise pleated chinos, camel or olive trench.',
+          'accessori.note': 'Examples in warm autumn tones: adapt materials and colors to your season.',
+          'accessori.title': 'Accessories & Details',
+          'accessori.watches': '<strong>Watches:</strong> Bronze, brushed brass or matte black cases with mocha or leather straps.',
+          'accessori.glasses': '<strong>Glasses:</strong> Amber tortoiseshell or olive/brown acetate frames.',
+          'accessori.hats': '<strong>Hats:</strong> Classic dad hats in olive, rust or mocha.',
+          'accessori.metals': '<strong>Metals:</strong> Satin yellow gold, bronze or burnished aged silver.',
+          'footer.note': 'Images are illustrative and AI-generated · Armocromatic'
+        }
+      };
+
+      function t(key) { return (I18N[LANG] && I18N[LANG][key]) || I18N.it[key] || ''; }
+      function tr(obj) { return obj ? (obj[LANG] || obj.it) : ''; }
+
+      /* ---------- DATI STAGIONI (bilingue) ---------- */
+
+      var SEASONS = {
+        autumn: {
+          name: { it: 'Autunno', en: 'Autumn' },
+          intro: { it: 'Tonalità calde, intense e avvolgenti, da tenere vicine al viso.', en: 'Warm, deep and enveloping tones, to keep close to your face.' },
+          colors: [
+            { name: { it: 'Moka Scuro', en: 'Dark Mocha' }, hex: '#4A2C2A' },
+            { name: { it: 'Verde Oliva', en: 'Olive Green' }, hex: '#556B2F' },
+            { name: { it: 'Terracotta', en: 'Terracotta' }, hex: '#C86446' },
+            { name: { it: 'Ottanio', en: 'Teal' }, hex: '#1B4D3E' },
+            { name: { it: 'Bordeaux', en: 'Bordeaux' }, hex: '#8B0000' },
+            { name: { it: 'Cammello', en: 'Camel' }, hex: '#C19A6B', dark: true },
+            { name: { it: 'Panna / Avorio', en: 'Cream / Ivory' }, hex: '#FFF8DC', dark: true },
+            { name: { it: 'Fango', en: 'Warm Mud' }, hex: '#4F423A' }
+          ],
+          dos: { it: 'Moka, Terracotta, Ottanio, Verde Oliva e Panna.', en: 'Mocha, Terracotta, Teal, Olive Green and Cream.' },
+          donts: { it: 'Bianco ottico puro, Grigio ghiaccio, Viola freddo e Blu elettrico.', en: 'Pure optic white, ice gray, cold violet and electric blue.' },
+          combo: [
+            { name: { it: 'Moka', en: 'Mocha' }, hex: '#4A2C2A' },
+            { name: { it: 'Oliva', en: 'Olive' }, hex: '#556B2F' },
+            { name: { it: 'Panna', en: 'Cream' }, hex: '#FFF8DC', dark: true }
+          ],
+          comboText: { it: 'Sopracamicia Moka + Chino Oliva + T-shirt Panna infilata', en: 'Mocha overshirt + Olive chinos + tucked-in cream tee' }
+        },
+        winter: {
+          name: { it: 'Inverno', en: 'Winter' },
+          intro: { it: 'Tonalità fredde, intense e ad alto contrasto.', en: 'Cold, deep and high-contrast tones.' },
+          colors: [
+            { name: { it: 'Nero Assoluto', en: 'True Black' }, hex: '#111111' },
+            { name: { it: 'Bianco Ottico', en: 'Optic White' }, hex: '#FFFFFF', dark: true },
+            { name: { it: 'Blu Elettrico', en: 'Electric Blue' }, hex: '#0033AA' },
+            { name: { it: 'Rosso Ciliegia', en: 'Cherry Red' }, hex: '#C2185B' },
+            { name: { it: 'Verde Smeraldo', en: 'Emerald Green' }, hex: '#00695C' },
+            { name: { it: 'Antracite', en: 'Anthracite' }, hex: '#37474F' },
+            { name: { it: 'Grigio Ghiaccio', en: 'Ice Gray' }, hex: '#CFD8DC', dark: true },
+            { name: { it: 'Fucsia Freddo', en: 'Cold Fuchsia' }, hex: '#AD1457' }
+          ],
+          dos: { it: 'Nero, Bianco puro, Blu elettrico, Antracite e Rosso freddo.', en: 'Black, pure white, electric blue, anthracite and cool red.' },
+          donts: { it: 'Arancione, Cammello caldo, Senape e Beige dorato.', en: 'Orange, warm camel, mustard and golden beige.' },
+          combo: [
+            { name: { it: 'Nero', en: 'Black' }, hex: '#111111' },
+            { name: { it: 'Blu', en: 'Blue' }, hex: '#0033AA' },
+            { name: { it: 'Bianco', en: 'White' }, hex: '#FFFFFF', dark: true }
+          ],
+          comboText: { it: 'Giacca Nero + Chino Blu + T-shirt Bianca pulita', en: 'Black jacket + Blue chinos + clean white tee' }
+        },
+        spring: {
+          name: { it: 'Primavera', en: 'Spring' },
+          intro: { it: 'Tonalità calde, luminose e brillanti.', en: 'Warm, bright and lively tones.' },
+          colors: [
+            { name: { it: 'Pesca', en: 'Peach' }, hex: '#FF8A65', dark: true },
+            { name: { it: 'Verde Mela', en: 'Apple Green' }, hex: '#7CB342', dark: true },
+            { name: { it: 'Cammello Chiaro', en: 'Light Camel' }, hex: '#D4A373', dark: true },
+            { name: { it: 'Turchese', en: 'Turquoise' }, hex: '#00ACC1', dark: true },
+            { name: { it: 'Corallo', en: 'Coral' }, hex: '#FF7043', dark: true },
+            { name: { it: 'Avorio Caldo', en: 'Warm Ivory' }, hex: '#FAF0CA', dark: true },
+            { name: { it: 'Verde Prato', en: 'Grass Green' }, hex: '#558B2F' },
+            { name: { it: 'Azzurro Cielo', en: 'Sky Blue' }, hex: '#64B5F6', dark: true }
+          ],
+          dos: { it: 'Pesca, Turchese brillante, Cammello, Verde chiaro e Avorio.', en: 'Peach, bright turquoise, camel, light green and ivory.' },
+          donts: { it: 'Nero cupo, Grigio scuro polveroso e Toni fumosi.', en: 'Heavy black, dusty dark gray and muted tones.' },
+          combo: [
+            { name: { it: 'Cammello', en: 'Camel' }, hex: '#D4A373', dark: true },
+            { name: { it: 'Turchese', en: 'Turquoise' }, hex: '#00ACC1', dark: true },
+            { name: { it: 'Avorio', en: 'Ivory' }, hex: '#FAF0CA', dark: true }
+          ],
+          comboText: { it: 'Sopracamicia Cammello + Polo Turchese + Chino Avorio', en: 'Camel overshirt + Turquoise polo + Ivory chinos' }
+        },
+        summer: {
+          name: { it: 'Estate', en: 'Summer' },
+          intro: { it: 'Tonalità fredde, tenui e polverose.', en: 'Cold, soft and powdery tones.' },
+          colors: [
+            { name: { it: 'Azzurro Polvere', en: 'Powder Blue' }, hex: '#90CAF9', dark: true },
+            { name: { it: 'Grigio Perla', en: 'Pearl Gray' }, hex: '#B0BEC5', dark: true },
+            { name: { it: 'Rosa Cipria', en: 'Powder Pink' }, hex: '#F48FB1', dark: true },
+            { name: { it: 'Navy Soft', en: 'Soft Navy' }, hex: '#37474F' },
+            { name: { it: 'Lavanda', en: 'Lavender' }, hex: '#CE93D8', dark: true },
+            { name: { it: 'Cacao', en: 'Cocoa' }, hex: '#8D6E63' },
+            { name: { it: 'Menta', en: 'Mint' }, hex: '#80CBC4', dark: true },
+            { name: { it: 'Blu Avio', en: 'Aviation Blue' }, hex: '#78909C' }
+          ],
+          dos: { it: 'Azzurro polvere, Grigio perla, Blu avio e toni pastello freddi.', en: 'Powder blue, pearl gray, aviation blue and cool pastels.' },
+          donts: { it: 'Arancione vivo, Giallo senape e Marrone caldo ruggine.', en: 'Bright orange, mustard yellow and warm rusty brown.' },
+          combo: [
+            { name: { it: 'Navy', en: 'Navy' }, hex: '#37474F' },
+            { name: { it: 'Azzurro Polvere', en: 'Powder Blue' }, hex: '#90CAF9', dark: true },
+            { name: { it: 'Grigio Perla', en: 'Pearl Gray' }, hex: '#B0BEC5', dark: true }
+          ],
+          comboText: { it: 'Cardigan Navy + Camicia Azzurro Polvere + Chino Grigio Perla', en: 'Navy cardigan + Powder blue shirt + Pearl gray chinos' }
+        }
+      };
+
+      var currentSeason = 'autumn';
+      try {
+        var s = localStorage.getItem('armocromatic_season');
+        if (s && SEASONS[s]) currentSeason = s;
+      } catch (err) { /* storage non disponibile */ }
+
+      var FACE_NAMES = {
+        'square-full': { it: 'Mascella Marcata / Guance Piene', en: 'Strong Jaw / Full Cheeks' },
+        'oval': { it: 'Viso Ovale', en: 'Oval Face' },
+        'round': { it: 'Viso Rotondo', en: 'Round Face' },
+        'elongated': { it: 'Viso Allungato', en: 'Elongated Face' }
+      };
+
+      function renderSeason() {
+        var data = SEASONS[currentSeason];
+        var homeSel = document.getElementById('home-season-select');
+        var palSel = document.getElementById('palette-season-select');
+        if (homeSel) homeSel.value = currentSeason;
+        if (palSel) palSel.value = currentSeason;
+
+        // Griglia palette
+        var grid = document.getElementById('palette-grid');
+        if (grid) {
+          var html = '';
+          data.colors.forEach(function (c) {
+            var style = 'background:' + c.hex + ';';
+            if (c.dark) style += 'color:#1A1817;text-shadow:none;';
+            html += '<div class="swatch" style="' + style + '">' + tr(c.name) + '</div>';
+          });
+          grid.innerHTML = html;
+        }
+        var intro = document.getElementById('palette-intro');
+        if (intro) intro.textContent = tr(data.intro);
+
+        // Regole di stagione (sia nella sezione Palette sia nella sezione Regole)
+        var rules = document.getElementById('season-rules');
+        if (rules) {
+          rules.innerHTML =
+            '<div class="rule-box do"><strong>' + t('rules.promoted') + '</strong> ' + tr(data.dos) + '</div>' +
+            '<div class="rule-box dont"><strong>' + t('rules.avoided') + '</strong> ' + tr(data.donts) + '</div>';
+        }
+        var rulesDo = document.getElementById('rules-season-do');
+        var rulesDont = document.getElementById('rules-season-dont');
+        if (rulesDo) rulesDo.innerHTML = '<strong>' + t('rules.promoted') + '</strong> ' + tr(data.dos);
+        if (rulesDont) rulesDont.innerHTML = '<strong>' + t('rules.avoided') + '</strong> ' + tr(data.donts);
+
+        // Combo in Home
+        var banner = document.getElementById('combo-banner-box');
+        if (banner) {
+          var bh = '';
+          data.combo.forEach(function (cb) {
+            var style = 'background:' + cb.hex + ';';
+            if (cb.dark) style += 'color:#1A1817;text-shadow:none;';
+            bh += '<div class="combo-color" style="' + style + '">' + tr(cb.name) + '</div>';
+          });
+          banner.innerHTML = bh;
+        }
+        var sub = document.getElementById('combo-text-sub');
+        if (sub) sub.textContent = tr(data.comboText);
+
+        // Pillola stagionale in Home (sostituisce il consiglio fisso)
+        var tip1 = document.getElementById('tip-season-box');
+        if (tip1) tip1.innerHTML = '<strong>' + t('home.tip1Label') + '</strong> ' + t('home.tip1Body') + ' ' + tr(data.dos);
+
+        // Chip profilo
+        var chipSeason = document.getElementById('chip-season');
+        if (chipSeason) chipSeason.textContent = tr(data.name);
+        updateFaceChip();
+      }
+
+      function updateFaceChip() {
+        var chip = document.getElementById('chip-face');
+        var sel = document.getElementById('face-shape-select');
+        if (chip && sel) chip.textContent = tr(FACE_NAMES[sel.value] || FACE_NAMES['square-full']);
+      }
+
+      function setSeason(key) {
+        if (!SEASONS[key]) return;
+        currentSeason = key;
+        try { localStorage.setItem('armocromatic_season', key); } catch (err) { /* ignora */ }
+        renderSeason();
+      }
+
+      ['home-season-select', 'palette-season-select'].forEach(function (id) {
+        var sel = document.getElementById(id);
+        if (sel) sel.addEventListener('change', function () { setSeason(sel.value); });
+      });
+
+      /* ---------- CAMBIO LINGUA ---------- */
+
+      function applyLang() {
+        document.documentElement.setAttribute('lang', LANG);
+        var itBtn = document.getElementById('lang-it');
+        var enBtn = document.getElementById('lang-en');
+        if (itBtn) itBtn.classList.toggle('active', LANG === 'it');
+        if (enBtn) enBtn.classList.toggle('active', LANG === 'en');
+
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+          var key = el.getAttribute('data-i18n');
+          var val = t(key);
+          if (val) el.innerHTML = val;
+        });
+        document.querySelectorAll('[data-i18n-alt]').forEach(function (el) {
+          var key = el.getAttribute('data-i18n-alt');
+          var val = t(key);
+          if (val) el.setAttribute('alt', val);
+        });
+        document.querySelectorAll('[data-i18n-aria]').forEach(function (el) {
+          var key = el.getAttribute('data-i18n-aria');
+          var val = t(key);
+          if (val) el.setAttribute('aria-label', val);
+        });
+        openBtn.setAttribute('aria-label', t('aria.openMenu'));
+        closeBtn.setAttribute('aria-label', t('aria.closeMenu'));
+
+        renderSeason();
+        updateGroomingAdvice();
+        calculateFit();
+      }
+
+      function setLang(l) {
+        if (l !== 'it' && l !== 'en') return;
+        LANG = l;
+        try { localStorage.setItem('armocromatic_lang', l); } catch (err) { /* ignora */ }
+        applyLang();
+      }
+
+      var itBtn = document.getElementById('lang-it');
+      var enBtn = document.getElementById('lang-en');
+      if (itBtn) itBtn.addEventListener('click', function () { setLang('it'); });
+      if (enBtn) enBtn.addEventListener('click', function () { setLang('en'); });
+
+      /* ---------- MENU LATERALE (drawer modale) + modalità desktop ---------- */
+
+      var desktopMQ = window.matchMedia('(min-width: 900px)');
+
+      function syncSidebarMode() {
+        if (desktopMQ.matches) {
+          // Desktop: sidebar sempre visibile, navigazione permanente (non modale)
+          var wasOpen = menuIsOpen;
+          menuIsOpen = false;
+          document.body.classList.remove('menu-open');
+          document.body.style.top = '';
+          if ('inert' in topbar) topbar.inert = false;
+          if ('inert' in mainContent) mainContent.inert = false;
+          if ('inert' in sidebar) sidebar.inert = false;
+          sidebar.classList.remove('open');
+          sidebar.removeAttribute('role');
+          sidebar.removeAttribute('aria-modal');
+          sidebar.setAttribute('aria-hidden', 'false');
+          overlay.classList.remove('active');
+          overlay.setAttribute('aria-hidden', 'true');
+          openBtn.setAttribute('aria-expanded', 'false');
+          if (wasOpen) {
+            // Ripristina la posizione di scroll persa sbloccando il body
+            // e sposta il focus su un controllo visibile (il close-btn e' nascosto su desktop)
+            window.scrollTo(0, savedScrollY);
+            if (sidebar.contains(document.activeElement)) {
+              var firstLink = sidebar.querySelector('.nav-links a');
+              if (firstLink) firstLink.focus({ preventScroll: true });
+            }
+          }
+        } else if (!menuIsOpen) {
+          // Mobile con menu chiuso: drawer modale e inerte
+          sidebar.setAttribute('role', 'dialog');
+          sidebar.setAttribute('aria-modal', 'true');
+          if ('inert' in sidebar) sidebar.inert = true;
+          sidebar.setAttribute('aria-hidden', 'true');
+        }
+      }
+
+      if (desktopMQ.addEventListener) desktopMQ.addEventListener('change', syncSidebarMode);
+      else if (desktopMQ.addListener) desktopMQ.addListener(syncSidebarMode);
+
+      function openMenu() {
+        if (desktopMQ.matches || menuIsOpen) return;
+        menuIsOpen = true;
+        lastFocused = document.activeElement;
+        savedScrollY = window.scrollY;
+
+        // Blocca lo scroll di sfondo preservando la posizione (affidabile su iOS Safari)
+        document.body.classList.add('menu-open');
+        document.body.style.top = -savedScrollY + 'px';
+
+        // Il drawer diventa attivo; lo sfondo (topbar + contenuti) diventa inerte
+        if ('inert' in sidebar) sidebar.inert = false;
+        if ('inert' in topbar) topbar.inert = true;
+        if ('inert' in mainContent) mainContent.inert = true;
+
+        sidebar.classList.add('open');
+        sidebar.setAttribute('aria-hidden', 'false');
+        overlay.classList.add('active');
+        overlay.setAttribute('aria-hidden', 'false');
+        openBtn.setAttribute('aria-expanded', 'true');
+
+        closeBtn.focus({ preventScroll: true });
+      }
+
+      function closeMenu(restoreScroll) {
+        if (!menuIsOpen) return;
+        menuIsOpen = false;
+
+        // Sfondo di nuovo attivo, poi ripristina il focus PRIMA di nascondere il drawer
+        if ('inert' in topbar) topbar.inert = false;
+        if ('inert' in mainContent) mainContent.inert = false;
+        if (lastFocused && typeof lastFocused.focus === 'function') {
+          lastFocused.focus({ preventScroll: true });
+        }
+
+        // Il drawer chiuso diventa inerte subito (non solo a transizione finita)
+        if ('inert' in sidebar) sidebar.inert = true;
+        sidebar.classList.remove('open');
+        sidebar.setAttribute('aria-hidden', 'true');
+        overlay.classList.remove('active');
+        overlay.setAttribute('aria-hidden', 'true');
+        openBtn.setAttribute('aria-expanded', 'false');
+
+        // Sblocca lo scroll di sfondo
+        document.body.classList.remove('menu-open');
+        document.body.style.top = '';
+
+        // Ripristina la posizione di scroll solo se NON si sta navigando verso un'altra sezione
+        if (restoreScroll !== false) {
+          window.scrollTo(0, savedScrollY);
+        }
+      }
+
+      openBtn.addEventListener('click', openMenu);
+      closeBtn.addEventListener('click', function () { closeMenu(); });
+      overlay.addEventListener('click', function () { closeMenu(); });
+
+      document.addEventListener('keydown', function (e) {
+        if (!menuIsOpen) return;
+        if (e.key === 'Escape') {
+          closeMenu();
+          return;
+        }
+        // Contenimento del focus (Tab / Shift+Tab) dentro la sidebar aperta
+        if (e.key === 'Tab') {
+          var focusables = sidebar.querySelectorAll('a[href], button:not([disabled])');
+          if (!focusables.length) return;
+          var first = focusables[0];
+          var last = focusables[focusables.length - 1];
+          if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      });
+
+      /* ---------- NAVIGAZIONE UNIFICATA A TAB ---------- */
+
+      function switchTab(tabId, scrollTarget) {
+        var target = document.getElementById(tabId);
+        if (!target) return;
+
+        document.querySelectorAll('.section').forEach(function (s) {
+          s.classList.toggle('active', s.id === tabId);
+        });
+        // Aggiorna lo stato attivo anche nella sidebar
+        navLinks.forEach(function (a) {
+          var isActive = a.dataset.section === tabId;
+          a.classList.toggle('active', isActive);
+          if (isActive) a.setAttribute('aria-current', 'true');
+          else a.removeAttribute('aria-current');
+        });
+
+        // Aggiorna l'hash senza aggiungere una voce alla cronologia.
+        // Il prefisso "#/" evita che il browser scatti all'ancora con quell'id.
+        // In iframe sandboxati (anteprime) replaceState puo' fallire: non deve
+        // mai interrompere l'attivazione della sezione o la chiusura del menu.
+        if (history.replaceState) {
+          try {
+            history.replaceState(null, '', '#/' + tabId);
+          } catch (err) { /* sandbox: si prosegue senza aggiornare l'URL */ }
+        }
+
+        if (scrollTarget === 'top') {
+          // Navigazione: chiudi il menu senza ripristinare la vecchia posizione e torna in cima
+          closeMenu(false);
+          window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
+        } else {
+          closeMenu();
+        }
+      }
+
+      // Click sui link della sidebar: un solo gestore, niente onclick inline.
+      navLinks.forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          switchTab(link.dataset.section, 'top');
+        });
+      });
+
+      // Scorciatoie dalla Home: stessa logica unificata
+      featureCards.forEach(function (card) {
+        card.addEventListener('click', function () {
+          switchTab(card.dataset.section, 'top');
+        });
+      });
+
+      // Card editoriali della Home (link con immagine)
+      var shopLinks = Array.prototype.slice.call(document.querySelectorAll('.shop-link'));
+      shopLinks.forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          switchTab(a.dataset.section, 'top');
+        });
+      });
+
+      /* ---------- CALCOLATORE PROPORZIONI (contenuto bilingue) ---------- */
+
+      var FIT_CONTENT = {
+        athletic: {
+          it: '<div class="rule-box do"><strong>Top consigliati:</strong> Maglie o camicie infilate nei pantaloni (tuck-in) per valorizzare le spalle e definire il punto vita. Sopracamicie strutturate.</div><div class="rule-box do"><strong>Pantaloni ideali:</strong> Taglio regular o tapered a vita media/alta per allungare la figura.</div><div class="rule-box dont"><strong>Da evitare:</strong> Fit ultra-baggy contemporanei sopra e sotto.</div>',
+          en: '<div class="rule-box do"><strong>Recommended tops:</strong> Tucked-in shirts or tees to highlight shoulders and define the waist. Structured overshirts.</div><div class="rule-box do"><strong>Ideal trousers:</strong> Regular or tapered cut, mid/high-rise, to elongate your figure.</div><div class="rule-box dont"><strong>Avoid:</strong> Ultra-baggy fits on top and bottom.</div>'
+        },
+        other: {
+          it: '<div class="rule-box do"><strong>Consiglio generale:</strong> Prediligi linee verticali e pulite con capispalla di media lunghezza.</div>',
+          en: '<div class="rule-box do"><strong>General advice:</strong> Prefer clean vertical lines with mid-length outerwear.</div>'
+        }
+      };
+
+      function calculateFit() {
+        var type = document.getElementById('body-type').value;
+        var resContainer = document.getElementById('fit-results');
+        var resContent = document.getElementById('fit-content');
+        var html = FIT_CONTENT.athletic[LANG] || FIT_CONTENT.athletic.it;
+        if (type !== 'athletic') {
+          html = FIT_CONTENT.other[LANG] || FIT_CONTENT.other.it;
+        }
+        resContent.innerHTML = html;
+        resContainer.style.display = 'block';
+      }
+
+      document.getElementById('calcBtn').addEventListener('click', calculateFit);
+
+      /* ---------- GROOMING: CONSIGLI PER FORMA DEL VISO (bilingue) ---------- */
+
+      var GROOMING_CONTENT = {
+        'square-full': {
+          title: { it: 'Consigli per Mascella Marcata / Guance Piene', en: 'Tips for Strong Jaw / Full Cheeks' },
+          items: [
+            { it: '<strong>Sfumatura ai Lati (Taper Fade):</strong> Sfoltire e tenere pulite le tempie per restringere la larghezza del viso.', en: '<strong>Side fade (Taper Fade):</strong> Thin out and keep the temples clean to visually narrow the face.' },
+            { it: '<strong>Mullet & Ricci:</strong> Nuca sfoltita e massa controllata sopra. La permanente lisciante va bene se i capelli restano medio-corti sopra.', en: '<strong>Mullet & curls:</strong> Thinned nape and controlled volume on top. A straightening perm works if hair stays mid-short on top.' },
+            { it: '<strong>Barba:</strong> Sfumata sui lati, leggermente più lunga sul mento per allungare il profilo.', en: '<strong>Beard:</strong> Faded on the sides, slightly longer on the chin to lengthen the profile.' },
+            { it: '<strong>Cappellini:</strong> Promossi i Dad Hat da baseball portati leggermente alti. Evitare Beanie di lana stretti.', en: '<strong>Hats:</strong> Baseball dad hats worn slightly high work well. Avoid tight wool beanies.' },
+            { it: '<strong>Scolli:</strong> Prediligi scolli a V o camicie aperte per slanciare il collo.', en: '<strong>Necklines:</strong> Prefer V-necks or open shirts to elongate the neck.' }
+          ]
+        },
+        'oval': {
+          title: { it: 'Consigli per Viso Ovale', en: 'Tips for an Oval Face' },
+          items: [
+            { it: '<strong>Capelli:</strong> Adatti quasi tutti i tagli (Pompadour, Textured Crop, ricci lunghi).', en: '<strong>Hair:</strong> Almost every cut works (Pompadour, Textured Crop, long curls).' },
+            { it: '<strong>Barba:</strong> Incolta sfumata o rasatura pulita.', en: '<strong>Beard:</strong> Faded stubble or a clean shave.' },
+            { it: '<strong>Cappellini:</strong> Qualsiasi modello (Beanie, Snapback, Dad Hat).', en: '<strong>Hats:</strong> Any style (beanie, snapback, dad hat).' }
+          ]
+        },
+        'round': {
+          title: { it: 'Consigli per Viso Rotondo', en: 'Tips for a Round Face' },
+          items: [
+            { it: '<strong>Capelli:</strong> Molto volume in alto per allungare il profilo, sfumatura alta ai lati (High Fade).', en: '<strong>Hair:</strong> Lots of height on top to lengthen the profile, high fade on the sides.' },
+            { it: '<strong>Barba:</strong> Sfumata ai lati e più squadrata sul mento.', en: '<strong>Beard:</strong> Faded on the sides, squarer on the chin.' },
+            { it: '<strong>Cappellini:</strong> Snapback a visiera dritta portati alti.', en: '<strong>Hats:</strong> Flat-brim snapbacks worn high.' }
+          ]
+        },
+        'elongated': {
+          title: { it: 'Consigli per Viso Allungato', en: 'Tips for an Elongated Face' },
+          items: [
+            { it: '<strong>Capelli:</strong> Frangia morbida avanti o volume laterale per bilanciare l\u2019altezza.', en: '<strong>Hair:</strong> Soft fringe forward or side volume to balance the height.' },
+            { it: '<strong>Barba:</strong> Barba piena sui lati per allargare visivamente il volto.', en: '<strong>Beard:</strong> Fuller beard on the sides to visually widen the face.' },
+            { it: '<strong>Cappellini:</strong> Beanie aderenti per contenere l\u2019altezza della testa.', en: '<strong>Hats:</strong> Snug beanies to contain head height.' }
+          ]
+        }
+      };
+
+      function updateGroomingAdvice() {
+        var shape = document.getElementById('face-shape-select').value;
+        var data = GROOMING_CONTENT[shape] || GROOMING_CONTENT['square-full'];
+        var card = document.getElementById('grooming-advice-card');
+        var html = '<h2>' + tr(data.title) + '</h2><ul class="clean-list">';
+        data.items.forEach(function (item) {
+          html += '<li>' + tr(item) + '</li>';
+        });
+        html += '</ul>';
+        card.innerHTML = html;
+      }
+
+      var faceSelect = document.getElementById('face-shape-select');
+      faceSelect.addEventListener('change', function () {
+        try { localStorage.setItem('armocromatic_face', faceSelect.value); } catch (err) { /* ignora */ }
+        updateGroomingAdvice();
+        updateFaceChip();
+      });
+
+      /* ---------- NAVIGAZIONE TRAMITE HASH (stesso documento) ---------- */
+      // Cambiare frammento (es. da #/palette a #/fit) senza ricaricare la pagina
+      // deve comunque attivare la sezione corrispondente.
+      window.addEventListener('hashchange', function () {
+        var id = (location.hash || '').replace(/^#\/?/, '');
+        if (SECTIONS.indexOf(id) !== -1) {
+          switchTab(id, 'top');
+        }
+      });
+
+      /* ---------- SERVICE WORKER (PWA offline, se disponibile) ---------- */
+      // In contesti sandboxati la registrazione puo' fallire: mai bloccare l'app.
+      if ('serviceWorker' in navigator) {
+        try {
+          navigator.serviceWorker.register('./sw.js').catch(function () { /* anteprime sandbox: si prosegue */ });
+        } catch (err) { /* ignora */ }
+      }
+
+      /* ---------- AVVIO ---------- */
+
+      // Ripristina la forma del viso salvata
+      try {
+        var savedFace = localStorage.getItem('armocromatic_face');
+        if (savedFace && FACE_NAMES[savedFace]) faceSelect.value = savedFace;
+      } catch (err) { /* ignora */ }
+
+      syncSidebarMode();
+      applyLang();
+
+      // Permette link diretti tipo .../index.html#/palette e ricarica della pagina
+      var initial = (location.hash || '').replace(/^#\/?/, '') || 'home';
+      if (SECTIONS.indexOf(initial) !== -1) {
+        switchTab(initial);
+      }
+    })();
   </script>
 </body>
 </html>
