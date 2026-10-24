@@ -332,6 +332,7 @@
 
     /* COLOR SWATCHES */
     .color-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    #palette-grid { overflow: hidden; }
     /* Etichette in testo grande (>= 18.66px bold) per garantire contrasto >= 3:1 anche su Terracotta */
     .swatch { border-radius: 8px; padding: 18px 10px; text-align: center; font-size: 1.2rem; font-weight: 700; color: #FFF; text-shadow: 0 1px 2px rgba(0,0,0,0.3); border: 1px solid rgba(0,0,0,0.1); }
     #palette-grid.wind-out .swatch { animation: season-wind-out 240ms ease-in both; animation-delay: calc(var(--swatch-index) * 20ms); }
