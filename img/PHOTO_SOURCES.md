@@ -1,6 +1,6 @@
 # Foto
 
-Le foto stagionali (uomo e donna) e la foto del grooming donna sono state scaricate da Pexels e ritagliate in WebP.
+Le foto stagionali (uomo e donna) e le foto del grooming (uomo e donna) sono state scaricate da Pexels e ritagliate in WebP.
 La licenza Pexels consente l'uso gratuito sui siti e la modifica delle immagini;
 non richiede attribuzione: https://www.pexels.com/license/
 
@@ -31,3 +31,4 @@ non richiede attribuzione: https://www.pexels.com/license/
 | `accessories-spring-donna.webp` | https://www.pexels.com/photo/4506919/ |
 | `accessories-summer-donna.webp` | https://www.pexels.com/photo/34076070/ |
 | `grooming-donna.webp` | https://www.pexels.com/photo/37575400/ |
+| `grooming.webp` | https://www.pexels.com/photo/8867162/ |
