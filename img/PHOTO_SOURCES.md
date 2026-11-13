@@ -32,3 +32,5 @@ non richiede attribuzione: https://www.pexels.com/license/
 | `accessories-summer-donna.webp` | https://www.pexels.com/photo/34076070/ |
 | `grooming-donna.webp` | https://www.pexels.com/photo/37575400/ |
 | `grooming.webp` | https://www.pexels.com/photo/8867162/ |
+
+`og-cover.jpg` (anteprima dei link condivisi) è composta con le foto `hero-autumn`, `hero-winter-donna`, `hero-spring` e `hero-summer-donna` qui sopra.
