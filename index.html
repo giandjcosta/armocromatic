@@ -180,8 +180,9 @@
     }
     .brand-container {
       display: flex; align-items: center; gap: 10px;
-      min-width: 0;
+      min-width: 0; text-decoration: none; color: inherit; border-radius: 10px;
     }
+    .brand-container:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
     .brand-logo {
       width: 34px; height: 34px; flex: none; border-radius: 8px;
       display: block;
@@ -530,10 +531,10 @@
   <!-- TOP BAR -->
   <header class="top-bar" id="topbar">
     <button class="menu-trigger" id="openBtn" aria-label="Apri menu" aria-controls="sidebar" aria-expanded="false" data-i18n-aria="aria.openMenu">☰</button>
-    <div class="brand-container">
+    <a class="brand-container" href="#home" id="brandHome" aria-label="Armocromatic: torna alla Home" data-i18n-aria="aria.home">
       <img class="brand-logo" src="icons/logo.svg" alt="" width="34" height="34">
-      <div class="brand-title">Armocromatic</div>
-    </div>
+      <span class="brand-title">Armocromatic</span>
+    </a>
     <div class="lang-switch" role="group" aria-label="Lingua / Language">
       <button class="lang-btn active" id="lang-it" type="button" lang="it">IT</button>
       <button class="lang-btn" id="lang-en" type="button" lang="en">EN</button>
@@ -890,7 +891,7 @@
 
       var I18N = {
         it: {
-          'aria.openMenu': 'Apri menu', 'aria.closeMenu': 'Chiudi menu',
+          'aria.openMenu': 'Apri menu', 'aria.closeMenu': 'Chiudi menu', 'aria.home': 'Armocromatic: torna alla Home',
           'aria.sections': 'Sezioni del sito', 'aria.menuLabel': 'Menu principale',
           'nav.menu': 'Menu', 'nav.home': 'Home', 'nav.fit': 'Proporzioni Corporee',
           'nav.grooming': 'Grooming & Forme Viso', 'nav.palette': 'Palette & Stagioni',
@@ -1017,7 +1018,7 @@
           'accessori.metals': '<strong>Metalli:</strong> Oro giallo satinato, bronzo o argento invecchiato brunito.'
         },
         en: {
-          'aria.openMenu': 'Open menu', 'aria.closeMenu': 'Close menu',
+          'aria.openMenu': 'Open menu', 'aria.closeMenu': 'Close menu', 'aria.home': 'Armocromatic: back to Home',
           'aria.sections': 'Site sections', 'aria.menuLabel': 'Main menu',
           'nav.menu': 'Menu', 'nav.home': 'Home', 'nav.fit': 'Body Proportions',
           'nav.grooming': 'Grooming & Face Shapes', 'nav.palette': 'Palette & Seasons',
@@ -1858,6 +1859,12 @@
         card.addEventListener('click', function () {
           switchTab(card.dataset.section, 'top');
         });
+      });
+
+      // Logo e nome in alto: riportano sempre alla Home
+      document.getElementById('brandHome').addEventListener('click', function (e) {
+        e.preventDefault();
+        switchTab('home', 'top');
       });
 
       // Card editoriali della Home (link con immagine)
