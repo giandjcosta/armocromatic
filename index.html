@@ -630,6 +630,7 @@
         <p id="combo-desc" data-i18n="home.comboDesc">L'abbinamento chiave per la tua stagione nello Smart Streetwear:</p>
         <div class="combo-banner" id="combo-banner-box"></div>
         <p style="font-size:0.82rem; text-align:center; color:var(--text-muted);" id="combo-text-sub"></p>
+        <p style="font-size:0.72rem; text-align:center; color:var(--text-muted); margin-top:4px; opacity:0.8;" id="combo-next"></p>
       </div>
 
       <div class="card hero-span">
@@ -998,6 +999,7 @@
           'rules.promoted': 'Promossi vicino al viso:',
           'rules.avoided': 'Da evitare vicino al viso:',
           'home.comboTitle': 'Combo Cromatica della Settimana',
+          'home.comboNext': 'Ogni lunedì una combo nuova.',
           'home.comboDesc': 'L\u2019abbinamento chiave per la tua stagione nello Smart Streetwear:',
           'home.capsuleTitle': 'Guardaroba Capsule',
           'home.capsuleIntro': 'Una base di capi versatili da combinare, in toni coerenti con la tua stagione ({s}):',
@@ -1125,6 +1127,7 @@
           'rules.promoted': 'Promoted near the face:',
           'rules.avoided': 'Avoid near the face:',
           'home.comboTitle': 'Combo of the Week',
+          'home.comboNext': 'A new combo every Monday.',
           'home.comboDesc': 'The key pairing for your season in smart streetwear:',
           'home.capsuleTitle': 'Capsule Wardrobe',
           'home.capsuleIntro': 'A base of versatile pieces to mix and match, in tones consistent with your season ({s}):',
@@ -1195,6 +1198,18 @@
           ],
           comboText: { it: 'Prova una sopracamicia moka con chino oliva e T-shirt panna: toni caldi e morbidi, facili da portare ogni giorno.', en: 'Try a mocha overshirt with olive chinos and a cream tee: warm, easygoing tones you can wear every day.' },
           comboTextF: { it: 'Trench Moka + Gonna midi Oliva + Maglia Panna', en: 'Mocha trench + Olive midi skirt + Cream knit' },
+          // Altre combo: la Home ne mostra una diversa ogni settimana
+          moreCombos: [
+            { colors: [{ name: { it: 'Terracotta', en: 'Terracotta' }, hex: '#C86446' }, { name: { it: 'Cammello', en: 'Camel' }, hex: '#C19A6B', dark: true }, { name: { it: 'Fango', en: 'Warm Mud' }, hex: '#4F423A' }],
+              text: { it: 'Maglione terracotta, chino cammello e scarpe in camoscio color fango: calore pieno, da autunno vero.', en: 'A terracotta sweater, camel chinos and mud-toned suede shoes: full autumn warmth.' },
+              textF: { it: 'Maglione terracotta, gonna midi cammello e stivali color fango: calore pieno, da autunno vero.', en: 'A terracotta sweater, camel midi skirt and mud-toned boots: full autumn warmth.' } },
+            { colors: [{ name: { it: 'Ottanio', en: 'Teal' }, hex: '#1B4D3E' }, { name: { it: 'Panna', en: 'Cream' }, hex: '#FFF8DC', dark: true }, { name: { it: 'Moka', en: 'Mocha' }, hex: '#4A2C2A' }],
+              text: { it: 'Camicia ottanio sotto un cardigan panna, pantaloni moka: profondo ma luminoso vicino al viso.', en: 'A teal shirt under a cream cardigan with mocha trousers: deep, yet bright near the face.' },
+              textF: { it: 'Blusa ottanio, cardigan panna e pantaloni a palazzo moka: profondo ma luminoso vicino al viso.', en: 'A teal blouse, cream cardigan and mocha palazzo trousers: deep, yet bright near the face.' } },
+            { colors: [{ name: { it: 'Bordeaux', en: 'Bordeaux' }, hex: '#8B0000' }, { name: { it: 'Oliva', en: 'Olive' }, hex: '#556B2F' }, { name: { it: 'Cammello', en: 'Camel' }, hex: '#C19A6B', dark: true }],
+              text: { it: 'Dolcevita bordeaux, field jacket oliva e chino cammello: un classico caldo per le giornate fredde.', en: 'A bordeaux turtleneck, olive field jacket and camel chinos: a warm classic for cold days.' },
+              textF: { it: 'Abito in maglia bordeaux, trench oliva e stivali cammello: un classico caldo per le giornate fredde.', en: 'A bordeaux knit dress, olive trench and camel boots: a warm classic for cold days.' } }
+          ],
           capsuleF: [
             { it: '<strong>Cappotto o trench</strong> — Cammello, Moka, Oliva', en: '<strong>Coat or trench</strong> — Camel, Mocha, Olive' },
             { it: '<strong>Maglione a collo alto in lana</strong> — Senape, Ruggine, Panna', en: '<strong>Wool turtleneck</strong> — Mustard, Rust, Cream' },
@@ -1234,6 +1249,18 @@
           ],
           comboText: { it: 'Prova una giacca nera con chino blu e T-shirt bianca: un contrasto pulito che valorizza i colori intensi dell’Inverno.', en: 'Try a black jacket with blue chinos and a white tee: a crisp contrast that brings out Winter’s bold coloring.' },
           comboTextF: { it: 'Blazer Nero + Pantaloni Blu elettrico + Camicia Bianca', en: 'Black blazer + Electric blue trousers + White shirt' },
+          // Altre combo: la Home ne mostra una diversa ogni settimana
+          moreCombos: [
+            { colors: [{ name: { it: 'Antracite', en: 'Anthracite' }, hex: '#37474F' }, { name: { it: 'Azzurro Ghiaccio', en: 'Ice Blue' }, hex: '#CFE8F7', dark: true }, { name: { it: 'Bianco', en: 'White' }, hex: '#FFFFFF', dark: true }],
+              text: { it: 'Cappotto antracite, maglione azzurro ghiaccio e camicia bianca: freddo, pulito ed elegante.', en: 'An anthracite coat, ice-blue sweater and white shirt: cool, crisp and elegant.' },
+              textF: { it: 'Cappotto antracite, maglia azzurro ghiaccio e pantaloni bianchi: freddo, pulito ed elegante.', en: 'An anthracite coat, ice-blue knit and white trousers: cool, crisp and elegant.' } },
+            { colors: [{ name: { it: 'Smeraldo', en: 'Emerald' }, hex: '#00695C' }, { name: { it: 'Nero', en: 'Black' }, hex: '#111111' }, { name: { it: 'Bianco', en: 'White' }, hex: '#FFFFFF', dark: true }],
+              text: { it: 'Maglione verde smeraldo, pantaloni neri e sneakers bianche: un colore gioiello su una base netta.', en: 'An emerald sweater, black trousers and white sneakers: a jewel tone on a sharp base.' },
+              textF: { it: 'Blusa verde smeraldo, gonna a tubino nera e camicia bianca sotto: un colore gioiello su una base netta.', en: 'An emerald blouse, black pencil skirt and a white shirt underneath: a jewel tone on a sharp base.' } },
+            { colors: [{ name: { it: 'Rosso Ciliegia', en: 'Cherry Red' }, hex: '#C2185B' }, { name: { it: 'Antracite', en: 'Anthracite' }, hex: '#37474F' }, { name: { it: 'Nero', en: 'Black' }, hex: '#111111' }],
+              text: { it: 'Maglione rosso ciliegia sotto una giacca antracite, pantaloni neri: un tocco deciso vicino al viso.', en: 'A cherry-red sweater under an anthracite jacket with black trousers: a bold touch near the face.' },
+              textF: { it: 'Abito rosso ciliegia, cappotto antracite e stivali neri: un tocco deciso vicino al viso.', en: 'A cherry-red dress, anthracite coat and black boots: a bold touch near the face.' } }
+          ],
           capsuleF: [
             { it: '<strong>Cappotto dal taglio netto</strong> — Nero, Antracite', en: '<strong>Sharp-cut coat</strong> — Black, Anthracite' },
             { it: '<strong>Camicia bianca</strong> — Bianco puro', en: '<strong>White shirt</strong> — Pure white' },
@@ -1273,6 +1300,18 @@
           ],
           comboText: { it: 'Abbina una sopracamicia cammello a una polo turchese e chino avorio: un insieme luminoso, senza esagerare.', en: 'Pair a camel overshirt with a turquoise polo and ivory chinos for a bright look that still feels effortless.' },
           comboTextF: { it: 'Trench Cammello + Blusa Turchese + Pantaloni Avorio', en: 'Camel trench + Turquoise blouse + Ivory trousers' },
+          // Altre combo: la Home ne mostra una diversa ogni settimana
+          moreCombos: [
+            { colors: [{ name: { it: 'Corallo', en: 'Coral' }, hex: '#FF7043', dark: true }, { name: { it: 'Avorio', en: 'Ivory' }, hex: '#FAF0CA', dark: true }, { name: { it: 'Azzurro Cielo', en: 'Sky Blue' }, hex: '#64B5F6', dark: true }],
+              text: { it: 'Polo corallo, chino avorio e giacca leggera azzurro cielo: fresco e solare.', en: 'A coral polo, ivory chinos and a light sky-blue jacket: fresh and sunny.' },
+              textF: { it: 'Blusa corallo, cardigan avorio e jeans azzurro cielo: fresco e solare.', en: 'A coral blouse, ivory cardigan and sky-blue jeans: fresh and sunny.' } },
+            { colors: [{ name: { it: 'Verde Mela', en: 'Apple Green' }, hex: '#7CB342', dark: true }, { name: { it: 'Cammello Chiaro', en: 'Light Camel' }, hex: '#D4A373', dark: true }, { name: { it: 'Avorio', en: 'Ivory' }, hex: '#FAF0CA', dark: true }],
+              text: { it: 'Maglia verde mela, chino cammello chiaro e sneakers avorio: il colore della natura che rinasce.', en: 'An apple-green knit, light camel chinos and ivory sneakers: the color of nature coming back to life.' },
+              textF: { it: 'Abito verde mela, trench cammello chiaro e ballerine avorio: il colore della natura che rinasce.', en: 'An apple-green dress, light camel trench and ivory ballet flats: the color of nature coming back to life.' } },
+            { colors: [{ name: { it: 'Pesca', en: 'Peach' }, hex: '#FFB38A', dark: true }, { name: { it: 'Verde Prato', en: 'Grass Green' }, hex: '#558B2F' }, { name: { it: 'Avorio', en: 'Ivory' }, hex: '#FAF0CA', dark: true }],
+              text: { it: 'Camicia in lino pesca, chino verde prato e sneakers avorio: morbido e luminoso.', en: 'A peach linen shirt, grass-green chinos and ivory sneakers: soft and bright.' },
+              textF: { it: 'Blusa pesca, pantaloni verde prato e sandali avorio: morbido e luminoso.', en: 'A peach blouse, grass-green trousers and ivory sandals: soft and bright.' } }
+          ],
           capsuleF: [
             { it: '<strong>Trench o giacca leggera</strong> — Cammello chiaro, Avorio caldo', en: '<strong>Trench or light jacket</strong> — Light camel, Warm ivory' },
             { it: '<strong>Blusa in cotone o lino</strong> — Pesca, Corallo, Turchese', en: '<strong>Cotton or linen blouse</strong> — Peach, Coral, Turquoise' },
@@ -1312,6 +1351,18 @@
           ],
           comboText: { it: 'Un cardigan navy soft, una camicia azzurro polvere e chino grigio perla creano un insieme fresco e armonioso.', en: 'A soft navy cardigan, powder-blue shirt and pearl-gray chinos make a calm, balanced outfit.' },
           comboTextF: { it: 'Cardigan Navy + Blusa Azzurro Polvere + Gonna Grigio Perla', en: 'Navy cardigan + Powder blue blouse + Pearl gray skirt' },
+          // Altre combo: la Home ne mostra una diversa ogni settimana
+          moreCombos: [
+            { colors: [{ name: { it: 'Rosa Cipria', en: 'Powder Pink' }, hex: '#F48FB1', dark: true }, { name: { it: 'Grigio Perla', en: 'Pearl Gray' }, hex: '#B0BEC5', dark: true }, { name: { it: 'Navy', en: 'Navy' }, hex: '#37474F' }],
+              text: { it: 'Camicia oxford rosa cipria, chino grigio perla e mocassini navy: delicato e raffinato.', en: 'A powder-pink oxford shirt, pearl-gray chinos and navy loafers: soft and refined.' },
+              textF: { it: 'Blusa rosa cipria, gonna plissé grigio perla e cardigan navy: delicato e raffinato.', en: 'A powder-pink blouse, pearl-gray pleated skirt and navy cardigan: soft and refined.' } },
+            { colors: [{ name: { it: 'Lavanda', en: 'Lavender' }, hex: '#CE93D8', dark: true }, { name: { it: 'Blu Avio', en: 'Aviation Blue' }, hex: '#78909C' }, { name: { it: 'Grigio Perla', en: 'Pearl Gray' }, hex: '#B0BEC5', dark: true }],
+              text: { it: 'Maglione lavanda, pantaloni blu avio e sneakers grigio perla: freddo e tenue, mai spento.', en: 'A lavender sweater, aviation-blue trousers and pearl-gray sneakers: cool and soft, never dull.' },
+              textF: { it: 'Maglia lavanda, pantaloni blu avio e ballerine grigio perla: freddo e tenue, mai spento.', en: 'A lavender knit, aviation-blue trousers and pearl-gray ballet flats: cool and soft, never dull.' } },
+            { colors: [{ name: { it: 'Menta', en: 'Mint' }, hex: '#80CBC4', dark: true }, { name: { it: 'Cacao', en: 'Cocoa' }, hex: '#8D6E63' }, { name: { it: 'Grigio Perla', en: 'Pearl Gray' }, hex: '#B0BEC5', dark: true }],
+              text: { it: 'Polo menta, chino cacao e scarpe in camoscio grigio perla: rilassato e armonioso.', en: 'A mint polo, cocoa chinos and pearl-gray suede shoes: relaxed and harmonious.' },
+              textF: { it: 'Abito menta, cardigan cacao e mocassini grigio perla: rilassato e armonioso.', en: 'A mint dress, cocoa cardigan and pearl-gray loafers: relaxed and harmonious.' } }
+          ],
           capsuleF: [
             { it: '<strong>Blazer o cardigan morbido</strong> — Navy soft, Grigio perla', en: '<strong>Soft blazer or cardigan</strong> — Soft navy, Pearl gray' },
             { it: '<strong>Camicia o blusa fluida</strong> — Azzurro polvere, Rosa cipria', en: '<strong>Flowing shirt or blouse</strong> — Powder blue, Powder pink' },
@@ -1495,6 +1546,15 @@
       // Capsule e combo hanno una versione da donna (capsuleF, comboTextF)
       function forMe(data, field) { return (isWoman() && data[field + 'F']) || data[field]; }
 
+      // Numero della settimana ISO (la settimana comincia il lunedì)
+      function isoWeek(d) {
+        var x = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+        var day = x.getUTCDay() || 7;
+        x.setUTCDate(x.getUTCDate() + 4 - day);
+        var start = new Date(Date.UTC(x.getUTCFullYear(), 0, 1));
+        return Math.ceil(((x - start) / 86400000 + 1) / 7);
+      }
+
       function renderSeasonParts() {
         var data = SEASONS[mySeason()];
         // Regole (sezione Regole)
@@ -1505,11 +1565,13 @@
         var do2 = document.getElementById('rules-do2');
         if (do2) do2.innerHTML = '<strong>' + t('rules.do2Label') + '</strong> ' +
           forMe(data, 'capsule').slice(0, 3).map(function (c) { return tr(c).replace(/<\/?strong>/g, ''); }).join('; ') + '.';
-        // Combo in Home
+        // Combo in Home: una diversa ogni settimana (cambia il lunedì)
+        var combos = [{ colors: data.combo, text: data.comboText, textF: data.comboTextF }].concat(data.moreCombos || []);
+        var combo = combos[isoWeek(new Date()) % combos.length];
         var banner = document.getElementById('combo-banner-box');
         if (banner) {
           var bh = '';
-          data.combo.forEach(function (cb) {
+          combo.colors.forEach(function (cb) {
             var style = 'background:' + cb.hex + ';';
             if (cb.dark) style += 'color:#1A1817;text-shadow:none;';
             bh += '<div class="combo-color" style="' + style + '">' + tr(cb.name) + '</div>';
@@ -1517,7 +1579,9 @@
           banner.innerHTML = bh;
         }
         var sub = document.getElementById('combo-text-sub');
-        if (sub) sub.textContent = tr(forMe(data, 'comboText'));
+        if (sub) sub.textContent = tr(forMe(combo, 'text'));
+        var next = document.getElementById('combo-next');
+        if (next) next.textContent = t('home.comboNext');
         var sidebarTip = document.getElementById('sidebar-season-tip');
         if (sidebarTip) sidebarTip.textContent = tr(data.dos);
         // Guardaroba capsule della stagione
