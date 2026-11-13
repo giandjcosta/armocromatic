@@ -857,6 +857,10 @@
         <div class="btn-row" id="palette-mine-row" hidden>
           <button class="btn-secondary" type="button" id="palette-set-mine"></button>
         </div>
+        <div class="btn-row">
+          <button class="btn-secondary" type="button" id="palette-save" data-i18n="palette.save">Salva la palette come immagine</button>
+        </div>
+        <p class="save-note" id="palette-save-note" aria-live="polite"></p>
       </div>
 
       <div class="card">
@@ -1006,6 +1010,9 @@
           'grooming.needData': 'Scegli la forma del viso per vedere i consigli su capelli, barba e cappelli.',
           'grooming.intro': 'Seleziona la forma più vicina al tuo viso: troverai idee pratiche per capelli, barba e accessori, da adattare al tuo gusto.',
           'palette.setMine': 'Imposta {s} come mia stagione',
+          'palette.save': 'Salva la palette come immagine',
+          'palette.saved': 'Immagine pronta: la trovi nei download o nella galleria.',
+          'palette.imgTitle': 'La mia palette: {s}', 'palette.imgYes': 'Sì vicino al viso', 'palette.imgNo': 'Da evitare',
           'rules.intro': 'Pensa ai colori vicino al viso e costruisci il resto dell’outfit con calma: una base neutra e un accento bastano spesso.',
           'rules.do2Label': 'Capi chiave per la tua stagione:',
           'home.subtitle': "Guida d'immagine personale per l'equilibrio cromatico, le proporzioni fisiche e il grooming.",
@@ -1145,6 +1152,9 @@
           'grooming.needData': 'Choose your face shape to see hair, beard and hat advice.',
           'grooming.intro': 'Choose the shape closest to your face for practical ideas on hair, beard and accessories that you can make your own.',
           'palette.setMine': 'Set {s} as my season',
+          'palette.save': 'Save the palette as an image',
+          'palette.saved': 'Image ready: find it in your downloads or gallery.',
+          'palette.imgTitle': 'My palette: {s}', 'palette.imgYes': 'Yes near the face', 'palette.imgNo': 'Avoid',
           'rules.intro': 'Start with the colors closest to your face, then build the rest of the outfit around them. A neutral base and one accent are often enough.',
           'rules.do2Label': 'Key pieces for your season:',
           'home.subtitle': 'Your personal image guide to color balance, body proportions and grooming.',
@@ -2344,6 +2354,85 @@
         var key = quizSeason();
         if (key) updateProfile({ season: key });
       });
+
+      /* ---------- PALETTE COME IMMAGINE (da portare in negozio) ---------- */
+      // Disegna la palette della stagione che si sta guardando in un PNG verticale (1080x1350)
+      function wrapText(ctx, text, x, y, maxW, lineH) {
+        var words = text.split(' '), line = '';
+        words.forEach(function (w) {
+          var test = line ? line + ' ' + w : w;
+          if (ctx.measureText(test).width > maxW && line) { ctx.fillText(line, x, y); y += lineH; line = w; }
+          else line = test;
+        });
+        if (line) { ctx.fillText(line, x, y); y += lineH; }
+        return y;
+      }
+      function drawPaletteImage(key) {
+        var data = SEASONS[key], W = 1080, H = 1700, pad = 72;
+        var cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+        var ctx = cv.getContext('2d');
+        var css = getComputedStyle(document.documentElement);
+        var heading = css.getPropertyValue('--heading').trim() || '#2B1D18';
+        var muted = css.getPropertyValue('--text-muted').trim() || '#6B5648';
+        var serif = "'Playfair Display', Georgia, serif", sans = "'Plus Jakarta Sans', system-ui, sans-serif";
+        ctx.fillStyle = THEME_BG[key]; ctx.fillRect(0, 0, W, H);
+        ctx.fillStyle = heading; ctx.textBaseline = 'alphabetic';
+        ctx.font = '700 40px ' + serif; ctx.fillText('Armocromatic', pad, pad + 30);
+        ctx.font = '800 66px ' + serif; ctx.fillText(fmt('palette.imgTitle', key), pad, pad + 130);
+        ctx.fillStyle = muted; ctx.font = '500 30px ' + sans;
+        var y = wrapText(ctx, tr(data.intro), pad, pad + 190, W - pad * 2, 42);
+        // 8 colori in griglia 2x4
+        var gap = 24, cols = 2, cw = (W - pad * 2 - gap) / cols, ch = 160, top = y + 24;
+        data.colors.forEach(function (c, i) {
+          var x = pad + (i % cols) * (cw + gap), yy = top + Math.floor(i / cols) * (ch + gap);
+          ctx.fillStyle = c.hex;
+          if (ctx.roundRect) { ctx.beginPath(); ctx.roundRect(x, yy, cw, ch, 22); ctx.fill(); } else ctx.fillRect(x, yy, cw, ch);
+          if (c.hex.toUpperCase() === '#FFFFFF' || c.hex.toUpperCase() === '#FFF8DC' || c.hex.toUpperCase() === '#FAF0CA') {
+            ctx.strokeStyle = 'rgba(0,0,0,0.12)'; ctx.lineWidth = 2;
+            if (ctx.roundRect) { ctx.beginPath(); ctx.roundRect(x, yy, cw, ch, 22); ctx.stroke(); } else ctx.strokeRect(x, yy, cw, ch);
+          }
+          ctx.fillStyle = c.dark ? '#1A1817' : '#FFFFFF';
+          ctx.font = '700 36px ' + serif; ctx.fillText(tr(c.name), x + 26, yy + 78);
+          ctx.font = '600 24px ' + sans; ctx.globalAlpha = 0.8; ctx.fillText(c.hex.toUpperCase(), x + 26, yy + 122); ctx.globalAlpha = 1;
+        });
+        y = top + 4 * (ch + gap) + 44;
+        ctx.fillStyle = heading; ctx.font = '700 30px ' + sans; ctx.fillText(t('palette.imgYes'), pad, y);
+        ctx.fillStyle = muted; ctx.font = '500 28px ' + sans; y = wrapText(ctx, tr(data.dos), pad, y + 42, W - pad * 2, 38);
+        ctx.fillStyle = heading; ctx.font = '700 30px ' + sans; ctx.fillText(t('palette.imgNo'), pad, y + 18);
+        ctx.fillStyle = muted; ctx.font = '500 28px ' + sans; y = wrapText(ctx, tr(data.donts), pad, y + 60, W - pad * 2, 38);
+        // Altezza finale: almeno 1350 (4:5), di più se i testi vanno a capo
+        var outH = Math.max(1350, Math.ceil(y + 90));
+        var out = document.createElement('canvas'); out.width = W; out.height = outH;
+        var o = out.getContext('2d');
+        o.fillStyle = THEME_BG[key]; o.fillRect(0, 0, W, outH);
+        o.drawImage(cv, 0, 0, W, Math.min(outH, H), 0, 0, W, Math.min(outH, H));
+        o.fillStyle = muted; o.font = '600 24px ' + sans; o.fillText('armocromatic.netlify.app', pad, outH - 44);
+        return out;
+      }
+      function savePaletteImage() {
+        var key = paletteSeason;
+        var note = document.getElementById('palette-save-note');
+        var ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+        ready.then(function () {
+          drawPaletteImage(key).toBlob(function (blob) {
+            if (!blob) return;
+            var name = 'armocromatic-palette-' + tr(SEASONS[key].name).toLowerCase() + '.png';
+            var file = null;
+            try { file = new File([blob], name, { type: 'image/png' }); } catch (err) { /* File non disponibile */ }
+            // Sul telefono il foglio di condivisione permette "Salva immagine"; altrimenti si scarica
+            if (file && navigator.canShare && navigator.canShare({ files: [file] }) && desktopMQ && !desktopMQ.matches) {
+              navigator.share({ files: [file], title: fmt('palette.imgTitle', key) }).catch(function () { /* annullato */ });
+              return;
+            }
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a'); a.href = url; a.download = name;
+            document.body.appendChild(a); a.click(); a.remove();
+            setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+            if (note) { note.textContent = t('palette.saved'); setTimeout(function () { note.textContent = ''; }, 3500); }
+          }, 'image/png');
+        });
+      }
+      document.getElementById('palette-save').addEventListener('click', savePaletteImage);
 
       // Palette: sfogliare le stagioni non cambia il profilo; il pulsante sì
       var palSelect = document.getElementById('palette-season-select');
