@@ -433,6 +433,18 @@
     .choice-btn[aria-pressed="true"] { background: var(--accent-deep); border-color: var(--accent-deep); color: #FFF; }
     .quiz-result { margin-top: 12px; }
 
+    /* Questo colore mi sta bene? */
+    .check-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: stretch; }
+    .check-pick { flex: 1 1 140px; display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 6px 12px; border: 1.5px solid var(--border-color); border-radius: 10px; background: var(--card-bg); font-weight: 600; font-size: 0.9rem; color: var(--text-dark); cursor: pointer; }
+    .check-pick input { width: 40px; height: 34px; padding: 0; border: 0; background: none; cursor: pointer; flex: none; }
+    .check-photo { flex: 1 1 140px; display: flex; align-items: center; justify-content: center; cursor: pointer; margin-top: 0; }
+    .check-canvas-wrap { margin-top: 12px; }
+    .check-canvas-wrap canvas { display: block; max-width: 100%; border-radius: 10px; cursor: crosshair; touch-action: manipulation; }
+    .check-result { margin-top: 14px; }
+    .check-result:empty { display: none; }
+    .check-swatches { display: flex; gap: 8px; margin-bottom: 10px; }
+    .check-swatches div { flex: 1; min-height: 56px; border-radius: 10px; display: flex; align-items: flex-end; padding: 6px 8px; font-size: 0.72rem; font-weight: 700; color: #FFF; text-shadow: 0 1px 2px rgba(0,0,0,0.4); box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08); }
+
     /* COLOR SWATCHES */
     .color-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
     /* I colori escono di lato durante l'animazione: restano dentro il riquadro, la pagina non si allarga */
@@ -880,6 +892,27 @@
         <h2 data-i18n="palette.rulesTitle">Regole Colore per la Tua Stagione</h2>
         <div id="season-rules"></div>
       </div>
+
+      <!-- Questo colore mi sta bene? Si sceglie un colore o lo si prende da una foto -->
+      <div class="card" id="color-check">
+        <h2 data-i18n="check.title">Questo colore mi sta bene?</h2>
+        <p style="margin-bottom:12px;" data-i18n="check.intro">Scegli un colore o prendilo da una foto (un capo in negozio, un tessuto): ti dico a quale stagione appartiene e se va bene per te.</p>
+        <div class="check-row">
+          <label class="check-pick">
+            <input type="color" id="check-color" value="#C86446">
+            <span data-i18n="check.pick">Scegli il colore</span>
+          </label>
+          <label class="btn-secondary check-photo">
+            <input type="file" id="check-file" accept="image/*" hidden>
+            <span data-i18n="check.photo">Prendilo da una foto</span>
+          </label>
+        </div>
+        <div class="check-canvas-wrap" id="check-canvas-wrap" hidden>
+          <p class="form-hint" data-i18n="check.tap">Tocca la foto nel punto del colore che vuoi controllare.</p>
+          <canvas id="check-canvas"></canvas>
+        </div>
+        <div class="check-result" id="check-result" aria-live="polite"></div>
+      </div>
     </div>
 
     <!-- RULES SECTION -->
@@ -1024,6 +1057,16 @@
           'grooming.intro': 'Seleziona la forma più vicina al tuo viso: troverai idee pratiche per capelli, barba e accessori, da adattare al tuo gusto.',
           'palette.setMine': 'Imposta {s} come mia stagione',
           'palette.save': 'Salva la palette come immagine',
+          'check.title': 'Questo colore mi sta bene?',
+          'check.intro': 'Scegli un colore o prendilo da una foto (un capo in negozio, un tessuto): ti dico a quale stagione appartiene e se va bene per te.',
+          'check.pick': 'Scegli il colore', 'check.photo': 'Prendilo da una foto',
+          'check.tap': 'Tocca la foto nel punto del colore che vuoi controllare.',
+          'check.yours': 'Il tuo colore', 'check.nearest': 'Il più vicino',
+          'check.season': 'È un colore da {s}: il più simile è {c}.',
+          'check.good': 'Ti sta bene: è molto vicino a un colore della tua palette ({c}).',
+          'check.ok': 'Può andare: assomiglia a un colore della tua palette ({c}). Meglio lontano dal viso o in piccoli dettagli.',
+          'check.bad': 'Non è dei tuoi colori. Della tua palette prova piuttosto: {c}.',
+          'check.noSeason': 'Scegli la tua stagione nel profilo per sapere se ti sta bene.',
           'palette.saved': 'Immagine pronta: la trovi nei download o nella galleria.',
           'palette.imgTitle': 'La mia palette: {s}', 'palette.imgYes': 'Sì vicino al viso', 'palette.imgNo': 'Da evitare',
           'rules.intro': 'Pensa ai colori vicino al viso e costruisci il resto dell’outfit con calma: una base neutra e un accento bastano spesso.',
@@ -1169,6 +1212,16 @@
           'grooming.intro': 'Choose the shape closest to your face for practical ideas on hair, beard and accessories that you can make your own.',
           'palette.setMine': 'Set {s} as my season',
           'palette.save': 'Save the palette as an image',
+          'check.title': 'Does this color suit me?',
+          'check.intro': 'Pick a color or take it from a photo (a garment in a shop, a fabric): I will tell you which season it belongs to and whether it suits you.',
+          'check.pick': 'Pick the color', 'check.photo': 'Take it from a photo',
+          'check.tap': 'Tap the photo on the color you want to check.',
+          'check.yours': 'Your color', 'check.nearest': 'Closest',
+          'check.season': 'It belongs to {s}: the closest is {c}.',
+          'check.good': 'It suits you: it is very close to {c} in your palette.',
+          'check.ok': 'It can work: it looks like {c} in your palette. Better away from the face or in small details.',
+          'check.bad': 'It is not one of your colors. Try {c} from your palette instead.',
+          'check.noSeason': 'Choose your season in your profile to see if it suits you.',
           'palette.saved': 'Image ready: find it in your downloads or gallery.',
           'palette.imgTitle': 'My palette: {s}', 'palette.imgYes': 'Yes near the face', 'palette.imgNo': 'Avoid',
           'rules.intro': 'Start with the colors closest to your face, then build the rest of the outfit around them. A neutral base and one accent are often enough.',
@@ -1757,6 +1810,7 @@
         renderFit();
         updateGroomingAdvice();
         if (typeof quiz === 'object') renderQuiz();
+        if (typeof checkedHex === 'string') renderColorCheck();
       }
 
       var savedTimer = null;
@@ -2379,6 +2433,81 @@
       document.getElementById('quiz-apply').addEventListener('click', function () {
         var key = quizSeason();
         if (key) updateProfile({ season: key });
+      });
+
+      /* ---------- QUESTO COLORE MI STA BENE? ---------- */
+      // Confronta il colore con gli 8 colori di ogni stagione nello spazio Lab (distanza CIE76)
+      function hexToRgb(h) { h = h.replace('#', ''); return [0, 2, 4].map(function (i) { return parseInt(h.substr(i, 2), 16); }); }
+      function rgbToHex(c) { return '#' + c.map(function (v) { return ('0' + Math.round(v).toString(16)).slice(-2); }).join('').toUpperCase(); }
+      function rgbToLab(c) {
+        var r = c.map(function (v) { v /= 255; return v > 0.04045 ? Math.pow((v + 0.055) / 1.055, 2.4) : v / 12.92; });
+        var x = (r[0] * 0.4124 + r[1] * 0.3576 + r[2] * 0.1805) / 0.95047;
+        var y = (r[0] * 0.2126 + r[1] * 0.7152 + r[2] * 0.0722);
+        var z = (r[0] * 0.0193 + r[1] * 0.1192 + r[2] * 0.9505) / 1.08883;
+        var f = function (t) { return t > 0.008856 ? Math.cbrt(t) : 7.787 * t + 16 / 116; };
+        return [116 * f(y) - 16, 500 * (f(x) - f(y)), 200 * (f(y) - f(z))];
+      }
+      function labDist(a, b) { return Math.sqrt(Math.pow(a[0] - b[0], 2) + Math.pow(a[1] - b[1], 2) + Math.pow(a[2] - b[2], 2)); }
+      function nearestIn(lab, season) {
+        var best = null;
+        SEASONS[season].colors.forEach(function (c) {
+          var d = labDist(lab, rgbToLab(hexToRgb(c.hex)));
+          if (!best || d < best.d) best = { d: d, color: c, season: season };
+        });
+        return best;
+      }
+      var checkedHex = '';
+      function renderColorCheck() {
+        var box = document.getElementById('check-result');
+        if (!box || !checkedHex) return;
+        var lab = rgbToLab(hexToRgb(checkedHex));
+        var all = Object.keys(SEASONS).map(function (k) { return nearestIn(lab, k); }).sort(function (a, b) { return a.d - b.d; });
+        var top = all[0];
+        var sw = function (hex, label, dark) {
+          return '<div style="background:' + hex + ';' + (dark ? 'color:#1A1817;text-shadow:none;' : '') + '">' + label + '</div>';
+        };
+        var html = '<div class="check-swatches">' + sw(checkedHex, t('check.yours') + ' ' + checkedHex, rgbToLab(hexToRgb(checkedHex))[0] > 70) +
+          sw(top.color.hex, t('check.nearest') + ': ' + tr(top.color.name), top.color.dark) + '</div>';
+        html += '<p>' + fmt('check.season', top.season).replace('{c}', tr(top.color.name)) + '</p>';
+        if (PROFILE.season) {
+          var mine = nearestIn(lab, PROFILE.season);
+          var key = mine.d < 18 ? 'check.good' : (mine.d < 32 ? 'check.ok' : 'check.bad');
+          html += '<div class="rule-box ' + (key === 'check.bad' ? 'dont' : 'do') + '" style="margin-top:10px;">' + t(key).replace('{c}', tr(mine.color.name)) + '</div>';
+        } else {
+          html += '<p class="form-hint">' + t('check.noSeason') + '</p>';
+        }
+        box.innerHTML = html;
+      }
+      function checkColor(hex) { checkedHex = hex.toUpperCase(); renderColorCheck(); }
+      var checkInput = document.getElementById('check-color');
+      checkInput.addEventListener('input', function () { checkColor(checkInput.value); });
+      checkInput.addEventListener('change', function () { checkColor(checkInput.value); });
+      // Foto: si disegna in un canvas (resta sul dispositivo) e si legge il colore dove si tocca
+      document.getElementById('check-file').addEventListener('change', function (e) {
+        var file = e.target.files && e.target.files[0];
+        if (!file) return;
+        var img = new Image();
+        img.onload = function () {
+          var cv = document.getElementById('check-canvas');
+          var maxW = 900, scale = Math.min(1, maxW / img.naturalWidth);
+          cv.width = Math.round(img.naturalWidth * scale); cv.height = Math.round(img.naturalHeight * scale);
+          cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
+          URL.revokeObjectURL(img.src);
+          document.getElementById('check-canvas-wrap').hidden = false;
+        };
+        img.src = URL.createObjectURL(file);
+      });
+      document.getElementById('check-canvas').addEventListener('click', function (e) {
+        var cv = e.currentTarget, rect = cv.getBoundingClientRect();
+        var x = Math.round((e.clientX - rect.left) * cv.width / rect.width), y = Math.round((e.clientY - rect.top) * cv.height / rect.height);
+        // media di un quadratino 7x7 per non prendere un pixel isolato
+        var r = 3, x0 = Math.max(0, x - r), y0 = Math.max(0, y - r);
+        var d = cv.getContext('2d').getImageData(x0, y0, Math.min(cv.width - x0, 2 * r + 1), Math.min(cv.height - y0, 2 * r + 1)).data;
+        var sum = [0, 0, 0], n = 0;
+        for (var i = 0; i < d.length; i += 4) { sum[0] += d[i]; sum[1] += d[i + 1]; sum[2] += d[i + 2]; n++; }
+        var hex = rgbToHex(sum.map(function (v) { return v / n; }));
+        checkInput.value = hex.toLowerCase();
+        checkColor(hex);
       });
 
       /* ---------- PALETTE COME IMMAGINE (da portare in negozio) ---------- */
