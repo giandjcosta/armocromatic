@@ -716,17 +716,38 @@
         </div>
 
         <details class="quiz" id="me-quiz">
-          <summary data-i18n="quiz.summary">Non conosci la tua stagione? Rispondi a 2 domande</summary>
-          <p class="quiz-q" data-i18n="quiz.q1">1. Sottotono: le vene del polso sembrano verdi e ti sta meglio l'oro, oppure sembrano blu o viola e ti sta meglio l'argento?</p>
-          <div class="choice-group" data-q="tone" role="group">
-            <button type="button" class="choice-btn" data-v="warm" aria-pressed="false" data-i18n="quiz.warm">Caldo (oro, vene verdi)</button>
-            <button type="button" class="choice-btn" data-v="cool" aria-pressed="false" data-i18n="quiz.cool">Freddo (argento, vene blu)</button>
+          <summary data-i18n="quiz.summary">Non conosci la tua stagione? Rispondi a 6 domande</summary>
+          <p class="quiz-q" data-i18n="quiz.t1"></p>
+          <div class="choice-group" data-q="t1" role="group">
+            <button type="button" class="choice-btn" data-v="warm" aria-pressed="false" data-i18n="quiz.t1w"></button>
+            <button type="button" class="choice-btn" data-v="cool" aria-pressed="false" data-i18n="quiz.t1c"></button>
           </div>
-          <p class="quiz-q" data-i18n="quiz.q2">2. I tuoi colori naturali (capelli, occhi, pelle) sono più intensi e profondi o chiari e delicati?</p>
-          <div class="choice-group" data-q="depth" role="group">
-            <button type="button" class="choice-btn" data-v="deep" aria-pressed="false" data-i18n="quiz.deep">Intensi e profondi</button>
-            <button type="button" class="choice-btn" data-v="light" aria-pressed="false" data-i18n="quiz.light">Chiari e delicati</button>
+          <p class="quiz-q" data-i18n="quiz.t2"></p>
+          <div class="choice-group" data-q="t2" role="group">
+            <button type="button" class="choice-btn" data-v="warm" aria-pressed="false" data-i18n="quiz.t2w"></button>
+            <button type="button" class="choice-btn" data-v="cool" aria-pressed="false" data-i18n="quiz.t2c"></button>
           </div>
+          <p class="quiz-q" data-i18n="quiz.t3"></p>
+          <div class="choice-group" data-q="t3" role="group">
+            <button type="button" class="choice-btn" data-v="warm" aria-pressed="false" data-i18n="quiz.t3w"></button>
+            <button type="button" class="choice-btn" data-v="cool" aria-pressed="false" data-i18n="quiz.t3c"></button>
+          </div>
+          <p class="quiz-q" data-i18n="quiz.d1"></p>
+          <div class="choice-group" data-q="d1" role="group">
+            <button type="button" class="choice-btn" data-v="deep" aria-pressed="false" data-i18n="quiz.d1d"></button>
+            <button type="button" class="choice-btn" data-v="light" aria-pressed="false" data-i18n="quiz.d1l"></button>
+          </div>
+          <p class="quiz-q" data-i18n="quiz.d2"></p>
+          <div class="choice-group" data-q="d2" role="group">
+            <button type="button" class="choice-btn" data-v="deep" aria-pressed="false" data-i18n="quiz.d2d"></button>
+            <button type="button" class="choice-btn" data-v="light" aria-pressed="false" data-i18n="quiz.d2l"></button>
+          </div>
+          <p class="quiz-q" data-i18n="quiz.d3"></p>
+          <div class="choice-group" data-q="d3" role="group">
+            <button type="button" class="choice-btn" data-v="deep" aria-pressed="false" data-i18n="quiz.d3d"></button>
+            <button type="button" class="choice-btn" data-v="light" aria-pressed="false" data-i18n="quiz.d3l"></button>
+          </div>
+          <p class="form-hint" id="quiz-progress" aria-live="polite"></p>
           <div class="quiz-result" id="quiz-result" aria-live="polite" hidden>
             <p class="form-hint" id="quiz-result-text"></p>
             <div class="btn-row"><button type="button" class="btn-secondary" id="quiz-apply"></button></div>
@@ -951,12 +972,23 @@
           'me.done': 'Vedi i consigli per te', 'me.reset': 'Cancella i miei dati',
           'me.saved': 'Salvato su questo dispositivo ✓', 'me.cleared': 'Dati cancellati da questo dispositivo.',
           'me.confirmReset': 'Vuoi cancellare i tuoi dati da questo dispositivo?',
-          'quiz.summary': 'Non conosci la tua stagione? Rispondi a 2 domande',
-          'quiz.q1': '1. Sottotono: le vene del polso sembrano verdi e ti sta meglio l\u2019oro, oppure sembrano blu o viola e ti sta meglio l\u2019argento?',
-          'quiz.warm': 'Caldo (oro, vene verdi)', 'quiz.cool': 'Freddo (argento, vene blu)',
-          'quiz.q2': '2. I tuoi colori naturali (capelli, occhi, pelle) sono più intensi e profondi o chiari e delicati?',
-          'quiz.deep': 'Intensi e profondi', 'quiz.light': 'Chiari e delicati',
-          'quiz.result': 'Probabilmente sei {s}. È un\u2019indicazione: confrontala con la palette prima di sceglierla.',
+          'quiz.summary': 'Non conosci la tua stagione? Rispondi a 6 domande',
+          'quiz.t1': '1. Guarda le vene sull’interno del polso, alla luce del giorno: di che colore sembrano?',
+          'quiz.t1w': 'Verdi o verde oliva', 'quiz.t1c': 'Blu o viola',
+          'quiz.t2': '2. Quale metallo ti illumina di più il viso?',
+          'quiz.t2w': 'L’oro', 'quiz.t2c': 'L’argento',
+          'quiz.t3': '3. Al primo sole senza protezione, di solito la tua pelle…',
+          'quiz.t3w': 'Si abbronza e diventa dorata', 'quiz.t3c': 'Si arrossa o si scotta',
+          'quiz.d1': '4. I tuoi capelli naturali sono…',
+          'quiz.d1d': 'Scuri: castano scuro o neri', 'quiz.d1l': 'Chiari: biondi, castano chiaro o rossi chiari',
+          'quiz.d2': '5. I tuoi occhi sono…',
+          'quiz.d2d': 'Scuri e intensi', 'quiz.d2l': 'Chiari: azzurri, verdi o nocciola chiaro',
+          'quiz.d3': '6. Tra capelli, occhi e pelle c’è…',
+          'quiz.d3d': 'Un contrasto forte', 'quiz.d3l': 'Un contrasto leggero',
+          'quiz.progress': 'Risposte: {n} di 6.',
+          'quiz.result': 'Le tue risposte indicano {s}. È un’indicazione: confrontala con la palette prima di sceglierla.',
+          'quiz.resultSure': 'Le tue risposte indicano chiaramente {s}.',
+          'quiz.resultNear': ' Anche la stagione {s} è vicina: guarda tutte e due le palette.',
           'quiz.apply': 'Usa {s} come mia stagione',
           'profile.createTitle': 'Crea il Tuo Profilo',
           'profile.createText': 'Indica se i consigli sono per uomo o donna, poi stagione, altezza, corporatura e forma del viso: consigli e colori del sito si adattano a te. I dati restano su questo dispositivo.',
@@ -1079,12 +1111,23 @@
           'me.done': 'See your tips', 'me.reset': 'Delete my data',
           'me.saved': 'Saved on this device ✓', 'me.cleared': 'Data deleted from this device.',
           'me.confirmReset': 'Delete your data from this device?',
-          'quiz.summary': 'Don\u2019t know your season? Answer 2 questions',
-          'quiz.q1': '1. Undertone: do the veins on your wrist look green and gold suits you, or do they look blue or purple and silver suits you?',
-          'quiz.warm': 'Warm (gold, green veins)', 'quiz.cool': 'Cool (silver, blue veins)',
-          'quiz.q2': '2. Are your natural colors (hair, eyes, skin) deep and intense, or light and soft?',
-          'quiz.deep': 'Deep and intense', 'quiz.light': 'Light and soft',
-          'quiz.result': 'You are probably {s}. It is a pointer: compare it with the palette before choosing.',
+          'quiz.summary': 'Don’t know your season? Answer 6 questions',
+          'quiz.t1': '1. Look at the veins on your inner wrist in daylight: what color do they look?',
+          'quiz.t1w': 'Green or olive', 'quiz.t1c': 'Blue or purple',
+          'quiz.t2': '2. Which metal makes your face glow more?',
+          'quiz.t2w': 'Gold', 'quiz.t2c': 'Silver',
+          'quiz.t3': '3. In the first sun without protection, your skin usually…',
+          'quiz.t3w': 'Tans to a golden glow', 'quiz.t3c': 'Turns red or burns',
+          'quiz.d1': '4. Your natural hair is…',
+          'quiz.d1d': 'Dark: dark brown or black', 'quiz.d1l': 'Light: blond, light brown or light red',
+          'quiz.d2': '5. Your eyes are…',
+          'quiz.d2d': 'Dark and intense', 'quiz.d2l': 'Light: blue, green or light hazel',
+          'quiz.d3': '6. Between your hair, eyes and skin there is…',
+          'quiz.d3d': 'Strong contrast', 'quiz.d3l': 'Soft contrast',
+          'quiz.progress': 'Answers: {n} of 6.',
+          'quiz.result': 'Your answers point to {s}. It is a pointer: compare it with the palette before choosing.',
+          'quiz.resultSure': 'Your answers clearly point to {s}.',
+          'quiz.resultNear': ' You are also close to {s}: look at both palettes.',
           'quiz.apply': 'Use {s} as my season',
           'profile.createTitle': 'Create Your Profile',
           'profile.createText': 'Choose man or woman, then your season, height, build and face shape: tips and site colors adapt to you. Your data stays on this device.',
@@ -1677,6 +1720,7 @@
         renderHomeTips();
         renderFit();
         updateGroomingAdvice();
+        if (typeof quiz === 'object') renderQuiz();
       }
 
       var savedTimer = null;
@@ -2248,10 +2292,26 @@
         showSaved('me.cleared');
       });
 
-      // Mini quiz: sottotono + intensità → stagione suggerita (non si salva finché non si conferma)
+      // Quiz: tre domande sul sottotono (caldo/freddo) e tre sull'intensità (profondo/chiaro).
+      // Con tutte le risposte vince la maggioranza su ogni asse; un asse 2 a 1 indica anche la stagione vicina.
       var QUIZ_MAP = { 'warm-deep': 'autumn', 'warm-light': 'spring', 'cool-deep': 'winter', 'cool-light': 'summer' };
+      var QUIZ_QS = ['t1', 't2', 't3', 'd1', 'd2', 'd3'];
       var quiz = {};
-      function quizSeason() { return QUIZ_MAP[quiz.tone + '-' + quiz.depth] || ''; }
+      function quizCount(v) { return QUIZ_QS.filter(function (q) { return quiz[q] === v; }).length; }
+      function quizAnswered() { return QUIZ_QS.filter(function (q) { return quiz[q]; }).length; }
+      function quizSeason() {
+        if (quizAnswered() < QUIZ_QS.length) return '';
+        return QUIZ_MAP[(quizCount('warm') > 1 ? 'warm' : 'cool') + '-' + (quizCount('deep') > 1 ? 'deep' : 'light')];
+      }
+      // La stagione vicina: si cambia l'asse meno netto (2 a 1); se lo sono tutti e due, il sottotono
+      function quizNear() {
+        var tone = quizCount('warm') > 1 ? 'warm' : 'cool', depth = quizCount('deep') > 1 ? 'deep' : 'light';
+        var toneSure = quizCount('warm') !== 2 && quizCount('warm') !== 1;
+        var depthSure = quizCount('deep') !== 2 && quizCount('deep') !== 1;
+        if (toneSure && depthSure) return '';
+        if (!toneSure) tone = tone === 'warm' ? 'cool' : 'warm'; else depth = depth === 'deep' ? 'light' : 'deep';
+        return QUIZ_MAP[tone + '-' + depth];
+      }
       function renderQuiz() {
         document.querySelectorAll('.choice-group').forEach(function (g) {
           g.querySelectorAll('.choice-btn').forEach(function (b) {
@@ -2260,9 +2320,15 @@
         });
         var res = document.getElementById('quiz-result');
         var key = quizSeason();
+        var prog = document.getElementById('quiz-progress');
+        if (prog) {
+          prog.textContent = t('quiz.progress').replace('{n}', quizAnswered());
+          prog.hidden = !!key;
+        }
         res.hidden = !key;
         if (key) {
-          document.getElementById('quiz-result-text').textContent = fmt('quiz.result', key);
+          var near = quizNear();
+          document.getElementById('quiz-result-text').textContent = near ? fmt('quiz.result', key) + fmt('quiz.resultNear', near) : fmt('quiz.resultSure', key);
           document.getElementById('quiz-apply').textContent = fmt('quiz.apply', key);
         }
       }
