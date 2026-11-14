@@ -433,6 +433,17 @@
     .choice-btn[aria-pressed="true"] { background: var(--accent-deep); border-color: var(--accent-deep); color: #FFF; }
     .quiz-result { margin-top: 12px; }
 
+    /* Prova colori sul selfie */
+    .drape-upload { display: flex; align-items: center; justify-content: center; cursor: pointer; }
+    .drape { margin-top: 14px; border-radius: 18px; padding: 22px 22px 70px; background: #C86446; transition: background-color 0.35s ease; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08); }
+    .drape-photo { width: 72%; max-width: 280px; margin: 0 auto; aspect-ratio: 3 / 4; border-radius: 48% 48% 44% 44% / 42% 42% 58% 58%; overflow: hidden; background: var(--soft-bg); box-shadow: 0 6px 18px rgba(0,0,0,0.18); }
+    .drape-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transform-origin: 50% 40%; }
+    .drape-name { text-align: center; font-weight: 700; margin-top: 10px; color: var(--text-dark); }
+    .drape-swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .drape-swatches button { min-height: 48px; border-radius: 10px; border: 2px solid transparent; font: inherit; font-size: 0.68rem; font-weight: 700; line-height: 1.15; padding: 4px; cursor: pointer; color: #FFF; text-shadow: 0 1px 2px rgba(0,0,0,0.4); box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1); touch-action: manipulation; }
+    .drape-swatches button[aria-pressed="true"] { border-color: var(--text-dark); box-shadow: 0 0 0 2px var(--card-bg) inset, 0 0 0 1px rgba(0,0,0,0.1); }
+    #drape-zoom { width: 100%; accent-color: var(--accent-deep); }
+
     /* Questo colore mi sta bene? */
     .check-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: stretch; }
     .check-pick { flex: 1 1 140px; display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 6px 12px; border: 1.5px solid var(--border-color); border-radius: 10px; background: var(--card-bg); font-weight: 600; font-size: 0.9rem; color: var(--text-dark); cursor: pointer; }
@@ -893,6 +904,39 @@
         <div id="season-rules"></div>
       </div>
 
+      <!-- Prova colori: il selfie con sotto i colori della palette, come i drappi dell'armocromista -->
+      <div class="card" id="drape-card">
+        <h2 data-i18n="drape.title">Prova i Colori sul Tuo Viso</h2>
+        <p style="margin-bottom:12px;" data-i18n="drape.intro">Carica un selfie con luce naturale, senza trucco né filtri: tocca i colori e guarda quali ti illuminano il viso e quali lo spengono. La foto resta sul tuo dispositivo.</p>
+        <div class="btn-row" style="margin-top:0;">
+          <label class="btn-action drape-upload">
+            <input type="file" id="drape-file" accept="image/*" capture="user" hidden>
+            <span data-i18n="drape.upload">Carica o scatta un selfie</span>
+          </label>
+        </div>
+        <div id="drape-stage" hidden>
+          <div class="drape" id="drape">
+            <div class="drape-photo"><img id="drape-img" alt="" data-i18n-alt="drape.alt"></div>
+          </div>
+          <p class="drape-name" id="drape-name" aria-live="polite"></p>
+          <div class="form-group" style="margin-top:10px;">
+            <label for="drape-season" data-i18n="drape.season">Colori della stagione</label>
+            <select id="drape-season" class="form-control">
+              <option value="autumn" data-i18n="season.autumn">Autunno</option>
+              <option value="winter" data-i18n="season.winter">Inverno</option>
+              <option value="spring" data-i18n="season.spring">Primavera</option>
+              <option value="summer" data-i18n="season.summer">Estate</option>
+            </select>
+          </div>
+          <div class="drape-swatches" id="drape-swatches" role="group"></div>
+          <div class="form-group" style="margin-top:12px;">
+            <label for="drape-zoom" data-i18n="drape.zoom">Ingrandisci il viso</label>
+            <input type="range" id="drape-zoom" min="100" max="250" value="100" step="5">
+          </div>
+          <p class="form-hint" data-i18n="drape.tip">Confronta due stagioni diverse: quella giusta rende la pelle più uniforme e gli occhi più luminosi; quella sbagliata fa risaltare occhiaie e rossori.</p>
+        </div>
+      </div>
+
       <!-- Questo colore mi sta bene? Si sceglie un colore o lo si prende da una foto -->
       <div class="card" id="color-check">
         <h2 data-i18n="check.title">Questo colore mi sta bene?</h2>
@@ -1057,6 +1101,12 @@
           'grooming.intro': 'Seleziona la forma più vicina al tuo viso: troverai idee pratiche per capelli, barba e accessori, da adattare al tuo gusto.',
           'palette.setMine': 'Imposta {s} come mia stagione',
           'palette.save': 'Salva la palette come immagine',
+          'drape.title': 'Prova i Colori sul Tuo Viso',
+          'drape.intro': 'Carica un selfie con luce naturale, senza trucco né filtri: tocca i colori e guarda quali ti illuminano il viso e quali lo spengono. La foto resta sul tuo dispositivo.',
+          'drape.upload': 'Carica o scatta un selfie', 'drape.change': 'Cambia foto',
+          'drape.alt': 'Il tuo selfie con sotto il colore scelto',
+          'drape.season': 'Colori della stagione', 'drape.zoom': 'Ingrandisci il viso',
+          'drape.tip': 'Confronta due stagioni diverse: quella giusta rende la pelle più uniforme e gli occhi più luminosi; quella sbagliata fa risaltare occhiaie e rossori.',
           'check.title': 'Questo colore mi sta bene?',
           'check.intro': 'Scegli un colore o prendilo da una foto (un capo in negozio, un tessuto): ti dico a quale stagione appartiene e se va bene per te.',
           'check.pick': 'Scegli il colore', 'check.photo': 'Prendilo da una foto',
@@ -1212,6 +1262,12 @@
           'grooming.intro': 'Choose the shape closest to your face for practical ideas on hair, beard and accessories that you can make your own.',
           'palette.setMine': 'Set {s} as my season',
           'palette.save': 'Save the palette as an image',
+          'drape.title': 'Try the Colors on Your Face',
+          'drape.intro': 'Upload a selfie in natural light, without makeup or filters: tap the colors and see which ones light up your face and which ones dull it. The photo stays on your device.',
+          'drape.upload': 'Upload or take a selfie', 'drape.change': 'Change photo',
+          'drape.alt': 'Your selfie with the chosen color below',
+          'drape.season': 'Season colors', 'drape.zoom': 'Zoom in on the face',
+          'drape.tip': 'Compare two different seasons: the right one evens out the skin and brightens the eyes; the wrong one brings out shadows and redness.',
           'check.title': 'Does this color suit me?',
           'check.intro': 'Pick a color or take it from a photo (a garment in a shop, a fabric): I will tell you which season it belongs to and whether it suits you.',
           'check.pick': 'Pick the color', 'check.photo': 'Take it from a photo',
@@ -1811,6 +1867,7 @@
         updateGroomingAdvice();
         if (typeof quiz === 'object') renderQuiz();
         if (typeof checkedHex === 'string') renderColorCheck();
+        if (typeof drape === 'object') renderDrape();
       }
 
       var savedTimer = null;
@@ -2433,6 +2490,45 @@
       document.getElementById('quiz-apply').addEventListener('click', function () {
         var key = quizSeason();
         if (key) updateProfile({ season: key });
+      });
+
+      /* ---------- PROVA COLORI SUL SELFIE (la foto non lascia il dispositivo) ---------- */
+      var drape = { season: '', index: 0, url: '' };
+      function renderDrape() {
+        var stage = document.getElementById('drape-stage');
+        if (!stage || stage.hidden) return;
+        if (!drape.season) drape.season = mySeason();
+        var colors = SEASONS[drape.season].colors, c = colors[drape.index] || colors[0];
+        document.getElementById('drape').style.backgroundColor = c.hex;
+        document.getElementById('drape-name').textContent = tr(c.name) + ' · ' + tr(SEASONS[drape.season].name);
+        document.getElementById('drape-season').value = drape.season;
+        document.getElementById('drape-swatches').innerHTML = colors.map(function (col, i) {
+          return '<button type="button" data-i="' + i + '" aria-pressed="' + (i === drape.index) + '" style="background:' + col.hex + ';' +
+            (col.dark ? 'color:#1A1817;text-shadow:none;' : '') + '">' + tr(col.name) + '</button>';
+        }).join('');
+        var up = document.querySelector('.drape-upload span');
+        if (up) up.textContent = t('drape.change');
+      }
+      document.getElementById('drape-file').addEventListener('change', function (e) {
+        var file = e.target.files && e.target.files[0];
+        if (!file) return;
+        if (drape.url) URL.revokeObjectURL(drape.url);
+        drape.url = URL.createObjectURL(file);
+        document.getElementById('drape-img').src = drape.url;
+        document.getElementById('drape-stage').hidden = false;
+        renderDrape();
+      });
+      document.getElementById('drape-swatches').addEventListener('click', function (e) {
+        var b = e.target.closest('button');
+        if (!b) return;
+        drape.index = Number(b.getAttribute('data-i'));
+        renderDrape();
+      });
+      document.getElementById('drape-season').addEventListener('change', function (e) {
+        drape.season = e.target.value; drape.index = 0; renderDrape();
+      });
+      document.getElementById('drape-zoom').addEventListener('input', function (e) {
+        document.getElementById('drape-img').style.transform = 'scale(' + (Number(e.target.value) / 100) + ')';
       });
 
       /* ---------- QUESTO COLORE MI STA BENE? ---------- */
